@@ -461,7 +461,7 @@
                 "section-portal": "School Portal & Resources",
                 "section-learning": "Learning Resources",
                 "section-info": "School Information",
-                "link-website": "School Website",
+                "link-website": "Website",
                 "link-website-desc": "Official Tenby International School Penang website",
                 "link-portal": "Parent Portal (iSAMS)",
                 "link-portal-desc": "Access student grades, attendance, and announcements",
@@ -478,9 +478,9 @@
                 "app-flash": "Flash Academy",
                 "app-raz": "Raz Kids A-Z",
                 "app-purple": "Purple Mash",
-                "link-instagram": "School Instagram",
+                "link-instagram": "Instagram",
                 "link-instagram-desc": "Follow school updates and activities",
-                "link-location": "School Location",
+                "link-location": "Location",
                 "link-location-desc": "Get directions to the school",
                 "footer-text": "Tenby International School Penang | For Parents & Students",
                 "footer-disclaimer": "⚠️ This is an unofficial page created by parents for convenience",
@@ -492,7 +492,7 @@
                 "section-portal": "학교 포털 및 리소스",
                 "section-learning": "학습 리소스",
                 "section-info": "학교 정보",
-                "link-website": "학교 웹사이트",
+                "link-website": "웹사이트",
                 "link-website-desc": "텐비 인터내셔널 스쿨 페낭 공식 웹사이트",
                 "link-portal": "학부모 포털 (iSAMS)",
                 "link-portal-desc": "학생 성적, 출석률, 공지사항 확인",
@@ -509,9 +509,9 @@
                 "app-flash": "플래시 아카데미",
                 "app-raz": "라즈키즈 A-Z",
                 "app-purple": "퍼플 매시",
-                "link-instagram": "학교 인스타그램",
+                "link-instagram": "인스타그램",
                 "link-instagram-desc": "학교 소식과 활동 팩로우",
-                "link-location": "학교 위치",
+                "link-location": "위치",
                 "link-location-desc": "학교 길찾기",
                 "footer-text": "텐비 인터내셔널 스쿨 페낭 | 학부모 및 학생용",
                 "footer-disclaimer": "⚠️ 이 페이지는 편의를 위해 학부모가 만든 비공식 페이지입니다",
@@ -523,7 +523,7 @@
                 "section-portal": "学校门户及资源",
                 "section-learning": "学习资源",
                 "section-info": "学校信息",
-                "link-website": "学校网站",
+                "link-website": "网站",
                 "link-website-desc": "槟城腾比国际学校官方网站",
                 "link-portal": "家长门户 (iSAMS)",
                 "link-portal-desc": "查看学生成绩、出勤率和公告",
@@ -540,9 +540,9 @@
                 "app-flash": "闪电学院",
                 "app-raz": "Raz Kids A-Z",
                 "app-purple": "紫色糊状物",
-                "link-instagram": "学校Instagram",
+                "link-instagram": "Instagram",
                 "link-instagram-desc": "关注学校动态和活动",
-                "link-location": "学校位置",
+                "link-location": "位置",
                 "link-location-desc": "获取学校路线指引",
                 "footer-text": "槟城腾比国际学校 | 面向家长和学生",
                 "footer-disclaimer": "⚠️ 这是家长为方便而创建的非官方页面",
@@ -554,7 +554,7 @@
                 "section-portal": "学校ポータル・リソース",
                 "section-learning": "学習リソース",
                 "section-info": "学校情報",
-                "link-website": "学校ウェブサイト",
+                "link-website": "ウェブサイト",
                 "link-website-desc": "ペナン・テンビー国際学校公式ウェブサイト",
                 "link-portal": "保護者ポータル (iSAMS)",
                 "link-portal-desc": "学生の成績、出席状況、お知らせの確認",
@@ -571,9 +571,9 @@
                 "app-flash": "フラッシュアカデミー",
                 "app-raz": "Raz Kids A-Z",
                 "app-purple": "パープルマッシュ",
-                "link-instagram": "学校Instagram",
+                "link-instagram": "Instagram",
                 "link-instagram-desc": "学校の最新情報や活動をフォロー",
-                "link-location": "学校の場所",
+                "link-location": "場所",
                 "link-location-desc": "学校への道案内を取得",
                 "footer-text": "ペナン・テンビー国際学校 | 保護者・学生向け",
                 "footer-disclaimer": "⚠️ これは保護者が便宜のために作成した非公式ページです",
@@ -637,12 +637,25 @@
             window.open(url, '_blank');
         }
 
-        // Load saved language preference on page load
+        // Detect browser language and set default
+        function detectBrowserLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            
+            // Map browser language codes to our supported languages
+            if (browserLang.startsWith('ko')) return 'ko'; // Korean
+            if (browserLang.startsWith('zh')) return 'zh'; // Chinese
+            if (browserLang.startsWith('ja')) return 'ja'; // Japanese
+            return 'en'; // Default to English
+        }
+
+        // Load saved language preference or detect browser language on page load
         document.addEventListener('DOMContentLoaded', function() {
-            const savedLang = localStorage.getItem('preferred-language') || 'en';
-            if (savedLang !== 'en') {
+            const savedLang = localStorage.getItem('preferred-language');
+            const defaultLang = savedLang || detectBrowserLanguage();
+            
+            if (defaultLang !== 'en') {
                 // Find and click the appropriate language button
-                const langButton = document.querySelector(`[onclick="switchLanguage('${savedLang}')"]`);
+                const langButton = document.querySelector(`[onclick="switchLanguage('${defaultLang}')"]`);
                 if (langButton) {
                     langButton.click();
                 }
