@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenby International School Penang - Parent Links</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #E74C3C 0%, #3498DB 50%, #F39C12 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2C5530 0%, #34495e 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+        }
+
+        .links-container {
+            padding: 40px 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            color: #2C5530;
+            margin-bottom: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .link-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .link-card {
+            background: #f8f9fa;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .link-card:hover {
+            border-color: #E74C3C;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.2);
+        }
+
+        .link-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #E74C3C, #F39C12);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .link-content {
+            flex: 1;
+        }
+
+        .link-title {
+            font-weight: 600;
+            color: #2C5530;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        .link-description {
+            color: #6c757d;
+            font-size: 0.875rem;
+            line-height: 1.4;
+        }
+
+        .app-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .app-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .app-card:hover {
+            border-color: #E74C3C;
+            transform: translateY(-2px);
+        }
+
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #3498DB, #2ECC71);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: white;
+            font-size: 1.5rem;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .app-icon img {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            object-fit: cover;
+        }
+
+        .app-title {
+            font-weight: 600;
+            color: #2C5530;
+            margin-bottom: 10px;
+        }
+
+        .app-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .app-button {
+            background: linear-gradient(135deg, #E74C3C, #C0392B);
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .app-button:hover {
+            background: linear-gradient(135deg, #C0392B, #A93226);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .links-container {
+                padding: 30px 20px;
+            }
+
+            .link-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .app-links {
+                grid-template-columns: 1fr;
+            }
+
+            .app-buttons {
+                flex-direction: column;
+            }
+
+            .app-button {
+                justify-content: center;
+            }
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.875rem;
+        }
+
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 5px;
+            z-index: 1000;
+        }
+
+        .lang-btn {
+            padding: 8px 12px;
+            border: none;
+            background: transparent;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: #6c757d;
+        }
+
+        .lang-btn:hover {
+            background: #f8f9fa;
+            color: #2C5530;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, #E74C3C, #F39C12);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .language-switcher {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 0 auto 20px;
+                width: fit-content;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="switchLanguage('ko')">한</button>
+        <button class="lang-btn" onclick="switchLanguage('zh')">中</button>
+        <button class="lang-btn" onclick="switchLanguage('ja')">日</button>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Tenby International School Penang</h1>
+            <p data-i18n="subtitle">Parent Resources & Quick Links</p>
+        </div>
+
+        <div class="links-container">
+            <!-- School Portal & Resources -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">🏫</span>
+                    <span data-i18n="section-portal">School Portal & Resources</span>
+                </h2>
+                <div class="link-grid">
+                    <a href="https://tenbypenang.parents.isamshosting.cloud/" class="link-card" target="_blank">
+                        <div class="link-icon">📊</div>
+                        <div class="link-content">
+                            <div class="link-title" data-i18n="link-portal">Parent Portal (iSAMS)</div>
+                            <div class="link-description" data-i18n="link-portal-desc">Access student grades, attendance, and announcements</div>
+                        </div>
+                    </a>
+
+                    <a href="https://tenbypenangint.schoolsbuddy.net/Dashboard" class="link-card" target="_blank">
+                        <div class="link-icon">🎯</div>
+                        <div class="link-content">
+                            <div class="link-title" data-i18n="link-buddy">Schools Buddy</div>
+                            <div class="link-description" data-i18n="link-buddy-desc">Activities booking and school events management</div>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+
+
+            <!-- Learning Resources -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">📚</span>
+                    <span data-i18n="section-learning">Learning Resources</span>
+                </h2>
+                
+                <!-- Web Resources -->
+                <div class="link-grid">
+                    <a href="https://www.learningvillage.net/" class="link-card" target="_blank">
+                        <div class="link-icon">🌐</div>
+                        <div class="link-content">
+                            <div class="link-title" data-i18n="link-learningvillage">Learning Village</div>
+                            <div class="link-description" data-i18n="link-learningvillage-desc">Interactive learning platform for students</div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Mobile Learning Apps -->
+                <div class="app-links" style="margin-top: 30px;">
+
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <img src="https://play-lh.googleusercontent.com/d7NBxso22K4rbCp6O2NUg64zjQkJYbjAQm_6kNaHcit6_cHrQe7w6AaYNhr76UrAqeE=w480-h960-rw" alt="Flash Academy" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
+                        </div>
+                        <div class="app-title" data-i18n="app-flash">Flash Academy</div>
+                        <div class="app-buttons">
+                            <a href="#" class="app-button" onclick="openAppStore('flash-ios')" target="_blank">📱 iOS</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.learninglabs.flashsticks" class="app-button" target="_blank">🤖 Android</a>
+                        </div>
+                    </div>
+
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <img src="https://play-lh.googleusercontent.com/G0tjC54WKETZNumMWnr8bSPxTbKBC9-YwSCa_pgAMNMv7v8pCBJWPsQB6iuoHFoudAs=w480-h960-rw" alt="Raz Kids A-Z" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
+                        </div>
+                        <div class="app-title" data-i18n="app-raz">Raz Kids A-Z</div>
+                        <div class="app-buttons">
+                            <a href="#" class="app-button" onclick="openAppStore('raz-ios')" target="_blank">📱 iOS</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.learninga_z.onyourown" class="app-button" target="_blank">🤖 Android</a>
+                        </div>
+                    </div>
+
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <img src="https://play-lh.googleusercontent.com/Ybd2wBlHcQBya94EMP_ELp6KphnbOaXTEa97gdgMTlYXNoxKqKcqhpPnYjl1yAvmHe0=w480-h960-rw" alt="Purple Mash" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
+                        </div>
+                        <div class="app-title" data-i18n="app-purple">Purple Mash</div>
+                        <div class="app-buttons">
+                            <a href="#" class="app-button" onclick="openAppStore('purple-ios')" target="_blank">📱 iOS</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.purplemash_browser_react_native" class="app-button" target="_blank">🤖 Android</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- School Information -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">🏫</span>
+                    <span data-i18n="section-info">School Information</span>
+                </h2>
+                <div class="link-grid">
+                    <a href="https://www.tenby.edu.my/penang/" class="link-card" target="_blank">
+                        <div class="link-icon">TIS</div>
+                        <div class="link-content">
+                            <div class="link-title" data-i18n="link-website">School Website</div>
+                            <div class="link-description" data-i18n="link-website-desc">Official Tenby International School Penang website</div>
+                        </div>
+                    </a>
+
+                    <a href="https://www.facebook.com/tenbypenang/" class="link-card" target="_blank">
+                        <div class="link-icon">📘</div>
+                        <div class="link-content">
+                            <div class="link-title" data-i18n="link-facebook">Facebook</div>
+                            <div class="link-description" data-i18n="link-facebook-desc">Follow school updates and news</div>
+                        </div>
+                    </a>
+
+                    <a href="https://www.linkedin.com/company/tenbyschoolspenang/" class="link-card" target="_blank">
+                        <div class="link-icon">💼</div>
+                        <div class="link-content">
+                            <div class="link-title" data-i18n="link-linkedin">LinkedIn</div>
+                            <div class="link-description" data-i18n="link-linkedin-desc">Professional school community</div>
+                        </div>
+                    </a>
+
+
+                    <a href="https://www.instagram.com/tenbypenang/" class="link-card" target="_blank">
+                        <div class="link-icon">📷</div>
+                        <div class="link-content">
+                            <div class="link-title" data-i18n="link-instagram">School Instagram</div>
+                            <div class="link-description" data-i18n="link-instagram-desc">Follow school updates and activities</div>
+                        </div>
+                    </a>
+
+                    <a href="https://maps.google.com/?q=Tenby+International+School+Penang" class="link-card" target="_blank">
+                        <div class="link-icon">📍</div>
+                        <div class="link-content">
+                            <div class="link-title" data-i18n="link-location">School Location</div>
+                            <div class="link-description" data-i18n="link-location-desc">Get directions to the school</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p data-i18n="footer-text">Tenby International School Penang | For Parents & Students</p>
+            <p data-i18n="footer-disclaimer">⚠️ This is an unofficial page created by parents for convenience</p>
+            <p><a href="mailto:soosoolife.k@gmail.com" style="color: #6c757d; text-decoration: none;" data-i18n="footer-creator">📧 Page Creator</a></p>
+            <p data-i18n="footer-updated">Last updated: January 2025</p>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            en: {
+                subtitle: "Parent Resources & Quick Links",
+                "section-portal": "School Portal & Resources",
+                "section-learning": "Learning Resources",
+                "section-info": "School Information",
+                "link-website": "School Website",
+                "link-website-desc": "Official Tenby International School Penang website",
+                "link-portal": "Parent Portal (iSAMS)",
+                "link-portal-desc": "Access student grades, attendance, and announcements",
+                "link-buddy": "Schools Buddy",
+                "link-buddy-desc": "Activities booking and school events management",
+                "link-facebook": "Facebook",
+                "link-facebook-desc": "Follow school updates and news",
+                "link-linkedin": "LinkedIn",
+                "link-linkedin-desc": "Professional school community",
+                "link-creator": "Page Creator",
+                "link-creator-desc": "Contact for page updates or suggestions",
+                "link-learningvillage": "Learning Village",
+                "link-learningvillage-desc": "Interactive learning platform for students",
+                "app-flash": "Flash Academy",
+                "app-raz": "Raz Kids A-Z",
+                "app-purple": "Purple Mash",
+                "link-instagram": "School Instagram",
+                "link-instagram-desc": "Follow school updates and activities",
+                "link-location": "School Location",
+                "link-location-desc": "Get directions to the school",
+                "footer-text": "Tenby International School Penang | For Parents & Students",
+                "footer-disclaimer": "⚠️ This is an unofficial page created by parents for convenience",
+                "footer-creator": "📧 Page Creator",
+                "footer-updated": "Last updated: September 12, 2025"
+            },
+            ko: {
+                subtitle: "학부모 리소스 및 바로가기 링크",
+                "section-portal": "학교 포털 및 리소스",
+                "section-learning": "학습 리소스",
+                "section-info": "학교 정보",
+                "link-website": "학교 웹사이트",
+                "link-website-desc": "텐비 인터내셔널 스쿨 페낭 공식 웹사이트",
+                "link-portal": "학부모 포털 (iSAMS)",
+                "link-portal-desc": "학생 성적, 출석률, 공지사항 확인",
+                "link-buddy": "스쿨즈 버디",
+                "link-buddy-desc": "활동 예약 및 학교 행사 관리",
+                "link-facebook": "페이스북",
+                "link-facebook-desc": "학교 소식과 뉴스 팩로우",
+                "link-linkedin": "링크드인",
+                "link-linkedin-desc": "전문적인 학교 커뮤니티",
+                "link-creator": "페이지 제작자",
+                "link-creator-desc": "페이지 업데이트나 제안사항 연락",
+                "link-learningvillage": "러닝 빌리지",
+                "link-learningvillage-desc": "학생용 인터랙티브 학습 플랫폼",
+                "app-flash": "플래시 아카데미",
+                "app-raz": "라즈키즈 A-Z",
+                "app-purple": "퍼플 매시",
+                "link-instagram": "학교 인스타그램",
+                "link-instagram-desc": "학교 소식과 활동 팩로우",
+                "link-location": "학교 위치",
+                "link-location-desc": "학교 길찾기",
+                "footer-text": "텐비 인터내셔널 스쿨 페낭 | 학부모 및 학생용",
+                "footer-disclaimer": "⚠️ 이 페이지는 편의를 위해 학부모가 만든 비공식 페이지입니다",
+                "footer-creator": "📧 페이지 제작자",
+                "footer-updated": "마지막 업데이트: 2025년 9월 12일"
+            },
+            zh: {
+                subtitle: "家长资源及快捷链接",
+                "section-portal": "学校门户及资源",
+                "section-learning": "学习资源",
+                "section-info": "学校信息",
+                "link-website": "学校网站",
+                "link-website-desc": "槟城腾比国际学校官方网站",
+                "link-portal": "家长门户 (iSAMS)",
+                "link-portal-desc": "查看学生成绩、出勤率和公告",
+                "link-buddy": "学校伙伴",
+                "link-buddy-desc": "活动预订和学校活动管理",
+                "link-facebook": "Facebook",
+                "link-facebook-desc": "关注学校更新和新闻",
+                "link-linkedin": "LinkedIn",
+                "link-linkedin-desc": "专业学校社区",
+                "link-creator": "页面创建者",
+                "link-creator-desc": "页面更新或建议联系",
+                "link-learningvillage": "学习村庄",
+                "link-learningvillage-desc": "学生互动学习平台",
+                "app-flash": "闪电学院",
+                "app-raz": "Raz Kids A-Z",
+                "app-purple": "紫色糊状物",
+                "link-instagram": "学校Instagram",
+                "link-instagram-desc": "关注学校动态和活动",
+                "link-location": "学校位置",
+                "link-location-desc": "获取学校路线指引",
+                "footer-text": "槟城腾比国际学校 | 面向家长和学生",
+                "footer-disclaimer": "⚠️ 这是家长为方便而创建的非官方页面",
+                "footer-creator": "📧 页面创建者",
+                "footer-updated": "最后更新：2025年9月12日"
+            },
+            ja: {
+                subtitle: "保護者向けリソース・クイックリンク",
+                "section-portal": "学校ポータル・リソース",
+                "section-learning": "学習リソース",
+                "section-info": "学校情報",
+                "link-website": "学校ウェブサイト",
+                "link-website-desc": "ペナン・テンビー国際学校公式ウェブサイト",
+                "link-portal": "保護者ポータル (iSAMS)",
+                "link-portal-desc": "学生の成績、出席状況、お知らせの確認",
+                "link-buddy": "スクールズバディ",
+                "link-buddy-desc": "活動予約と学校イベント管理",
+                "link-facebook": "Facebook",
+                "link-facebook-desc": "学校の最新情報とニュースをフォロー",
+                "link-linkedin": "LinkedIn",
+                "link-linkedin-desc": "プロフェッショナルな学校コミュニティ",
+                "link-creator": "ページ作成者",
+                "link-creator-desc": "ページ更新や提案の連絡先",
+                "link-learningvillage": "ラーニングビレッジ",
+                "link-learningvillage-desc": "学生向けインタラクティブ学習プラットフォーム",
+                "app-flash": "フラッシュアカデミー",
+                "app-raz": "Raz Kids A-Z",
+                "app-purple": "パープルマッシュ",
+                "link-instagram": "学校Instagram",
+                "link-instagram-desc": "学校の最新情報や活動をフォロー",
+                "link-location": "学校の場所",
+                "link-location-desc": "学校への道案内を取得",
+                "footer-text": "ペナン・テンビー国際学校 | 保護者・学生向け",
+                "footer-disclaimer": "⚠️ これは保護者が便宜のために作成した非公式ページです",
+                "footer-creator": "📧 ページ作成者",
+                "footer-updated": "最終更新：2025年9月12日"
+            }
+        };
+
+        let currentLanguage = 'en';
+
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // Update document language
+            document.documentElement.lang = lang;
+            
+            // Save preference
+            localStorage.setItem('preferred-language', lang);
+        }
+
+        // App Store Links by Region
+        const appStoreLinks = {
+            'flash-ios': {
+                'en': 'https://apps.apple.com/us/app/flashacademy-language-learning/id1002454172',    // US
+                'ko': 'https://apps.apple.com/kr/app/flashacademy-language-learning/id1002454172',    // Korea
+                'zh': 'https://apps.apple.com/cn/app/flashacademy-language-learning/id1002454172',    // China
+                'ja': 'https://apps.apple.com/jp/app/flashacademy-language-learning/id1002454172'     // Japan
+            },
+            'raz-ios': {
+                'en': 'https://apps.apple.com/us/app/kids-a-z/id474207297',    // US
+                'ko': 'https://apps.apple.com/kr/app/kids-a-z/id474207297',    // Korea
+                'zh': 'https://apps.apple.com/cn/app/kids-a-z/id474207297',    // China
+                'ja': 'https://apps.apple.com/jp/app/kids-a-z/id474207297'     // Japan
+            },
+            'purple-ios': {
+                'en': 'https://apps.apple.com/us/app/purple-mash-browser/id1659877439',    // US
+                'ko': 'https://apps.apple.com/kr/app/purple-mash-browser/id1659877439',    // Korea
+                'zh': 'https://apps.apple.com/cn/app/purple-mash-browser/id1659877439',    // China
+                'ja': 'https://apps.apple.com/jp/app/purple-mash-browser/id1659877439'     // Japan
+            }
+        };
+
+        // Function to open App Store based on current language
+        function openAppStore(appId) {
+            const currentLang = currentLanguage || 'en';
+            const url = appStoreLinks[appId][currentLang] || appStoreLinks[appId]['en'];
+            window.open(url, '_blank');
+        }
+
+        // Load saved language preference on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferred-language') || 'en';
+            if (savedLang !== 'en') {
+                // Find and click the appropriate language button
+                const langButton = document.querySelector(`[onclick="switchLanguage('${savedLang}')"]`);
+                if (langButton) {
+                    langButton.click();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
