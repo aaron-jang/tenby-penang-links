@@ -41,6 +41,147 @@
             background: linear-gradient(135deg, #E74C3C 0%, #3498DB 50%, #F39C12 100%);
             min-height: 100vh;
             padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        /* Dark mode styles */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: linear-gradient(135deg, #2C1810 0%, #1E3A8A 50%, #92400E 100%);
+            }
+
+            .container {
+                background: #1F2937;
+                color: #F3F4F6;
+            }
+
+            .header {
+                background: linear-gradient(135deg, #1F2937 0%, #374151 100%);
+                color: #F3F4F6;
+            }
+
+            .link-card {
+                background: #374151;
+                color: #F3F4F6;
+                border-color: transparent;
+            }
+
+            .link-card:hover {
+                border-color: #E74C3C;
+                background: #4B5563;
+            }
+
+            .link-title {
+                color: #F3F4F6;
+            }
+
+            .link-description {
+                color: #D1D5DB;
+            }
+
+            .section-title {
+                color: #F3F4F6;
+            }
+
+            .app-card {
+                background: #374151;
+                color: #F3F4F6;
+            }
+
+            .app-card:hover {
+                background: #4B5563;
+            }
+
+            .app-title {
+                color: #F3F4F6;
+            }
+
+            .footer {
+                background: #374151;
+                color: #D1D5DB;
+            }
+
+            .language-switcher {
+                background: rgba(31, 41, 55, 0.95);
+            }
+
+            .lang-btn {
+                color: #D1D5DB;
+            }
+
+            .theme-btn:hover, .lang-btn:hover {
+                background: #4B5563;
+                color: #F3F4F6;
+            }
+        }
+
+        /* Manual dark mode override */
+        body.dark-mode {
+            background: linear-gradient(135deg, #2C1810 0%, #1E3A8A 50%, #92400E 100%);
+        }
+
+        body.dark-mode .container {
+            background: #1F2937;
+            color: #F3F4F6;
+        }
+
+        body.dark-mode .header {
+            background: linear-gradient(135deg, #1F2937 0%, #374151 100%);
+            color: #F3F4F6;
+        }
+
+        body.dark-mode .link-card {
+            background: #374151;
+            color: #F3F4F6;
+            border-color: transparent;
+        }
+
+        body.dark-mode .link-card:hover {
+            border-color: #E74C3C;
+            background: #4B5563;
+        }
+
+        body.dark-mode .link-title {
+            color: #F3F4F6;
+        }
+
+        body.dark-mode .link-description {
+            color: #D1D5DB;
+        }
+
+        body.dark-mode .section-title {
+            color: #F3F4F6;
+        }
+
+        body.dark-mode .app-card {
+            background: #374151;
+            color: #F3F4F6;
+        }
+
+        body.dark-mode .app-card:hover {
+            background: #4B5563;
+        }
+
+        body.dark-mode .app-title {
+            color: #F3F4F6;
+        }
+
+        body.dark-mode .footer {
+            background: #374151;
+            color: #D1D5DB;
+        }
+
+        body.dark-mode .language-switcher {
+            background: rgba(31, 41, 55, 0.95);
+        }
+
+        body.dark-mode .theme-btn, body.dark-mode .lang-btn {
+            color: #D1D5DB;
+        }
+
+        body.dark-mode .theme-btn:hover, body.dark-mode .lang-btn:hover {
+            background: #4B5563;
+            color: #F3F4F6;
         }
 
         .container {
@@ -283,7 +424,7 @@
             z-index: 1000;
         }
 
-        .lang-btn {
+        .theme-btn, .lang-btn {
             padding: 8px 12px;
             border: none;
             background: transparent;
@@ -295,7 +436,7 @@
             color: #6c757d;
         }
 
-        .lang-btn:hover {
+        .theme-btn:hover, .lang-btn:hover {
             background: #f8f9fa;
             color: #2C5530;
         }
@@ -303,6 +444,11 @@
         .lang-btn.active {
             background: linear-gradient(135deg, #E74C3C, #F39C12);
             color: white;
+        }
+
+        .theme-btn {
+            margin-right: 8px;
+            font-size: 1rem;
         }
 
         @media (max-width: 768px) {
@@ -318,6 +464,7 @@
 </head>
 <body>
     <div class="language-switcher">
+        <button class="theme-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">🌙</button>
         <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
         <button class="lang-btn" onclick="switchLanguage('ko')">한</button>
         <button class="lang-btn" onclick="switchLanguage('zh')">中</button>
@@ -730,8 +877,49 @@
             return 'en'; // Default to English
         }
 
+        // Theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const themeBtn = document.querySelector('.theme-btn');
+            const isDark = body.classList.contains('dark-mode');
+            
+            if (isDark) {
+                body.classList.remove('dark-mode');
+                themeBtn.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.classList.add('dark-mode');
+                themeBtn.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Detect system theme preference
+        function getSystemTheme() {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return 'dark';
+            }
+            return 'light';
+        }
+
         // Load saved language preference or detect browser language on page load
         document.addEventListener('DOMContentLoaded', function() {
+            // Load theme preference
+            const savedTheme = localStorage.getItem('theme');
+            const systemTheme = getSystemTheme();
+            const theme = savedTheme || systemTheme;
+            
+            const body = document.body;
+            const themeBtn = document.querySelector('.theme-btn');
+            
+            if (theme === 'dark') {
+                body.classList.add('dark-mode');
+                themeBtn.textContent = '☀️';
+            } else {
+                themeBtn.textContent = '🌙';
+            }
+
+            // Load language preference
             const savedLang = localStorage.getItem('preferred-language');
             const defaultLang = savedLang || detectBrowserLanguage();
             
@@ -742,6 +930,19 @@
                     langButton.click();
                 }
             }
+
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function(e) {
+                if (!localStorage.getItem('theme')) {
+                    if (e.matches) {
+                        body.classList.add('dark-mode');
+                        themeBtn.textContent = '☀️';
+                    } else {
+                        body.classList.remove('dark-mode');
+                        themeBtn.textContent = '🌙';
+                    }
+                }
+            });
         });
     </script>
 </body>
