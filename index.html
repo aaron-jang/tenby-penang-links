@@ -583,7 +583,7 @@
                             </div>
                         </div>
                         <div class="app-buttons">
-                            <a href="#" class="app-button" onclick="openAppStore('flash-ios')" target="_blank">📱 iOS</a>
+                            <a href="https://apps.apple.com/us/app/flashacademy-language-learning/id1002454172" class="app-button" onclick="openAppStore('flash-ios', event)" target="_blank">📱 iOS</a>
                             <a href="https://play.google.com/store/apps/details?id=com.learninglabs.flashsticks" class="app-button" target="_blank" onclick="trackLinkClick('Flash Academy Android', 'https://play.google.com/store/apps/details?id=com.learninglabs.flashsticks', 'App Store')">🤖 Android</a>
                         </div>
                     </div>
@@ -599,7 +599,7 @@
                             </div>
                         </div>
                         <div class="app-buttons">
-                            <a href="#" class="app-button" onclick="openAppStore('raz-ios')" target="_blank">📱 iOS</a>
+                            <a href="https://apps.apple.com/us/app/kids-a-z/id474207297" class="app-button" onclick="openAppStore('raz-ios', event)" target="_blank">📱 iOS</a>
                             <a href="https://play.google.com/store/apps/details?id=com.learninga_z.onyourown" class="app-button" target="_blank" onclick="trackLinkClick('Raz Kids Android', 'https://play.google.com/store/apps/details?id=com.learninga_z.onyourown', 'App Store')">🤖 Android</a>
                         </div>
                     </div>
@@ -615,7 +615,7 @@
                             </div>
                         </div>
                         <div class="app-buttons">
-                            <a href="#" class="app-button" onclick="openAppStore('purple-ios')" target="_blank">📱 iOS</a>
+                            <a href="https://apps.apple.com/us/app/purple-mash-browser/id1659877439" class="app-button" onclick="openAppStore('purple-ios', event)" target="_blank">📱 iOS</a>
                             <a href="https://play.google.com/store/apps/details?id=com.purplemash_browser_react_native" class="app-button" target="_blank" onclick="trackLinkClick('Purple Mash Android', 'https://play.google.com/store/apps/details?id=com.purplemash_browser_react_native', 'App Store')">🤖 Android</a>
                         </div>
                     </div>
@@ -631,7 +631,7 @@
                             </div>
                         </div>
                         <div class="app-buttons">
-                            <a href="#" class="app-button" onclick="openAppStore('epic-ios')" target="_blank">📱 iOS</a>
+                            <a href="https://apps.apple.com/us/app/epic-kids-books-reading/id719219382" class="app-button" onclick="openAppStore('epic-ios', event)" target="_blank">📱 iOS</a>
                             <a href="https://play.google.com/store/apps/details?id=com.getepic.Epic" class="app-button" target="_blank" onclick="trackLinkClick('Epic Android', 'https://play.google.com/store/apps/details?id=com.getepic.Epic', 'App Store')">🤖 Android</a>
                         </div>
                     </div>
@@ -647,7 +647,7 @@
                             </div>
                         </div>
                         <div class="app-buttons">
-                            <a href="#" class="app-button" onclick="openAppStore('teams-ios')" target="_blank">📱 iOS</a>
+                            <a href="https://apps.apple.com/us/app/microsoft-teams/id1113153706" class="app-button" onclick="openAppStore('teams-ios', event)" target="_blank">📱 iOS</a>
                             <a href="https://play.google.com/store/apps/details?id=com.microsoft.teams" class="app-button" target="_blank" onclick="trackLinkClick('Teams Android', 'https://play.google.com/store/apps/details?id=com.microsoft.teams', 'App Store')">🤖 Android</a>
                         </div>
                     </div>
@@ -663,7 +663,7 @@
                             </div>
                         </div>
                         <div class="app-buttons">
-                            <a href="#" class="app-button" onclick="openAppStore('classdojo-ios')" target="_blank">📱 iOS</a>
+                            <a href="https://apps.apple.com/us/app/classdojo/id552602056" class="app-button" onclick="openAppStore('classdojo-ios', event)" target="_blank">📱 iOS</a>
                             <a href="https://play.google.com/store/apps/details?id=com.classdojo.android" class="app-button" target="_blank" onclick="trackLinkClick('ClassDojo Android', 'https://play.google.com/store/apps/details?id=com.classdojo.android', 'App Store')">🤖 Android</a>
                         </div>
                     </div>
@@ -679,7 +679,7 @@
                             </div>
                         </div>
                         <div class="app-buttons">
-                            <a href="#" class="app-button" onclick="openAppStore('canva-ios')" target="_blank">📱 iOS</a>
+                            <a href="https://apps.apple.com/us/app/canva-ai-video-photo-editor/id897446215" class="app-button" onclick="openAppStore('canva-ios', event)" target="_blank">📱 iOS</a>
                             <a href="https://play.google.com/store/apps/details?id=com.canva.editor" class="app-button" target="_blank" onclick="trackLinkClick('Canva Android', 'https://play.google.com/store/apps/details?id=com.canva.editor', 'App Store')">🤖 Android</a>
                         </div>
                     </div>
@@ -1004,7 +1004,12 @@
         }
 
         // Function to open App Store based on current language
-        function openAppStore(appId) {
+        function openAppStore(appId, event) {
+            // Prevent default link behavior
+            if (event) {
+                event.preventDefault();
+            }
+            
             const currentLang = currentLanguage || 'en';
             const url = appStoreLinks[appId][currentLang] || appStoreLinks[appId]['en'];
             
@@ -1012,7 +1017,19 @@
             const appName = appId.replace('-ios', '').replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
             trackLinkClick(`${appName} iOS`, url, 'App Store');
             
-            window.open(url, '_blank');
+            // Try multiple methods to open the link
+            try {
+                // Method 1: window.open (standard)
+                const newWindow = window.open(url, '_blank');
+                
+                // Method 2: If popup blocked, try location.href as fallback
+                if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+                    window.location.href = url;
+                }
+            } catch (error) {
+                // Method 3: Direct navigation as last resort
+                window.location.href = url;
+            }
         }
 
         // Detect browser language and set default
