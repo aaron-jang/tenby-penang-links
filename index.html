@@ -95,7 +95,7 @@
         "audienceType": "Parents and Students"
       },
       "keywords": "Tenby Penang, parent portal, iSAMS, learning apps, international school Malaysia",
-      "dateModified": "2025-10-16",
+      "dateModified": "2025-11-05",
       "isAccessibleForFree": true,
       "offers": {
         "@type": "Offer",
@@ -467,6 +467,11 @@
             transform: scale(1.05);
         }
 
+        /* BeepBox single button styling for desktop */
+        .beepbox-buttons {
+            width: 100px;
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 10px;
@@ -526,6 +531,16 @@
                 min-width: 0;
                 padding: 8px 12px;
                 font-size: 0.8rem;
+            }
+
+            /* BeepBox single button styling for mobile */
+            .beepbox-buttons {
+                width: auto;
+            }
+
+            .beepbox-buttons .app-button {
+                flex: initial;
+                min-width: 85px;
             }
         }
 
@@ -742,7 +757,7 @@
                     <span class="section-icon">🎨</span>
                     <span data-i18n="section-creative">Creative Tools</span>
                 </h2>
-                
+
                 <div class="app-links">
 
                     <div class="app-card">
@@ -774,6 +789,21 @@
                         <div class="app-buttons">
                             <a href="https://apps.apple.com/us/app/stop-motion-studio/id441651297" class="app-button" onclick="openAppStore('stopmotion-ios', event)" target="_blank">📱 iOS</a>
                             <a href="https://play.google.com/store/apps/details?id=com.cateater.stopmotionstudio" class="app-button" target="_blank" onclick="trackLinkClick('Stop Motion Studio Android', 'https://play.google.com/store/apps/details?id=com.cateater.stopmotionstudio', 'App Store')">🤖 Android</a>
+                        </div>
+                    </div>
+
+                    <div class="app-card">
+                        <div class="app-left">
+                            <div class="app-icon">
+                                <img src="icons/beepbox.webp" alt="BeepBox" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
+                            </div>
+                            <div class="app-info">
+                                <div class="app-title" data-i18n="app-beepbox">BeepBox</div>
+                                <div class="app-description" data-i18n="app-beepbox-desc">Music creation and composition tool</div>
+                            </div>
+                        </div>
+                        <div class="app-buttons beepbox-buttons">
+                            <a href="https://www.beepbox.co/" class="app-button" target="_blank" onclick="trackLinkClick('BeepBox Web', 'https://www.beepbox.co/', 'Creative Tool')">🌐 Web</a>
                         </div>
                     </div>
 
@@ -928,6 +958,8 @@
                 "app-canva-desc": "Design and creativity tool",
                 "app-stopmotion": "Stop Motion Studio",
                 "app-stopmotion-desc": "Create stunning stop motion animations",
+                "app-beepbox": "BeepBox",
+                "app-beepbox-desc": "Music creation and composition tool",
                 "app-flash": "Flash Academy",
                 "app-flash-desc": "Language learning with flashcards",
                 "app-raz": "Raz Kids A-Z",
@@ -941,7 +973,7 @@
                 "footer-text": "Tenby International School Penang | For Parents & Students",
                 "footer-disclaimer": "⚠️ This is an unofficial page created by parents for convenience",
                 "footer-creator": "📧 Page Creator: Aaron Jang",
-                "footer-updated": "Last updated: October 16, 2025"
+                "footer-updated": "Last updated: November 5, 2025"
             },
             ko: {
                 subtitle: "학부모 리소스 및 바로가기 링크",
@@ -976,6 +1008,8 @@
                 "app-canva-desc": "디자인 및 창작 도구",
                 "app-stopmotion": "Stop Motion Studio",
                 "app-stopmotion-desc": "멋진 스톱모션 애니메이션 제작",
+                "app-beepbox": "BeepBox",
+                "app-beepbox-desc": "음악 제작 및 작곡 도구",
                 "app-flash": "Flash Academy",
                 "app-flash-desc": "플래시카드 언어 학습",
                 "app-raz": "Raz Kids A-Z",
@@ -989,7 +1023,7 @@
                 "footer-text": "텐비 인터내셔널 스쿨 페낭 | 학부모 및 학생용",
                 "footer-disclaimer": "⚠️ 이 페이지는 편의를 위해 학부모가 만든 비공식 페이지입니다",
                 "footer-creator": "📧 페이지 제작자: Aaron Jang",
-                "footer-updated": "마지막 업데이트: 2025년 10월 16일"
+                "footer-updated": "마지막 업데이트: 2025년 11월 5일"
             },
             zh: {
                 subtitle: "家长资源及快捷链接",
@@ -1024,6 +1058,8 @@
                 "app-canva-desc": "设计和创意工具",
                 "app-stopmotion": "Stop Motion Studio",
                 "app-stopmotion-desc": "制作精美的定格动画",
+                "app-beepbox": "BeepBox",
+                "app-beepbox-desc": "音乐创作和作曲工具",
                 "app-flash": "Flash Academy",
                 "app-flash-desc": "闪卡语言学习",
                 "app-raz": "Raz Kids A-Z",
@@ -1037,7 +1073,7 @@
                 "footer-text": "槟城腾比国际学校 | 面向家长和学生",
                 "footer-disclaimer": "⚠️ 这是家长为方便而创建的非官方页面",
                 "footer-creator": "📧 页面创建者: Aaron Jang",
-                "footer-updated": "最后更新：2025年10月16日"
+                "footer-updated": "最后更新：2025年11月5日"
             },
             ja: {
                 subtitle: "保護者向けリソース・クイックリンク",
@@ -1072,6 +1108,8 @@
                 "app-canva-desc": "デザインと創作ツール",
                 "app-stopmotion": "Stop Motion Studio",
                 "app-stopmotion-desc": "素晴らしいストップモーションアニメーション制作",
+                "app-beepbox": "BeepBox",
+                "app-beepbox-desc": "音楽制作と作曲ツール",
                 "app-flash": "Flash Academy",
                 "app-flash-desc": "フラッシュカード言語学習",
                 "app-raz": "Raz Kids A-Z",
@@ -1085,7 +1123,7 @@
                 "footer-text": "ペナン・テンビー国際学校 | 保護者・学生向け",
                 "footer-disclaimer": "⚠️ これは保護者が便宜のために作成した非公式ページです",
                 "footer-creator": "📧 ページ作成者: Aaron Jang",
-                "footer-updated": "最終更新：2025年10月16日"
+                "footer-updated": "最終更新：2025年11月5日"
             }
         };
 
