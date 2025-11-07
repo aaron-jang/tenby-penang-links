@@ -467,11 +467,6 @@
             transform: scale(1.05);
         }
 
-        /* BeepBox single button styling for desktop */
-        .beepbox-buttons {
-            width: 100px;
-        }
-
         @media (max-width: 768px) {
             body {
                 padding: 10px;
@@ -531,16 +526,6 @@
                 min-width: 0;
                 padding: 8px 12px;
                 font-size: 0.8rem;
-            }
-
-            /* BeepBox single button styling for mobile */
-            .beepbox-buttons {
-                width: auto;
-            }
-
-            .beepbox-buttons .app-button {
-                flex: initial;
-                min-width: 85px;
             }
         }
 
@@ -808,21 +793,18 @@
                         </div>
                     </div>
 
-                    <div class="app-card">
-                        <div class="app-left">
-                            <div class="app-icon">
-                                <img src="icons/beepbox.webp" alt="BeepBox" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
-                            </div>
-                            <div class="app-info">
-                                <div class="app-title" data-i18n="app-beepbox">BeepBox</div>
-                                <div class="app-description" data-i18n="app-beepbox-desc">Music creation and composition tool</div>
-                            </div>
-                        </div>
-                        <div class="app-buttons beepbox-buttons">
-                            <a href="https://www.beepbox.co/" class="app-button" target="_blank" onclick="trackLinkClick('BeepBox Web', 'https://www.beepbox.co/', 'Creative Tool')">🌐 Web</a>
-                        </div>
-                    </div>
+                </div>
 
+                <div class="link-grid" style="margin-top: 15px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                    <a href="https://www.beepbox.co/" class="link-card" target="_blank" onclick="trackLinkClick('BeepBox', 'https://www.beepbox.co/', 'Creative Tool')" style="max-width: calc(50% - 7.5px);">
+                        <div class="link-icon">
+                            <img src="icons/beepbox.webp" alt="BeepBox" style="width: 100%; height: 100%; object-fit: contain; border-radius: 15px;">
+                        </div>
+                        <div class="link-content">
+                            <div class="link-title" data-i18n="link-beepbox">BeepBox</div>
+                            <div class="link-description" data-i18n="link-beepbox-desc">Music creation and composition tool</div>
+                        </div>
+                    </a>
                 </div>
             </div>
 
@@ -976,8 +958,8 @@
                 "app-canva-desc": "Design and creativity tool",
                 "app-stopmotion": "Stop Motion Studio",
                 "app-stopmotion-desc": "Create stunning stop motion animations",
-                "app-beepbox": "BeepBox",
-                "app-beepbox-desc": "Music creation and composition tool",
+                "link-beepbox": "BeepBox",
+                "link-beepbox-desc": "Music creation and composition tool",
                 "app-flash": "Flash Academy",
                 "app-flash-desc": "Language learning with flashcards",
                 "app-raz": "Raz Kids A-Z",
@@ -1028,8 +1010,8 @@
                 "app-canva-desc": "디자인 및 창작 도구",
                 "app-stopmotion": "Stop Motion Studio",
                 "app-stopmotion-desc": "멋진 스톱모션 애니메이션 제작",
-                "app-beepbox": "BeepBox",
-                "app-beepbox-desc": "음악 제작 및 작곡 도구",
+                "link-beepbox": "BeepBox",
+                "link-beepbox-desc": "음악 제작 및 작곡 도구",
                 "app-flash": "Flash Academy",
                 "app-flash-desc": "플래시카드 언어 학습",
                 "app-raz": "Raz Kids A-Z",
@@ -1080,8 +1062,8 @@
                 "app-canva-desc": "设计和创意工具",
                 "app-stopmotion": "Stop Motion Studio",
                 "app-stopmotion-desc": "制作精美的定格动画",
-                "app-beepbox": "BeepBox",
-                "app-beepbox-desc": "音乐创作和作曲工具",
+                "link-beepbox": "BeepBox",
+                "link-beepbox-desc": "音乐创作和作曲工具",
                 "app-flash": "Flash Academy",
                 "app-flash-desc": "闪卡语言学习",
                 "app-raz": "Raz Kids A-Z",
@@ -1132,8 +1114,8 @@
                 "app-canva-desc": "デザインと創作ツール",
                 "app-stopmotion": "Stop Motion Studio",
                 "app-stopmotion-desc": "素晴らしいストップモーションアニメーション制作",
-                "app-beepbox": "BeepBox",
-                "app-beepbox-desc": "音楽制作と作曲ツール",
+                "link-beepbox": "BeepBox",
+                "link-beepbox-desc": "音楽制作と作曲ツール",
                 "app-flash": "Flash Academy",
                 "app-flash-desc": "フラッシュカード言語学習",
                 "app-raz": "Raz Kids A-Z",
