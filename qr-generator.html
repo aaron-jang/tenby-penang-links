@@ -684,8 +684,23 @@
                 return;
             }
 
-            // Convert canvas to blob and download
-            canvas.toBlob(function(blob) {
+            // Create new canvas with white border/padding
+            const padding = 40; // 40px white border
+            const newCanvas = document.createElement('canvas');
+            const newSize = canvas.width + (padding * 2);
+            newCanvas.width = newSize;
+            newCanvas.height = newSize;
+            const ctx = newCanvas.getContext('2d');
+
+            // Fill with white background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, newSize, newSize);
+
+            // Draw original QR code in center
+            ctx.drawImage(canvas, padding, padding);
+
+            // Convert new canvas to blob and download
+            newCanvas.toBlob(function(blob) {
                 const url = URL.createObjectURL(blob);
                 const link = document.createElement('a');
                 const text = textInput.value.trim();
