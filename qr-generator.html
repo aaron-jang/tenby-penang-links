@@ -90,10 +90,16 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             transition: background 0.3s ease;
+        }
+
+        /* Desktop: Center container */
+        @media (min-width: 769px) {
+            body {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
         }
 
         /* Dark Mode */
@@ -232,6 +238,7 @@
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             overflow: hidden;
+            margin: 0 auto;
         }
 
         .header {
