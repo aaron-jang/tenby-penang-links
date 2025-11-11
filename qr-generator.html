@@ -531,7 +531,8 @@
         <button class="theme-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">🌙</button>
         <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
         <button class="lang-btn" onclick="switchLanguage('ko')">한</button>
-        <button class="lang-btn" onclick="switchLanguage('zh')">中</button>
+        <button class="lang-btn" onclick="switchLanguage('zh-CN')">中简</button>
+        <button class="lang-btn" onclick="switchLanguage('zh-TW')">中繁</button>
         <button class="lang-btn" onclick="switchLanguage('ja')">日</button>
     </div>
 
@@ -985,7 +986,7 @@
                 "footer-title": "무료 QR 코드 생성기",
                 "footer-credit": "텐비 페낭 커뮤니티를 위해 ❤️로 제작"
             },
-            zh: {
+            "zh-CN": {
                 "title": "🔳 QR码生成器",
                 "subtitle": "立即创建自定义QR码",
                 "label-text": "📝 输入文本或URL",
@@ -1008,6 +1009,30 @@
                 "btn-download": "💾 下载PNG",
                 "footer-title": "免费QR码生成器",
                 "footer-credit": "为腾比槟城社区 ❤️ 精心制作"
+            },
+            "zh-TW": {
+                "title": "🔳 QR碼產生器",
+                "subtitle": "立即建立自訂QR碼",
+                "label-text": "📝 輸入文字或URL",
+                "placeholder-text": "https://example.com 或任何文字",
+                "label-size": "📏 尺寸",
+                "size-small": "小 (128x128)",
+                "size-medium": "中 (256x256)",
+                "size-large": "大 (512x512)",
+                "label-color": "🎨 顏色",
+                "label-logo": "🖼️ 中心標誌（可選）",
+                "btn-choose-file": "📁 選擇圖像檔案",
+                "btn-remove": "✕ 移除",
+                "label-logo-size": "📐 標誌大小",
+                "label-logo-style": "🎨 標誌樣式",
+                "style-none": "無背景",
+                "style-white": "白色背景",
+                "style-rounded": "圓角背景",
+                "btn-generate": "🎨 產生QR碼",
+                "placeholder-generate": "👆 在上方輸入文字並點擊產生",
+                "btn-download": "💾 下載PNG",
+                "footer-title": "免費QR碼產生器",
+                "footer-credit": "為騰比檳城社區 ❤️ 精心製作"
             },
             ja: {
                 "title": "🔳 QRコード生成器",
@@ -1046,10 +1071,15 @@
                 description: "로고 오버레이가 있는 무료 온라인 QR 코드 생성기. 사용자 정의 색상, 크기 및 중앙 로고로 개인화된 QR 코드를 만드세요. PNG로 즉시 다운로드.",
                 keywords: "QR 코드 생성기, QR 코드 제작, 무료 QR 코드, 온라인 QR 생성기, 로고가 있는 QR 코드, 맞춤형 QR 코드"
             },
-            zh: {
+            "zh-CN": {
                 title: "QR码生成器 | 免费在线QR码创建工具（带徽标）",
                 description: "免费在线QR码生成器，支持自定义徽标覆盖。创建具有自定义颜色、尺寸和中心徽标的个性化QR码。即时下载为PNG。",
                 keywords: "QR码生成器, QR码创建, 免费QR码, 在线QR生成器, 带徽标的QR码, 自定义QR码"
+            },
+            "zh-TW": {
+                title: "QR碼產生器 | 免費線上QR碼建立工具（帶標誌）",
+                description: "免費線上QR碼產生器，支援自訂標誌覆蓋。建立具有自訂顏色、尺寸和中心標誌的個人化QR碼。即時下載為PNG。",
+                keywords: "QR碼產生器, QR碼建立, 免費QR碼, 線上QR產生器, 帶標誌的QR碼, 自訂QR碼"
             },
             ja: {
                 title: "QRコード生成器 | ロゴ付き無料オンラインQRコード作成ツール",
@@ -1155,7 +1185,8 @@
         function detectBrowserLanguage() {
             const browserLang = navigator.language || navigator.userLanguage;
             if (browserLang.startsWith('ko')) return 'ko';
-            if (browserLang.startsWith('zh')) return 'zh';
+            if (browserLang === 'zh-TW' || browserLang === 'zh-HK' || browserLang === 'zh-Hant') return 'zh-TW';
+            if (browserLang.startsWith('zh')) return 'zh-CN';
             if (browserLang.startsWith('ja')) return 'ja';
             return 'en';
         }
