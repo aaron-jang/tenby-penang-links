@@ -529,6 +529,52 @@
             }
         }
 
+        .utility-tools {
+            text-align: center;
+            padding: 15px 20px;
+            background: rgba(248, 249, 250, 0.5);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .utility-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #333;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .utility-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-color: #667eea;
+        }
+
+        body.dark-mode .utility-tools {
+            background: rgba(55, 65, 81, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-mode .utility-link {
+            background: #374151;
+            border-color: #4B5563;
+            color: #F3F4F6;
+        }
+
+        body.dark-mode .utility-link:hover {
+            background: #4B5563;
+            border-color: #667eea;
+        }
+
         .footer {
             background: #f8f9fa;
             padding: 20px;
@@ -913,6 +959,14 @@
             </div>
         </div>
 
+        <!-- Utility Tools -->
+        <div class="utility-tools">
+            <a href="qr-generator.html" onclick="trackLinkClick('QR Code Generator', 'qr-generator.html', 'Utility')" class="utility-link">
+                <span style="font-size: 1.2rem;">🔳</span>
+                <span data-i18n="link-qrgen">QR Code Generator</span>
+            </a>
+        </div>
+
         <div class="footer">
             <p data-i18n="footer-text">Tenby International School Penang | For Parents & Students</p>
             <p data-i18n="footer-disclaimer">⚠️ This is an unofficial page created by parents for convenience</p>
@@ -960,6 +1014,8 @@
                 "app-stopmotion-desc": "Create stunning stop motion animations",
                 "link-beepbox": "BeepBox",
                 "link-beepbox-desc": "Music creation and composition tool",
+                "link-qrgen": "QR Code Generator",
+                "link-qrgen-desc": "Create custom QR codes with logos",
                 "app-flash": "Flash Academy",
                 "app-flash-desc": "Language learning with flashcards",
                 "app-raz": "Raz Kids A-Z",
@@ -1012,6 +1068,8 @@
                 "app-stopmotion-desc": "멋진 스톱모션 애니메이션 제작",
                 "link-beepbox": "BeepBox",
                 "link-beepbox-desc": "음악 제작 및 작곡 도구",
+                "link-qrgen": "QR 코드 생성기",
+                "link-qrgen-desc": "로고가 있는 맞춤형 QR 코드 생성",
                 "app-flash": "Flash Academy",
                 "app-flash-desc": "플래시카드 언어 학습",
                 "app-raz": "Raz Kids A-Z",
@@ -1064,6 +1122,8 @@
                 "app-stopmotion-desc": "制作精美的定格动画",
                 "link-beepbox": "BeepBox",
                 "link-beepbox-desc": "音乐创作和作曲工具",
+                "link-qrgen": "QR码生成器",
+                "link-qrgen-desc": "创建带徽标的自定义QR码",
                 "app-flash": "Flash Academy",
                 "app-flash-desc": "闪卡语言学习",
                 "app-raz": "Raz Kids A-Z",
@@ -1116,6 +1176,8 @@
                 "app-stopmotion-desc": "素晴らしいストップモーションアニメーション制作",
                 "link-beepbox": "BeepBox",
                 "link-beepbox-desc": "音楽制作と作曲ツール",
+                "link-qrgen": "QRコード生成器",
+                "link-qrgen-desc": "ロゴ付きカスタムQRコードの作成",
                 "app-flash": "Flash Academy",
                 "app-flash-desc": "フラッシュカード言語学習",
                 "app-raz": "Raz Kids A-Z",
