@@ -93,6 +93,136 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background: linear-gradient(135deg, #1F2937 0%, #111827 100%);
+        }
+
+        body.dark-mode .container {
+            background: #1F2937;
+            color: #F3F4F6;
+        }
+
+        body.dark-mode .header {
+            background: linear-gradient(135deg, #374151 0%, #1F2937 100%);
+        }
+
+        body.dark-mode .input-group input,
+        body.dark-mode .input-group select {
+            background: #374151;
+            border-color: #4B5563;
+            color: #F3F4F6;
+        }
+
+        body.dark-mode .input-group label {
+            color: #F3F4F6;
+        }
+
+        body.dark-mode .color-preview {
+            background: #374151;
+            border-color: #4B5563;
+            color: #F3F4F6;
+        }
+
+        body.dark-mode .qr-preview {
+            background: #374151;
+        }
+
+        body.dark-mode .footer {
+            background: #374151;
+            color: #D1D5DB;
+        }
+
+        body.dark-mode .file-input-label {
+            background: linear-gradient(135deg, #374151 0%, #4B5563 100%);
+            border-color: #667eea;
+            color: #F3F4F6;
+        }
+
+        body.dark-mode .file-input-label:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body.dark-mode .logo-preview-container {
+            background: #374151;
+        }
+
+        body.dark-mode .logo-preview-img {
+            border-color: #4B5563;
+        }
+
+        body.dark-mode .logo-filename {
+            color: #F3F4F6;
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 5px;
+            z-index: 1000;
+        }
+
+        body.dark-mode .language-switcher {
+            background: rgba(31, 41, 55, 0.95);
+        }
+
+        .theme-btn, .lang-btn {
+            padding: 8px 12px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-radius: 25px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            color: #2C5530;
+        }
+
+        body.dark-mode .theme-btn,
+        body.dark-mode .lang-btn {
+            color: #D1D5DB;
+        }
+
+        .theme-btn:hover, .lang-btn:hover {
+            background: #f8f9fa;
+            color: #2C5530;
+        }
+
+        body.dark-mode .theme-btn:hover,
+        body.dark-mode .lang-btn:hover {
+            background: #4B5563;
+            color: #F3F4F6;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .theme-btn {
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .language-switcher {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 0 auto 20px;
+                width: fit-content;
+            }
         }
 
         .container {
@@ -397,18 +527,27 @@
     </style>
 </head>
 <body>
+    <div class="language-switcher">
+        <button class="theme-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">🌙</button>
+        <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="switchLanguage('ko')">한</button>
+        <button class="lang-btn" onclick="switchLanguage('zh')">中</button>
+        <button class="lang-btn" onclick="switchLanguage('ja')">日</button>
+    </div>
+
     <div class="container">
         <div class="header">
-            <h1>🔳 QR Code Generator</h1>
-            <p>Create custom QR codes instantly</p>
+            <h1 data-i18n="title">🔳 QR Code Generator</h1>
+            <p data-i18n="subtitle">Create custom QR codes instantly</p>
         </div>
 
         <div class="content">
             <div class="input-group">
-                <label for="text-input">📝 Enter Text or URL</label>
+                <label for="text-input" data-i18n="label-text">📝 Enter Text or URL</label>
                 <input
                     type="text"
                     id="text-input"
+                    data-i18n-placeholder="placeholder-text"
                     placeholder="https://example.com or any text"
                     autocomplete="off"
                 >
@@ -416,16 +555,16 @@
 
             <div class="options-grid">
                 <div class="input-group">
-                    <label for="size-select">📏 Size</label>
+                    <label for="size-select" data-i18n="label-size">📏 Size</label>
                     <select id="size-select">
-                        <option value="128">Small (128x128)</option>
-                        <option value="256" selected>Medium (256x256)</option>
-                        <option value="512">Large (512x512)</option>
+                        <option value="128" data-i18n="size-small">Small (128x128)</option>
+                        <option value="256" selected data-i18n="size-medium">Medium (256x256)</option>
+                        <option value="512" data-i18n="size-large">Large (512x512)</option>
                     </select>
                 </div>
 
                 <div class="input-group">
-                    <label>🎨 Color</label>
+                    <label data-i18n="label-color">🎨 Color</label>
                     <div class="color-input-wrapper">
                         <input type="color" id="color-input" value="#000000">
                         <div class="color-preview" id="color-preview">#000000</div>
@@ -434,10 +573,10 @@
             </div>
 
             <div class="input-group">
-                <label>🖼️ Center Logo (Optional)</label>
+                <label data-i18n="label-logo">🖼️ Center Logo (Optional)</label>
                 <div class="file-input-wrapper">
                     <input type="file" id="logo-input" accept="image/*">
-                    <label for="logo-input" class="file-input-label">
+                    <label for="logo-input" class="file-input-label" data-i18n="btn-choose-file">
                         📁 Choose Image File
                     </label>
                 </div>
@@ -447,42 +586,42 @@
                         <div class="logo-filename" id="logo-filename">image.png</div>
                         <div class="logo-filesize" id="logo-filesize">0 KB</div>
                     </div>
-                    <button type="button" id="remove-logo-btn" class="remove-logo-btn">✕ Remove</button>
+                    <button type="button" id="remove-logo-btn" class="remove-logo-btn" data-i18n="btn-remove">✕ Remove</button>
                 </div>
             </div>
 
             <div class="options-grid" id="logo-options" style="display: none;">
                 <div class="input-group">
-                    <label for="logo-size-slider">📐 Logo Size: <span id="logo-size-value">20</span>%</label>
+                    <label for="logo-size-slider"><span data-i18n="label-logo-size">📐 Logo Size</span>: <span id="logo-size-value">20</span>%</label>
                     <input type="range" id="logo-size-slider" min="10" max="35" value="20" style="width: 100%;">
                 </div>
 
                 <div class="input-group">
-                    <label for="logo-style-select">🎨 Logo Style</label>
+                    <label for="logo-style-select" data-i18n="label-logo-style">🎨 Logo Style</label>
                     <select id="logo-style-select">
-                        <option value="none">No Background</option>
-                        <option value="white" selected>White Background</option>
-                        <option value="rounded">Rounded Background</option>
+                        <option value="none" data-i18n="style-none">No Background</option>
+                        <option value="white" selected data-i18n="style-white">White Background</option>
+                        <option value="rounded" data-i18n="style-rounded">Rounded Background</option>
                     </select>
                 </div>
             </div>
 
-            <button class="btn btn-primary" id="generate-btn">
+            <button class="btn btn-primary" id="generate-btn" data-i18n="btn-generate">
                 🎨 Generate QR Code
             </button>
 
             <div class="qr-preview" id="qr-preview">
-                <div class="placeholder">👆 Enter text above and click Generate</div>
+                <div class="placeholder" data-i18n="placeholder-generate">👆 Enter text above and click Generate</div>
             </div>
 
-            <button class="btn btn-secondary" id="download-btn" disabled>
+            <button class="btn btn-secondary" id="download-btn" disabled data-i18n="btn-download">
                 💾 Download PNG
             </button>
         </div>
 
         <div class="footer">
-            <p>Free QR Code Generator</p>
-            <p style="margin-top: 8px;">Created with ❤️ for Tenby Penang Community</p>
+            <p data-i18n="footer-title">Free QR Code Generator</p>
+            <p style="margin-top: 8px;" data-i18n="footer-credit">Created with ❤️ for Tenby Penang Community</p>
         </div>
     </div>
 
@@ -791,6 +930,255 @@
                     'event_category': 'QR Generator',
                     'event_label': 'QR Color: ' + this.value
                 });
+            }
+        });
+
+        // ===== Multilingual Support =====
+        let currentLanguage = 'en';
+
+        const translations = {
+            en: {
+                "title": "🔳 QR Code Generator",
+                "subtitle": "Create custom QR codes instantly",
+                "label-text": "📝 Enter Text or URL",
+                "placeholder-text": "https://example.com or any text",
+                "label-size": "📏 Size",
+                "size-small": "Small (128x128)",
+                "size-medium": "Medium (256x256)",
+                "size-large": "Large (512x512)",
+                "label-color": "🎨 Color",
+                "label-logo": "🖼️ Center Logo (Optional)",
+                "btn-choose-file": "📁 Choose Image File",
+                "btn-remove": "✕ Remove",
+                "label-logo-size": "📐 Logo Size",
+                "label-logo-style": "🎨 Logo Style",
+                "style-none": "No Background",
+                "style-white": "White Background",
+                "style-rounded": "Rounded Background",
+                "btn-generate": "🎨 Generate QR Code",
+                "placeholder-generate": "👆 Enter text above and click Generate",
+                "btn-download": "💾 Download PNG",
+                "footer-title": "Free QR Code Generator",
+                "footer-credit": "Created with ❤️ for Tenby Penang Community"
+            },
+            ko: {
+                "title": "🔳 QR 코드 생성기",
+                "subtitle": "맞춤형 QR 코드를 즉시 생성하세요",
+                "label-text": "📝 텍스트 또는 URL 입력",
+                "placeholder-text": "https://example.com 또는 텍스트 입력",
+                "label-size": "📏 크기",
+                "size-small": "소형 (128x128)",
+                "size-medium": "중형 (256x256)",
+                "size-large": "대형 (512x512)",
+                "label-color": "🎨 색상",
+                "label-logo": "🖼️ 중앙 로고 (선택사항)",
+                "btn-choose-file": "📁 이미지 파일 선택",
+                "btn-remove": "✕ 제거",
+                "label-logo-size": "📐 로고 크기",
+                "label-logo-style": "🎨 로고 스타일",
+                "style-none": "배경 없음",
+                "style-white": "흰색 배경",
+                "style-rounded": "둥근 배경",
+                "btn-generate": "🎨 QR 코드 생성",
+                "placeholder-generate": "👆 위에 텍스트를 입력하고 생성을 클릭하세요",
+                "btn-download": "💾 PNG 다운로드",
+                "footer-title": "무료 QR 코드 생성기",
+                "footer-credit": "텐비 페낭 커뮤니티를 위해 ❤️로 제작"
+            },
+            zh: {
+                "title": "🔳 QR码生成器",
+                "subtitle": "立即创建自定义QR码",
+                "label-text": "📝 输入文本或URL",
+                "placeholder-text": "https://example.com 或任何文本",
+                "label-size": "📏 尺寸",
+                "size-small": "小 (128x128)",
+                "size-medium": "中 (256x256)",
+                "size-large": "大 (512x512)",
+                "label-color": "🎨 颜色",
+                "label-logo": "🖼️ 中心徽标（可选）",
+                "btn-choose-file": "📁 选择图像文件",
+                "btn-remove": "✕ 移除",
+                "label-logo-size": "📐 徽标大小",
+                "label-logo-style": "🎨 徽标样式",
+                "style-none": "无背景",
+                "style-white": "白色背景",
+                "style-rounded": "圆角背景",
+                "btn-generate": "🎨 生成QR码",
+                "placeholder-generate": "👆 在上方输入文本并点击生成",
+                "btn-download": "💾 下载PNG",
+                "footer-title": "免费QR码生成器",
+                "footer-credit": "为腾比槟城社区 ❤️ 精心制作"
+            },
+            ja: {
+                "title": "🔳 QRコード生成器",
+                "subtitle": "カスタムQRコードを即座に作成",
+                "label-text": "📝 テキストまたはURLを入力",
+                "placeholder-text": "https://example.com またはテキスト",
+                "label-size": "📏 サイズ",
+                "size-small": "小 (128x128)",
+                "size-medium": "中 (256x256)",
+                "size-large": "大 (512x512)",
+                "label-color": "🎨 色",
+                "label-logo": "🖼️ 中央ロゴ（オプション）",
+                "btn-choose-file": "📁 画像ファイルを選択",
+                "btn-remove": "✕ 削除",
+                "label-logo-size": "📐 ロゴサイズ",
+                "label-logo-style": "🎨 ロゴスタイル",
+                "style-none": "背景なし",
+                "style-white": "白背景",
+                "style-rounded": "丸い背景",
+                "btn-generate": "🎨 QRコードを生成",
+                "placeholder-generate": "👆 上にテキストを入力してから生成をクリック",
+                "btn-download": "💾 PNGをダウンロード",
+                "footer-title": "無料QRコード生成器",
+                "footer-credit": "テンビー・ペナンコミュニティのために ❤️ で作成"
+            }
+        };
+
+        const seoMetaTags = {
+            en: {
+                title: "QR Code Generator | Free Online QR Code Creator with Logo",
+                description: "Free online QR code generator with custom logo overlay. Create personalized QR codes with custom colors, sizes, and center logos. Download as PNG instantly.",
+                keywords: "QR code generator, QR code creator, free QR code, online QR generator, QR code with logo, custom QR code, QR code maker"
+            },
+            ko: {
+                title: "QR 코드 생성기 | 로고가 있는 무료 온라인 QR 코드 제작",
+                description: "로고 오버레이가 있는 무료 온라인 QR 코드 생성기. 사용자 정의 색상, 크기 및 중앙 로고로 개인화된 QR 코드를 만드세요. PNG로 즉시 다운로드.",
+                keywords: "QR 코드 생성기, QR 코드 제작, 무료 QR 코드, 온라인 QR 생성기, 로고가 있는 QR 코드, 맞춤형 QR 코드"
+            },
+            zh: {
+                title: "QR码生成器 | 免费在线QR码创建工具（带徽标）",
+                description: "免费在线QR码生成器，支持自定义徽标覆盖。创建具有自定义颜色、尺寸和中心徽标的个性化QR码。即时下载为PNG。",
+                keywords: "QR码生成器, QR码创建, 免费QR码, 在线QR生成器, 带徽标的QR码, 自定义QR码"
+            },
+            ja: {
+                title: "QRコード生成器 | ロゴ付き無料オンラインQRコード作成ツール",
+                description: "カスタムロゴオーバーレイ付きの無料オンラインQRコード生成器。カスタムカラー、サイズ、中央ロゴでパーソナライズされたQRコードを作成。即座にPNGでダウンロード。",
+                keywords: "QRコード生成器, QRコード作成, 無料QRコード, オンラインQR生成器, ロゴ付きQRコード, カスタムQRコード"
+            }
+        };
+
+        function updateSEOMetaTags(lang) {
+            const meta = seoMetaTags[lang];
+            if (meta) {
+                // Update title
+                document.title = meta.title;
+
+                // Update meta description
+                document.querySelector('meta[name="description"]').setAttribute('content', meta.description);
+
+                // Update meta keywords
+                document.querySelector('meta[name="keywords"]').setAttribute('content', meta.keywords);
+
+                // Update Open Graph tags
+                document.querySelector('meta[property="og:title"]').setAttribute('content', meta.title);
+                document.querySelector('meta[property="og:description"]').setAttribute('content', meta.description);
+
+                // Update Twitter tags
+                document.querySelector('meta[name="twitter:title"]').setAttribute('content', meta.title);
+                document.querySelector('meta[name="twitter:description"]').setAttribute('content', meta.description);
+
+                // Update html lang attribute
+                document.documentElement.lang = lang;
+            }
+        }
+
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+
+            // Track language change
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'language_change', {
+                    'event_category': 'QR Generator',
+                    'event_label': 'Language: ' + lang.toUpperCase()
+                });
+            }
+
+            // Update SEO meta tags for the selected language
+            updateSEOMetaTags(lang);
+
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Update all translatable elements
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // Update placeholder text
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-i18n-placeholder');
+                if (translations[lang] && translations[lang][key]) {
+                    element.setAttribute('placeholder', translations[lang][key]);
+                }
+            });
+
+            // Save preference
+            localStorage.setItem('preferred-language', lang);
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const themeBtn = document.querySelector('.theme-btn');
+            const isDark = body.classList.contains('dark-mode');
+
+            if (isDark) {
+                body.classList.remove('dark-mode');
+                themeBtn.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'theme_change', {
+                        'event_category': 'QR Generator',
+                        'event_label': 'Light Mode'
+                    });
+                }
+            } else {
+                body.classList.add('dark-mode');
+                themeBtn.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'theme_change', {
+                        'event_category': 'QR Generator',
+                        'event_label': 'Dark Mode'
+                    });
+                }
+            }
+        }
+
+        // Detect browser language
+        function detectBrowserLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            if (browserLang.startsWith('ko')) return 'ko';
+            if (browserLang.startsWith('zh')) return 'zh';
+            if (browserLang.startsWith('ja')) return 'ja';
+            return 'en';
+        }
+
+        // Load saved preferences on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                document.querySelector('.theme-btn').textContent = '☀️';
+            }
+
+            // Load saved language or detect browser language
+            const savedLang = localStorage.getItem('preferred-language');
+            const defaultLang = savedLang || detectBrowserLanguage();
+
+            if (defaultLang !== 'en') {
+                // Find and click the appropriate language button
+                const langButton = document.querySelector(`[onclick="switchLanguage('${defaultLang}')"]`);
+                if (langButton) {
+                    langButton.click();
+                }
             }
         });
     </script>
