@@ -168,6 +168,8 @@
             const saved = localStorage.getItem('danang-dark-mode');
             return saved ? JSON.parse(saved) : false;
           });
+          const [showTips, setShowTips] = useState(false);
+          const [activeTipCategory, setActiveTipCategory] = useState('money');
 
           // completedTasks가 변경될 때마다 localStorage에 저장
           useEffect(() => {
@@ -221,6 +223,80 @@
           // 다크모드 토글
           const toggleDarkMode = () => {
             setIsDarkMode(prev => !prev);
+          };
+
+          // 꿀팁 데이터
+          const tipsData = {
+            money: {
+              title: '💰 환전 & 돈 관리',
+              tips: [
+                { title: '한시장 금은방 환전', desc: '다낭 최고 환율! 한시장 내 금은방들이 은행보다 5-10% 좋은 환율 제공. 여러 곳 비교 후 환전 추천.' },
+                { title: '환율 계산법', desc: '100,000동 ≈ 5,500원으로 계산하면 편함. 실제로는 1,000동 = 55원 정도.' },
+                { title: 'ATM 수수료', desc: '비엣틴뱅크(Vietinbank) ATM 추천. 1회 인출 한도 500만동. 수수료 약 5,000원.' },
+                { title: '그랩페이 충전', desc: '현금 충전하면 10% 보너스 제공. 마사지샵, 식당에서 편하게 결제 가능.' },
+                { title: '일일 생활비', desc: '저렴하게: 3만원 / 보통: 5-7만원 / 여유있게: 10만원 이상' }
+              ]
+            },
+            transport: {
+              title: '🚕 교통 & 이동',
+              tips: [
+                { title: '그랩 바이크 vs 카', desc: '바이크: 1-3km 약 15,000동. 카: 2-5km 약 40,000동. 짧은 거리는 무조건 바이크!' },
+                { title: '공항 이동', desc: '그랩: 12-15만동 (20분) / 공항버스: 5만동 (40분) / 택시: 20만동 (바가지 주의!)' },
+                { title: '오토바이 렌트', desc: '하루 10-15만동. 국제면허 필요. 교통법규 엄격하니 헬멧 필수!' },
+                { title: '호이안 가는 법', desc: '그랩: 50만동 / 버스(옐로우버스): 4만동 / 데이투어: 40-60만동 (왕복+가이드)' },
+                { title: '안전운전 팁', desc: '경찰 단속 많음. 헬멧 안 쓰면 벌금 40만동! 속도 위반도 엄격.' }
+              ]
+            },
+            food: {
+              title: '🍜 맛집 & 먹거리',
+              tips: [
+                { title: '쌀국수 맛집', desc: 'Bún Bò Huế Bà Vân (분보후에), Phở Hồng (퍼홍), Mì Quảng 1A (미꽝) - 각 3-5만동' },
+                { title: '로컬 식당 찾기', desc: '플라스틱 의자 식당이 진짜 맛집! 가격 적혀있고 현지인 많은 곳 추천.' },
+                { title: '한인 마트', desc: '롯데마트, 빅씨(Big C), 한국마트. 한국 라면, 김치, 고추장 구매 가능.' },
+                { title: '그랩푸드 팁', desc: '새벽 1시까지 배달 가능. 첫 주문 50% 할인 쿠폰 활용. 팁 필수 아님.' },
+                { title: '바가지 주의', desc: '관광지 식당 피하기. 메뉴판 없는 곳, 호객행위 하는 곳 조심!' }
+              ]
+            },
+            living: {
+              title: '🏠 생활 정보',
+              tips: [
+                { title: '추천 숙소 지역', desc: '미케비치(한국인 多), 안방(조용함), 한시장(편리함). 한달 5-15만원.' },
+                { title: '세탁 서비스', desc: 'kg당 2-3만동. 24시간 완성. 호텔 세탁비의 1/10 가격!' },
+                { title: '병원 정보', desc: '패밀리메디컬(한국어 가능), 빈멕병원. 여행자보험 필수!' },
+                { title: '코워킹 스페이스', desc: 'Enouvo Space, The Workshop - 하루 이용료 10만동. 와이파이 빠름.' },
+                { title: '오션뷰 카페', desc: '콩카페(Cong Caphe), 43 Factory Coffee, Starbucks 미케비치점' }
+              ]
+            },
+            warning: {
+              title: '⚠️ 주의사항',
+              tips: [
+                { title: '택시 바가지', desc: '그랩 이용 필수! 일반 택시는 미터기 조작, 먼 길로 돌아가기 흔함.' },
+                { title: '마사지샵 선택', desc: '가격 먼저 확인! 발마사지 15-20만동, 전신 25-35만동이 적정가.' },
+                { title: '날씨 대비', desc: '2-4월: 쌀쌀, 5-8월: 폭염, 9-12월: 우기. 우산/선크림 필수!' },
+                { title: '모기 대비', desc: '저녁 해변 산책 시 모기 많음. 모기약 필수. 약국에서 저렴하게 구매.' },
+                { title: '안전 지역', desc: '미케비치, 한시장 안전. 밤늦게 한강변 인적드문 곳 피하기.' }
+              ]
+            },
+            digital: {
+              title: '📱 디지털 노마드',
+              tips: [
+                { title: '유심 vs eSIM', desc: 'Viettel 유심 추천 (30일 10GB - 30만동). 공항에서 구매 가능.' },
+                { title: 'VPN 필요성', desc: 'VPN 없어도 대부분 서비스 사용 가능. 필요시 ExpressVPN 추천.' },
+                { title: '와이파이 속도', desc: '대부분 숙소 20-50Mbps. 화상회의 가능. 코워킹 100Mbps+' },
+                { title: '노마드 카페', desc: 'The Workshop, 43 Factory Coffee, K Coffee - 콘센트 많고 조용함.' },
+                { title: '시차', desc: '한국보다 2시간 늦음. 한국 회의 참석 시 시차 고려 필요.' }
+              ]
+            },
+            saving: {
+              title: '💡 절약 팁',
+              tips: [
+                { title: '무료 비치', desc: '미케비치, 논누억비치 무료. 선베드 10만동. 유료 비치클럽은 50-100만동.' },
+                { title: '현지인 가격', desc: '베트남어 몇 마디 하면 가격 낮아짐. "Giảm giá được không?" (깜자득콩) = 할인되나요?' },
+                { title: '저렴한 마사지', desc: '한시장 근처 로컬 마사지샵. 전신 20만동. 팁 5-10만동 추가.' },
+                { title: '시장 vs 마트', desc: '한시장: 싱싱, 저렴. 빅씨: 정찰제, 에어컨. 과일은 시장이 2배 저렴!' },
+                { title: '점심 특선', desc: '오전 11-12시 로컬 식당 특가. 3만동에 푸짐한 한끼 가능.' }
+              ]
+            }
           };
 
           const scheduleData = {
@@ -457,13 +533,93 @@
                 </div>
               </main>
 
-              {/* Floating Tips Button/Panel (Static for demo) */}
+              {/* Floating Tips Button */}
               <div className="fixed bottom-6 right-6 z-10">
-                <button className="bg-amber-400 text-white p-4 rounded-full shadow-lg hover:bg-amber-500 transition-transform hover:scale-105 flex items-center gap-2 font-bold">
+                <button
+                  onClick={() => setShowTips(true)}
+                  className="bg-amber-400 text-white p-4 rounded-full shadow-lg hover:bg-amber-500 transition-transform hover:scale-105 flex items-center gap-2 font-bold"
+                >
                   <Info size={20} />
                   <span>꿀팁</span>
                 </button>
               </div>
+
+              {/* Tips Modal */}
+              {showTips && (
+                <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setShowTips(false)}>
+                  <div
+                    className={`max-w-4xl w-full max-h-[90vh] rounded-2xl overflow-hidden shadow-2xl ${
+                      isDarkMode ? 'bg-slate-800' : 'bg-white'
+                    }`}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {/* Modal Header */}
+                    <div className="bg-amber-400 text-white p-6 sm:p-8">
+                      <div className="flex justify-between items-center">
+                        <h2 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
+                          <Info size={32} />
+                          다낭 한달 살기 꿀팁
+                        </h2>
+                        <button
+                          onClick={() => setShowTips(false)}
+                          className="text-white hover:bg-amber-500 p-2 rounded-lg transition-colors"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                      <p className="mt-2 text-amber-50">실전에서 바로 쓸 수 있는 유용한 정보 모음</p>
+                    </div>
+
+                    {/* Category Tabs */}
+                    <div className={`flex overflow-x-auto border-b ${
+                      isDarkMode ? 'border-slate-700' : 'border-slate-200'
+                    }`}>
+                      {Object.entries(tipsData).map(([key, data]) => (
+                        <button
+                          key={key}
+                          onClick={() => setActiveTipCategory(key)}
+                          className={`px-4 py-3 text-sm sm:text-base whitespace-nowrap transition-colors ${
+                            activeTipCategory === key
+                              ? 'border-b-2 border-amber-400 text-amber-500 font-semibold'
+                              : isDarkMode
+                                ? 'text-slate-400 hover:text-slate-200'
+                                : 'text-slate-600 hover:text-slate-800'
+                          }`}
+                        >
+                          {data.title}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Tips Content */}
+                    <div className="p-6 sm:p-8 overflow-y-auto max-h-[60vh]">
+                      <div className="space-y-4">
+                        {tipsData[activeTipCategory].tips.map((tip, idx) => (
+                          <div
+                            key={idx}
+                            className={`p-4 rounded-xl border ${
+                              isDarkMode
+                                ? 'bg-slate-700 border-slate-600'
+                                : 'bg-slate-50 border-slate-200'
+                            }`}
+                          >
+                            <h3 className={`font-bold text-base sm:text-lg mb-2 ${
+                              isDarkMode ? 'text-amber-400' : 'text-amber-600'
+                            }`}>
+                              {tip.title}
+                            </h3>
+                            <p className={`text-sm sm:text-base ${
+                              isDarkMode ? 'text-slate-300' : 'text-slate-700'
+                            }`}>
+                              {tip.desc}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           );
         };
