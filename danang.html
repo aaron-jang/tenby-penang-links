@@ -1,9 +1,43 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <!-- 기본 메타 정보 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>다낭 한달 살기 플래너</title>
+    <meta name="description" content="다낭 한달 살기를 위한 4주 완벽 플래너. 28일간의 여행 일정, 주요 관광지, 힐링 스팟을 한눈에 확인하고 체크리스트로 관리하세요.">
+    <meta name="keywords" content="다낭, 한달살기, 여행 플래너, 베트남 여행, 디지털 노마드, 다낭 여행, 호이안, 바나힐">
+    <meta name="author" content="Da Nang Travel Planner">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aaron-jang.github.io/tenby-penang-links/danang.html">
+    <meta property="og:title" content="다낭 한달 살기 플래너 - 4주 완벽 가이드">
+    <meta property="og:description" content="느리게 걷는 여행, 일주일에 3곳만. 다낭 한달 살기를 위한 체계적인 4주 플래너로 완벽한 여행을 준비하세요.">
+    <meta property="og:image" content="https://aaron-jang.github.io/tenby-penang-links/icons/danang-preview.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://aaron-jang.github.io/tenby-penang-links/danang.html">
+    <meta name="twitter:title" content="다낭 한달 살기 플래너 - 4주 완벽 가이드">
+    <meta name="twitter:description" content="느리게 걷는 여행, 일주일에 3곳만. 다낭 한달 살기를 위한 체계적인 4주 플래너로 완벽한 여행을 준비하세요.">
+    <meta name="twitter:image" content="https://aaron-jang.github.io/tenby-penang-links/icons/danang-preview.png">
+
+    <!-- 추가 메타 정보 -->
+    <meta name="theme-color" content="#0d9488">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="다낭 플래너">
+
+    <title>다낭 한달 살기 플래너 - 4주 완벽 가이드</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2P6F0R5CLH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2P6F0R5CLH');
+    </script>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -274,23 +308,23 @@
           };
 
           return (
-            <div className={`max-w-md mx-auto min-h-screen font-sans shadow-xl overflow-hidden transition-colors ${
+            <div className={`max-w-md sm:max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto min-h-screen font-sans shadow-xl overflow-hidden transition-colors ${
               isDarkMode
                 ? 'bg-slate-900 text-slate-100'
                 : 'bg-slate-50 text-slate-800'
             }`}>
               {/* Header */}
-              <header className="bg-teal-600 text-white p-6 rounded-b-3xl shadow-lg relative overflow-hidden">
+              <header className="bg-teal-600 text-white p-6 sm:p-8 lg:p-10 rounded-b-3xl shadow-lg relative overflow-hidden">
                 <div className="absolute top-0 right-0 opacity-20 transform translate-x-4 -translate-y-4 pointer-events-none">
                   <Waves size={120} />
                 </div>
                 <div className="flex justify-between items-start">
                   <div>
-                    <h1 className="text-2xl font-bold mb-2 flex items-center gap-2">
+                    <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 flex items-center gap-2 sm:gap-3">
                       <MapPin className="fill-teal-200 text-teal-800" size={24} fill="currentColor" />
                       다낭 한달 살기
                     </h1>
-                    <p className="text-teal-100 text-sm opacity-90">
+                    <p className="text-teal-100 text-sm sm:text-base lg:text-lg opacity-90">
                       느리게 걷는 여행, 일주일에 3곳만
                     </p>
                   </div>
@@ -351,39 +385,39 @@
               </div>
 
               {/* Content Area */}
-              <main className="px-4 pb-24">
-                <div className="mb-6">
-                  <h2 className={`text-xl font-bold flex items-center gap-2 ${
+              <main className="px-4 sm:px-6 lg:px-8 pb-24">
+                <div className="mb-6 sm:mb-8">
+                  <h2 className={`text-xl sm:text-2xl lg:text-3xl font-bold flex items-center gap-2 sm:gap-3 ${
                     isDarkMode ? 'text-slate-100' : 'text-slate-800'
                   }`}>
-                    <span className="bg-teal-600 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm shadow-md">
+                    <span className="bg-teal-600 text-white w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full flex items-center justify-center text-sm sm:text-base lg:text-lg shadow-md">
                       {activeWeek}
                     </span>
                     {currentSchedule.title}
                   </h2>
-                  <p className={`text-sm ml-10 mt-1 ${
+                  <p className={`text-sm sm:text-base lg:text-lg ml-10 sm:ml-13 lg:ml-16 mt-1 ${
                     isDarkMode ? 'text-slate-400' : 'text-slate-500'
                   }`}>{currentSchedule.desc}</p>
                 </div>
 
-                <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
                   {currentSchedule.days.map((day) => (
                     <div key={day.id} className={`rounded-2xl p-5 shadow-sm border hover:shadow-md transition-shadow ${
                       isDarkMode
                         ? 'bg-slate-800 border-slate-700'
                         : 'bg-white border-slate-100'
                     }`}>
-                      <div className="flex justify-between items-start mb-3">
-                        <div className="flex items-center gap-3">
-                          <span className="text-slate-400 font-bold text-sm">{day.day}</span>
-                          <span className={`text-xs font-medium px-2 py-1 rounded-full flex items-center gap-1 ${getTypeStyle(day.type)}`}>
+                      <div className="flex justify-between items-start mb-3 sm:mb-4">
+                        <div className="flex items-center gap-2 sm:gap-3">
+                          <span className="text-slate-400 font-bold text-sm sm:text-base">{day.day}</span>
+                          <span className={`text-xs sm:text-sm font-medium px-2 py-1 rounded-full flex items-center gap-1 ${getTypeStyle(day.type)}`}>
                             {getTypeIcon(day.type)}
                             {getTypeLabel(day.type)}
                           </span>
                         </div>
                       </div>
 
-                      <h3 className={`font-bold text-lg mb-3 ${
+                      <h3 className={`font-bold text-lg sm:text-xl mb-3 sm:mb-4 ${
                         isDarkMode ? 'text-slate-100' : 'text-slate-800'
                       }`}>{day.title}</h3>
 
@@ -405,7 +439,7 @@
                               }`}>
                                 {isDone && <CheckCircle2 size={14} className="text-white" />}
                               </div>
-                              <span className={`text-sm transition-colors ${
+                              <span className={`text-sm sm:text-base transition-colors ${
                                 isDone
                                   ? 'text-slate-400 line-through'
                                   : isDarkMode

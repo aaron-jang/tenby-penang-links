@@ -1,0 +1,13 @@
+# Playwright MCP test artifacts
+.playwright-mcp/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Node
+node_modules/
+npm-debug.log*
