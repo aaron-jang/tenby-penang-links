@@ -166,16 +166,16 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #E74C3C 0%, #3498DB 50%, #F39C12 100%);
+            background: linear-gradient(160deg, #0f172a 0%, #1e3a5f 40%, #2d4a7a 100%);
             min-height: 100vh;
             padding: 20px;
-            transition: all 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         /* Dark mode styles */
         @media (prefers-color-scheme: dark) {
             body {
-                background: linear-gradient(135deg, #2C1810 0%, #1E3A8A 50%, #92400E 100%);
+                background: linear-gradient(160deg, #070d1a 0%, #0f1f3d 40%, #1a2f5a 100%);
             }
 
             .container {
@@ -184,27 +184,8 @@
             }
 
             .header {
-                background: linear-gradient(135deg, #1F2937 0%, #374151 100%);
+                background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('icons/header-bg.webp') center/cover no-repeat;
                 color: #F3F4F6;
-            }
-
-            .link-card {
-                background: #374151;
-                color: #F3F4F6;
-                border-color: transparent;
-            }
-
-            .link-card:hover {
-                border-color: #E74C3C;
-                background: #4B5563;
-            }
-
-            .link-title {
-                color: #F3F4F6;
-            }
-
-            .link-description {
-                color: #D1D5DB;
             }
 
             .section-title {
@@ -245,7 +226,7 @@
 
         /* Manual dark mode override */
         body.dark-mode {
-            background: linear-gradient(135deg, #2C1810 0%, #1E3A8A 50%, #92400E 100%);
+            background: linear-gradient(160deg, #070d1a 0%, #0f1f3d 40%, #1a2f5a 100%);
         }
 
         body.dark-mode .container {
@@ -254,27 +235,8 @@
         }
 
         body.dark-mode .header {
-            background: linear-gradient(135deg, #1F2937 0%, #374151 100%);
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('icons/header-bg.webp') center/cover no-repeat;
             color: #F3F4F6;
-        }
-
-        body.dark-mode .link-card {
-            background: #374151;
-            color: #F3F4F6;
-            border-color: transparent;
-        }
-
-        body.dark-mode .link-card:hover {
-            border-color: #E74C3C;
-            background: #4B5563;
-        }
-
-        body.dark-mode .link-title {
-            color: #F3F4F6;
-        }
-
-        body.dark-mode .link-description {
-            color: #D1D5DB;
         }
 
         body.dark-mode .section-title {
@@ -322,7 +284,7 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #2C5530 0%, #34495e 100%);
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('icons/header-bg.webp') center/cover no-repeat;
             color: white;
             padding: 40px 30px;
             text-align: center;
@@ -353,7 +315,7 @@
 
         .section-title {
             font-size: 1.3rem;
-            color: #2C5530;
+            color: #1e3a5f;
             margin-bottom: 20px;
             font-weight: 600;
             display: flex;
@@ -366,59 +328,10 @@
             height: 24px;
         }
 
-        .link-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
-        }
-
-        .link-card {
-            background: #f8f9fa;
-            border: 2px solid transparent;
-            border-radius: 12px;
-            padding: 20px;
+        a.web-card {
             text-decoration: none;
             color: inherit;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .link-card:hover {
-            border-color: #E74C3C;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.2);
-        }
-
-        .link-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #E74C3C, #F39C12);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-
-        .link-content {
-            flex: 1;
-        }
-
-        .link-title {
-            font-weight: 600;
-            color: #2C5530;
-            margin-bottom: 5px;
-            font-size: 1rem;
-        }
-
-        .link-description {
-            color: #6c757d;
-            font-size: 0.875rem;
-            line-height: 1.4;
+            cursor: pointer;
         }
 
         .app-links {
@@ -428,11 +341,11 @@
         }
 
         .app-card {
-            background: #f8f9fa;
+            background: #eef1f5;
             border-radius: 12px;
-            padding: 20px;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
+            padding: 12px 20px;
+            border: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -440,8 +353,9 @@
         }
 
         .app-card:hover {
-            border-color: #E74C3C;
+            background: #e2e6ec;
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
         .app-left {
@@ -480,7 +394,7 @@
 
         .app-title {
             font-weight: 600;
-            color: #2C5530;
+            color: #1e3a5f;
             margin-bottom: 4px;
             text-align: left;
         }
@@ -500,20 +414,21 @@
         }
 
         .app-button {
-            background: linear-gradient(135deg, #E74C3C, #C0392B);
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
             color: white;
             text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            transition: all 0.3s ease;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            transition: background 0.3s ease, transform 0.3s ease;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 5px;
         }
 
         .app-button:hover {
-            background: linear-gradient(135deg, #C0392B, #A93226);
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
             transform: scale(1.05);
         }
 
@@ -530,16 +445,12 @@
                 padding: 30px 20px;
             }
 
-            .link-grid {
-                grid-template-columns: 1fr;
-            }
-
             .app-links {
                 grid-template-columns: 1fr;
             }
 
             .app-card {
-                padding: 15px;
+                padding: 10px 15px;
                 gap: 10px;
             }
 
@@ -548,11 +459,6 @@
             }
 
             .app-icon {
-                width: 50px;
-                height: 50px;
-            }
-
-            .link-icon {
                 width: 50px;
                 height: 50px;
             }
@@ -574,8 +480,8 @@
                 justify-content: center;
                 flex: 1;
                 min-width: 0;
-                padding: 8px 12px;
-                font-size: 0.8rem;
+                padding: 5px 10px;
+                font-size: 0.7rem;
             }
         }
 
@@ -600,7 +506,7 @@
             text-decoration: none;
             color: #333;
             font-size: 0.9rem;
-            transition: all 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
 
         .utility-link:hover {
@@ -750,17 +656,17 @@
             cursor: pointer;
             font-size: 0.875rem;
             font-weight: 500;
-            transition: all 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease;
             color: #6c757d;
         }
 
         .theme-btn:hover, .lang-btn:hover {
             background: #f8f9fa;
-            color: #2C5530;
+            color: #1e3a5f;
         }
 
         .lang-btn.active {
-            background: linear-gradient(135deg, #E74C3C, #F39C12);
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
             color: white;
         }
 
@@ -803,37 +709,42 @@
                     <span class="section-icon">🏫</span>
                     <span data-i18n="section-portal">School Portal & Resources</span>
                 </h2>
-                <div class="link-grid">
-                    <a href="https://tenbypenang.parents.isamshosting.cloud/" class="link-card" target="_blank" onclick="trackLinkClick('Parent Portal (iSAMS)', 'https://tenbypenang.parents.isamshosting.cloud/', 'School Portal')">
-                        <div class="link-icon" style="background: transparent;">
-                            <img src="icons/isams.png" alt="iSAMS Parent Portal" style="width: 100%; height: 100%; object-fit: contain; border-radius: 15px;">
-                        </div>
-                        <div class="link-content">
-                            <div class="link-title" data-i18n="link-portal">Parent Portal (iSAMS)</div>
-                            <div class="link-description" data-i18n="link-portal-desc">Access student grades, attendance, and announcements</div>
-                        </div>
-                    </a>
-
-                    <a href="https://tenbypenangint.schoolsbuddy.net/Dashboard" class="link-card" target="_blank" onclick="trackLinkClick('Schools Buddy', 'https://tenbypenangint.schoolsbuddy.net/Dashboard', 'School Portal')">
-                        <div class="link-icon">
-                            <img src="icons/schoolsbuddy.png" alt="Schools Buddy" style="width: 100%; height: 100%; object-fit: contain; border-radius: 15px; background: white;">
-                        </div>
-                        <div class="link-content">
-                            <div class="link-title" data-i18n="link-buddy">Schools Buddy</div>
-                            <div class="link-description" data-i18n="link-buddy-desc">Activities booking and school events management</div>
+                <div class="app-links">
+                    <a href="https://tenbypenang.parents.isamshosting.cloud/" class="app-card web-card" target="_blank" onclick="trackLinkClick('Parent Portal (iSAMS)', 'https://tenbypenang.parents.isamshosting.cloud/', 'School Portal')">
+                        <div class="app-left">
+                            <div class="app-icon">
+                                <img src="icons/isams.webp" alt="iSAMS Parent Portal" style="width: 100%; height: 100%; border-radius: 15px; object-fit: contain;">
+                            </div>
+                            <div class="app-info">
+                                <div class="app-title" data-i18n="link-portal">Parent Portal (iSAMS)</div>
+                                <div class="app-description" data-i18n="link-portal-desc">Access student grades, attendance, and announcements</div>
+                            </div>
                         </div>
                     </a>
 
-                    <a href="https://www.ubsm.com.my/isp-tenby-schools" class="link-card" target="_blank" onclick="trackLinkClick('School Stationery', 'https://www.ubsm.com.my/isp-tenby-schools', 'School Portal')">
-                        <div class="link-icon">
-                            <img src="icons/ubsm.png" alt="School Stationery" style="width: 100%; height: 100%; object-fit: contain; border-radius: 15px;">
-                        </div>
-                        <div class="link-content">
-                            <div class="link-title" data-i18n="link-stationery">School Stationery</div>
-                            <div class="link-description" data-i18n="link-stationery-desc">Purchase notebooks and school supplies</div>
+                    <a href="https://tenbypenangint.schoolsbuddy.net/Dashboard" class="app-card web-card" target="_blank" onclick="trackLinkClick('Schools Buddy', 'https://tenbypenangint.schoolsbuddy.net/Dashboard', 'School Portal')">
+                        <div class="app-left">
+                            <div class="app-icon">
+                                <img src="icons/schoolsbuddy.webp" alt="Schools Buddy" style="width: 100%; height: 100%; border-radius: 15px; object-fit: contain; background: white;">
+                            </div>
+                            <div class="app-info">
+                                <div class="app-title" data-i18n="link-buddy">Schools Buddy</div>
+                                <div class="app-description" data-i18n="link-buddy-desc">Activities booking and school events management</div>
+                            </div>
                         </div>
                     </a>
 
+                    <a href="https://www.ubsm.com.my/isp-tenby-schools" class="app-card web-card" target="_blank" onclick="trackLinkClick('School Stationery', 'https://www.ubsm.com.my/isp-tenby-schools', 'School Portal')">
+                        <div class="app-left">
+                            <div class="app-icon">
+                                <img src="icons/ubsm.webp" alt="School Stationery" style="width: 100%; height: 100%; border-radius: 15px; object-fit: contain;">
+                            </div>
+                            <div class="app-info">
+                                <div class="app-title" data-i18n="link-stationery">School Stationery</div>
+                                <div class="app-description" data-i18n="link-stationery-desc">Purchase notebooks and school supplies</div>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
 
@@ -845,36 +756,48 @@
                     <span data-i18n="section-learning">Learning Resources</span>
                 </h2>
                 
-                <!-- Web Resources -->
-                <div class="link-grid">
-                    <a href="https://www.learningvillage.net/" class="link-card" target="_blank" onclick="trackLinkClick('Learning Village', 'https://www.learningvillage.net/', 'Learning Resource')">
-                        <div class="link-icon">
-                            <img src="icons/learning-village.png" alt="Learning Village" style="width: 100%; height: 100%; object-fit: contain; border-radius: 15px;">
-                        </div>
-                        <div class="link-content">
-                            <div class="link-title" data-i18n="link-learningvillage">Learning Village</div>
-                            <div class="link-description" data-i18n="link-learningvillage-desc">Interactive learning platform for students</div>
+                <div class="app-links">
+
+                    <a href="https://www.learningvillage.net/" class="app-card web-card" target="_blank" onclick="trackLinkClick('Learning Village', 'https://www.learningvillage.net/', 'Learning Resource')">
+                        <div class="app-left">
+                            <div class="app-icon">
+                                <img src="icons/learning-village.webp" alt="Learning Village" style="width: 100%; height: 100%; border-radius: 15px; object-fit: contain;">
+                            </div>
+                            <div class="app-info">
+                                <div class="app-title" data-i18n="link-learningvillage">Learning Village</div>
+                                <div class="app-description" data-i18n="link-learningvillage-desc">Interactive learning platform for students</div>
+                            </div>
                         </div>
                     </a>
 
-                    <a href="https://whiteroseeducation.com/" class="link-card" target="_blank" onclick="trackLinkClick('White Rose Education', 'https://whiteroseeducation.com/', 'Learning Resource')">
-                        <div class="link-icon" style="background: white;">
-                            <img src="icons/white-rose.ico" alt="White Rose Education" style="width: 100%; height: 100%; object-fit: contain; border-radius: 15px;">
-                        </div>
-                        <div class="link-content">
-                            <div class="link-title" data-i18n="link-whiterose">White Rose Education</div>
-                            <div class="link-description" data-i18n="link-whiterose-desc">Mathematics education resources and materials</div>
+                    <a href="https://whiteroseeducation.com/" class="app-card web-card" target="_blank" onclick="trackLinkClick('White Rose Education', 'https://whiteroseeducation.com/', 'Learning Resource')">
+                        <div class="app-left">
+                            <div class="app-icon">
+                                <img src="icons/white-rose.webp" alt="White Rose Education" style="width: 100%; height: 100%; border-radius: 15px; object-fit: contain; background: white;">
+                            </div>
+                            <div class="app-info">
+                                <div class="app-title" data-i18n="link-whiterose">White Rose Education</div>
+                                <div class="app-description" data-i18n="link-whiterose-desc">Mathematics education resources and materials</div>
+                            </div>
                         </div>
                     </a>
-                </div>
 
-                <!-- Mobile Learning Apps -->
-                <div class="app-links" style="margin-top: 15px;">
+                    <a href="https://www.century.tech/" class="app-card web-card" target="_blank" onclick="trackLinkClick('CENTURY', 'https://www.century.tech/', 'Learning Resource')">
+                        <div class="app-left">
+                            <div class="app-icon">
+                                <img src="icons/century-tech.webp" alt="CENTURY" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
+                            </div>
+                            <div class="app-info">
+                                <div class="app-title" data-i18n="link-century">CENTURY</div>
+                                <div class="app-description" data-i18n="link-century-desc">AI-powered learning platform</div>
+                            </div>
+                        </div>
+                    </a>
 
                     <div class="app-card">
                         <div class="app-left">
                             <div class="app-icon">
-                                <img src="icons/flash-academy.png" alt="Flash Academy" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
+                                <img src="icons/flash-academy.webp" alt="Flash Academy" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
                             </div>
                             <div class="app-info">
                                 <div class="app-title" data-i18n="app-flash">Flash Academy</div>
@@ -890,7 +813,7 @@
                     <div class="app-card">
                         <div class="app-left">
                             <div class="app-icon">
-                                <img src="icons/raz-kids.png" alt="Raz Kids A-Z" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
+                                <img src="icons/raz-kids.webp" alt="Raz Kids A-Z" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
                             </div>
                             <div class="app-info">
                                 <div class="app-title" data-i18n="app-raz">Raz Kids A-Z</div>
@@ -906,7 +829,7 @@
                     <div class="app-card">
                         <div class="app-left">
                             <div class="app-icon">
-                                <img src="icons/purple-mash.png" alt="Purple Mash" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
+                                <img src="icons/purple-mash.webp" alt="Purple Mash" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
                             </div>
                             <div class="app-info">
                                 <div class="app-title" data-i18n="app-purple">Purple Mash</div>
@@ -922,7 +845,7 @@
                     <div class="app-card">
                         <div class="app-left">
                             <div class="app-icon">
-                                <img src="icons/epic.png" alt="Epic - Kids' Books & Reading" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
+                                <img src="icons/epic.webp" alt="Epic - Kids' Books & Reading" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
                             </div>
                             <div class="app-info">
                                 <div class="app-title" data-i18n="app-epic">Epic - Kids' Books & Reading</div>
@@ -938,7 +861,7 @@
                     <div class="app-card">
                         <div class="app-left">
                             <div class="app-icon">
-                                <img src="icons/times-tables-rock-stars.png" alt="Times Tables Rock Stars" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
+                                <img src="icons/times-tables-rock-stars.webp" alt="Times Tables Rock Stars" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
                             </div>
                             <div class="app-info">
                                 <div class="app-title" data-i18n="app-timestables">Times Tables Rock Stars</div>
@@ -954,7 +877,7 @@
                     <div class="app-card">
                         <div class="app-left">
                             <div class="app-icon">
-                                <img src="icons/1-minute-maths.png" alt="1-Minute Maths" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
+                                <img src="icons/1-minute-maths.webp" alt="1-Minute Maths" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
                             </div>
                             <div class="app-info">
                                 <div class="app-title" data-i18n="app-1minutemaths">1-Minute Maths</div>
@@ -970,7 +893,7 @@
                     <div class="app-card">
                         <div class="app-left">
                             <div class="app-icon">
-                                <img src="icons/vexcode-go.png" alt="Vexcode GO" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
+                                <img src="icons/vexcode-go.webp" alt="Vexcode GO" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
                             </div>
                             <div class="app-info">
                                 <div class="app-title" data-i18n="app-vexcode">Vexcode GO</div>
@@ -986,7 +909,7 @@
                     <div class="app-card">
                         <div class="app-left">
                             <div class="app-icon">
-                                <img src="icons/tinkercad.png" alt="Tinkercad" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
+                                <img src="icons/tinkercad.webp" alt="Tinkercad" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
                             </div>
                             <div class="app-info">
                                 <div class="app-title" data-i18n="app-tinkercad">Tinkercad</div>
@@ -1014,7 +937,7 @@
                     <div class="app-card">
                         <div class="app-left">
                             <div class="app-icon">
-                                <img src="icons/canva.png" alt="Canva" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
+                                <img src="icons/canva.webp" alt="Canva" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
                             </div>
                             <div class="app-info">
                                 <div class="app-title" data-i18n="app-canva">Canva</div>
@@ -1030,7 +953,7 @@
                     <div class="app-card">
                         <div class="app-left">
                             <div class="app-icon">
-                                <img src="icons/stop-motion-studio.png" alt="Stop Motion Studio" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
+                                <img src="icons/stop-motion-studio.webp" alt="Stop Motion Studio" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
                             </div>
                             <div class="app-info">
                                 <div class="app-title" data-i18n="app-stopmotion">Stop Motion Studio</div>
@@ -1043,21 +966,18 @@
                         </div>
                     </div>
 
-                </div>
-
-                <div class="link-grid" style="margin-top: 15px;">
-                    <a href="https://www.beepbox.co/" class="link-card" target="_blank" onclick="trackLinkClick('BeepBox', 'https://www.beepbox.co/', 'Creative Tool')">
-                        <div class="link-icon">
-                            <img src="icons/beepbox.webp" alt="BeepBox" style="width: 100%; height: 100%; object-fit: contain; border-radius: 15px;">
-                        </div>
-                        <div class="link-content">
-                            <div class="link-title" data-i18n="link-beepbox">BeepBox</div>
-                            <div class="link-description" data-i18n="link-beepbox-desc">Music creation and composition tool</div>
+                    <a href="https://www.beepbox.co/" class="app-card web-card" target="_blank" onclick="trackLinkClick('BeepBox', 'https://www.beepbox.co/', 'Creative Tool')">
+                        <div class="app-left">
+                            <div class="app-icon">
+                                <img src="icons/beepbox.webp" alt="BeepBox" style="width: 100%; height: 100%; border-radius: 15px; object-fit: contain;">
+                            </div>
+                            <div class="app-info">
+                                <div class="app-title" data-i18n="link-beepbox">BeepBox</div>
+                                <div class="app-description" data-i18n="link-beepbox-desc">Music creation and composition tool</div>
+                            </div>
                         </div>
                     </a>
 
-                    <!-- Empty placeholder for grid layout -->
-                    <div></div>
                 </div>
             </div>
 
@@ -1073,7 +993,7 @@
                     <div class="app-card">
                         <div class="app-left">
                             <div class="app-icon">
-                                <img src="icons/teams.png" alt="Microsoft Teams" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
+                                <img src="icons/teams.webp" alt="Microsoft Teams" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
                             </div>
                             <div class="app-info">
                                 <div class="app-title" data-i18n="app-teams">Microsoft Teams</div>
@@ -1089,7 +1009,7 @@
                     <div class="app-card">
                         <div class="app-left">
                             <div class="app-icon">
-                                <img src="icons/classdojo.png" alt="ClassDojo" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
+                                <img src="icons/classdojo.webp" alt="ClassDojo" style="width: 100%; height: 100%; border-radius: 15px; object-fit: cover;">
                             </div>
                             <div class="app-info">
                                 <div class="app-title" data-i18n="app-classdojo">ClassDojo</div>
@@ -1111,55 +1031,64 @@
                     <span class="section-icon">🏫</span>
                     <span data-i18n="section-info">School Information</span>
                 </h2>
-                <div class="link-grid">
-                    <a href="https://www.tenby.edu.my/penang/" class="link-card" target="_blank" onclick="trackLinkClick('School Website', 'https://www.tenby.edu.my/penang/', 'School Information')">
-                        <div class="link-icon">
-                            <img src="icons/tenby-logo.jpg" alt="Tenby Website" style="width: 100%; height: 100%; object-fit: contain; border-radius: 15px; background: white;">
-                        </div>
-                        <div class="link-content">
-                            <div class="link-title" data-i18n="link-website">School Website</div>
-                            <div class="link-description" data-i18n="link-website-desc">Official Tenby International School Penang website</div>
-                        </div>
-                    </a>
-
-                    <a href="https://www.facebook.com/tenbypenang/" class="link-card" target="_blank" onclick="trackLinkClick('Facebook', 'https://www.facebook.com/tenbypenang/', 'Social Media')">
-                        <div class="link-icon">
-                            <img src="icons/facebook.ico" alt="Facebook" style="width: 100%; height: 100%; object-fit: contain; border-radius: 15px; background: white;">
-                        </div>
-                        <div class="link-content">
-                            <div class="link-title" data-i18n="link-facebook">Facebook</div>
-                            <div class="link-description" data-i18n="link-facebook-desc">Follow school updates and news</div>
+                <div class="app-links">
+                    <a href="https://www.tenby.edu.my/penang/" class="app-card web-card" target="_blank" onclick="trackLinkClick('School Website', 'https://www.tenby.edu.my/penang/', 'School Information')">
+                        <div class="app-left">
+                            <div class="app-icon">
+                                <img src="icons/tenby-logo.webp" alt="Tenby Website" style="width: 100%; height: 100%; border-radius: 15px; object-fit: contain; background: white;">
+                            </div>
+                            <div class="app-info">
+                                <div class="app-title" data-i18n="link-website">School Website</div>
+                                <div class="app-description" data-i18n="link-website-desc">Official Tenby International School Penang website</div>
+                            </div>
                         </div>
                     </a>
 
-                    <a href="https://www.linkedin.com/company/tenbyschoolspenang/" class="link-card" target="_blank" onclick="trackLinkClick('LinkedIn', 'https://www.linkedin.com/company/tenbyschoolspenang/', 'Social Media')">
-                        <div class="link-icon" style="background: transparent;">
-                            <img src="icons/linkedin.png" alt="LinkedIn" style="width: 100%; height: 100%; object-fit: contain; border-radius: 15px;">
-                        </div>
-                        <div class="link-content">
-                            <div class="link-title" data-i18n="link-linkedin">LinkedIn</div>
-                            <div class="link-description" data-i18n="link-linkedin-desc">Professional school community</div>
-                        </div>
-                    </a>
-
-
-                    <a href="https://www.instagram.com/tenbypenang/" class="link-card" target="_blank" onclick="trackLinkClick('Instagram', 'https://www.instagram.com/tenbypenang/', 'Social Media')">
-                        <div class="link-icon" style="background: transparent;">
-                            <img src="icons/instagram.png" alt="Instagram" style="width: 100%; height: 100%; object-fit: contain; border-radius: 15px;">
-                        </div>
-                        <div class="link-content">
-                            <div class="link-title" data-i18n="link-instagram">School Instagram</div>
-                            <div class="link-description" data-i18n="link-instagram-desc">Follow school updates and activities</div>
+                    <a href="https://www.facebook.com/tenbypenang/" class="app-card web-card" target="_blank" onclick="trackLinkClick('Facebook', 'https://www.facebook.com/tenbypenang/', 'Social Media')">
+                        <div class="app-left">
+                            <div class="app-icon">
+                                <img src="icons/facebook.webp" alt="Facebook" style="width: 100%; height: 100%; border-radius: 15px; object-fit: contain; background: white;">
+                            </div>
+                            <div class="app-info">
+                                <div class="app-title" data-i18n="link-facebook">Facebook</div>
+                                <div class="app-description" data-i18n="link-facebook-desc">Follow school updates and news</div>
+                            </div>
                         </div>
                     </a>
 
-                    <a href="https://maps.google.com/?q=Tenby+International+School+Penang" class="link-card" target="_blank" onclick="trackLinkClick('School Location', 'https://maps.google.com/?q=Tenby+International+School+Penang', 'School Information')">
-                        <div class="link-icon">
-                            <img src="icons/googlemaps.png" alt="Google Maps" style="width: 100%; height: 100%; object-fit: contain; border-radius: 15px; background: white;">
+                    <a href="https://www.linkedin.com/company/tenbyschoolspenang/" class="app-card web-card" target="_blank" onclick="trackLinkClick('LinkedIn', 'https://www.linkedin.com/company/tenbyschoolspenang/', 'Social Media')">
+                        <div class="app-left">
+                            <div class="app-icon">
+                                <img src="icons/linkedin.webp" alt="LinkedIn" style="width: 100%; height: 100%; border-radius: 15px; object-fit: contain;">
+                            </div>
+                            <div class="app-info">
+                                <div class="app-title" data-i18n="link-linkedin">LinkedIn</div>
+                                <div class="app-description" data-i18n="link-linkedin-desc">Professional school community</div>
+                            </div>
                         </div>
-                        <div class="link-content">
-                            <div class="link-title" data-i18n="link-location">School Location</div>
-                            <div class="link-description" data-i18n="link-location-desc">Get directions to the school</div>
+                    </a>
+
+                    <a href="https://www.instagram.com/tenbypenang/" class="app-card web-card" target="_blank" onclick="trackLinkClick('Instagram', 'https://www.instagram.com/tenbypenang/', 'Social Media')">
+                        <div class="app-left">
+                            <div class="app-icon">
+                                <img src="icons/instagram.webp" alt="Instagram" style="width: 100%; height: 100%; border-radius: 15px; object-fit: contain;">
+                            </div>
+                            <div class="app-info">
+                                <div class="app-title" data-i18n="link-instagram">School Instagram</div>
+                                <div class="app-description" data-i18n="link-instagram-desc">Follow school updates and activities</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="https://maps.google.com/?q=Tenby+International+School+Penang" class="app-card web-card" target="_blank" onclick="trackLinkClick('School Location', 'https://maps.google.com/?q=Tenby+International+School+Penang', 'School Information')">
+                        <div class="app-left">
+                            <div class="app-icon">
+                                <img src="icons/googlemaps.webp" alt="Google Maps" style="width: 100%; height: 100%; border-radius: 15px; object-fit: contain; background: white;">
+                            </div>
+                            <div class="app-info">
+                                <div class="app-title" data-i18n="link-location">School Location</div>
+                                <div class="app-description" data-i18n="link-location-desc">Get directions to the school</div>
+                            </div>
                         </div>
                     </a>
                 </div>
@@ -1239,6 +1168,8 @@
                 "link-learningvillage-desc": "Interactive learning platform for students",
                 "link-whiterose": "White Rose Education",
                 "link-whiterose-desc": "Mathematics education resources and materials",
+                "link-century": "CENTURY",
+                "link-century-desc": "AI-powered learning platform",
                 "app-teams": "Microsoft Teams",
                 "app-teams-desc": "Video calls and collaboration",
                 "app-epic": "Epic - Kids' Books & Reading",
@@ -1312,6 +1243,8 @@
                 "link-learningvillage-desc": "학생용 인터랙티브 학습 플랫폼",
                 "link-whiterose": "White Rose Education",
                 "link-whiterose-desc": "수학 교육 리소스 및 자료",
+                "link-century": "CENTURY",
+                "link-century-desc": "AI 기반 학습 플랫폼",
                 "app-teams": "Microsoft Teams",
                 "app-teams-desc": "화상통화 및 협업",
                 "app-epic": "Epic - Kids' Books & Reading",
@@ -1385,6 +1318,8 @@
                 "link-learningvillage-desc": "学生互动学习平台",
                 "link-whiterose": "White Rose Education",
                 "link-whiterose-desc": "数学教育资源和材料",
+                "link-century": "CENTURY",
+                "link-century-desc": "AI驱动的学习平台",
                 "app-teams": "Microsoft Teams",
                 "app-teams-desc": "视频通话和协作",
                 "app-epic": "Epic - Kids' Books & Reading",
@@ -1458,6 +1393,8 @@
                 "link-learningvillage-desc": "學生互動學習平台",
                 "link-whiterose": "White Rose Education",
                 "link-whiterose-desc": "數學教育資源和材料",
+                "link-century": "CENTURY",
+                "link-century-desc": "AI驅動的學習平台",
                 "app-teams": "Microsoft Teams",
                 "app-teams-desc": "視訊通話和協作",
                 "app-epic": "Epic - Kids' Books & Reading",
@@ -1531,6 +1468,8 @@
                 "link-learningvillage-desc": "学生向けインタラクティブ学習プラットフォーム",
                 "link-whiterose": "White Rose Education",
                 "link-whiterose-desc": "数学教育リソースと教材",
+                "link-century": "CENTURY",
+                "link-century-desc": "AI搭載学習プラットフォーム",
                 "app-teams": "Microsoft Teams",
                 "app-teams-desc": "ビデオ通話とコラボレーション",
                 "app-epic": "Epic - Kids' Books & Reading",
