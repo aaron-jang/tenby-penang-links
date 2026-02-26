@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://aaron-jang.github.io/tenby-penang-links/sitemap.xml
+Sitemap: https://soosoo.life/tenby-penang-links/sitemap.xml
 
 # Allow all major search engines
 User-agent: Googlebot
