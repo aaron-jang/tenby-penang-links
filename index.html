@@ -44,7 +44,7 @@
 
       gtag('config', 'G-2P6F0R5CLH');
     </script>
-    
+
     <!-- Structured Data (Schema.org) -->
     <script type="application/ld+json">
     {
@@ -687,6 +687,15 @@
     </style>
 </head>
 <body>
+    <!-- Prevent FOUC: apply dark mode before first paint -->
+    <script>
+      (function() {
+        var theme = localStorage.getItem('theme');
+        if (theme === 'dark' || (!theme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.body.classList.add('dark-mode');
+        }
+      })();
+    </script>
     <div class="language-switcher">
         <button class="theme-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">🌙</button>
         <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
@@ -1798,16 +1807,9 @@
 
         // Load saved language preference or detect browser language on page load
         document.addEventListener('DOMContentLoaded', function() {
-            // Load theme preference
-            const savedTheme = localStorage.getItem('theme');
-            const systemTheme = getSystemTheme();
-            const theme = savedTheme || systemTheme;
-            
-            const body = document.body;
+            // Sync theme button icon (dark-mode class already applied by inline script)
             const themeBtn = document.querySelector('.theme-btn');
-            
-            if (theme === 'dark') {
-                body.classList.add('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
                 themeBtn.textContent = '☀️';
             } else {
                 themeBtn.textContent = '🌙';
