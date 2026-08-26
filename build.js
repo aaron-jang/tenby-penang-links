@@ -160,7 +160,10 @@ function renderJsonLd(content, lang) {
   }
 
   return blocks
-    .map(b => `    <script type="application/ld+json">\n${JSON.stringify(b, null, 4)}\n    </script>`)
+    .map(b => {
+      const json = JSON.stringify(b, null, 4).replace(/</g, '\\u003c');
+      return `    <script type="application/ld+json">\n${json}\n    </script>`;
+    })
     .join('\n');
 }
 

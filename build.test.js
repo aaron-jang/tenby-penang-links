@@ -249,3 +249,49 @@ test('renderJsonLd omits FAQPage when there are no faq entries', () => {
   c.i18n.en.faq = [];
   assert.ok(!parseLd(renderJsonLd(c, c.languages[0])).some(b => b['@type'] === 'FAQPage'));
 });
+
+test('renderJsonLd escapes < to prevent </script> breakout', () => {
+  const c = ldContent();
+  c.i18n.en.faq[0].a = 'This contains </script> which should not break out';
+  const html = renderJsonLd(c, c.languages[0]);
+  const scriptTags = html.split('<script type="application/ld+json">').length - 1;
+  const closeTags = (html.match(/<\/script>/g) || []).length;
+  assert.strictEqual(closeTags, scriptTags, 'closing tags should equal opening tags');
+  assert.ok(!html.includes('</script> which should not'), 'raw </script> should not appear in unescaped text');
+});
+
+test('renderJsonLd escaping is lossless: parsed JSON recovers original unescaped < character', () => {
+  const c = ldContent();
+  c.i18n.en.faq[0].a = 'Answer with <tag> inside';
+  const html = renderJsonLd(c, c.languages[0]);
+  const blocks = parseLd(html);
+  const faq = blocks.find(b => b['@type'] === 'FAQPage');
+  assert.strictEqual(faq.mainEntity[0].acceptedAnswer.text, 'Answer with <tag> inside');
+});
+
+test('renderJsonLd handles non-ASCII with < escape (Korean)', () => {
+  const c = ldContent();
+  c.i18n.ko.faq[0].a = '한국어 <태그> 포함';
+  const html = renderJsonLd(c, c.languages[1]);
+  const blocks = parseLd(html);
+  const faq = blocks.find(b => b['@type'] === 'FAQPage');
+  assert.strictEqual(faq.mainEntity[0].acceptedAnswer.text, '한국어 <태그> 포함');
+});
+
+test('renderJsonLd handles title with < (page title as page subject)', () => {
+  const c = ldContent();
+  c.i18n.en.meta.title = 'My <Script> Title';
+  const html = renderJsonLd(c, c.languages[0]);
+  const blocks = parseLd(html);
+  const page = blocks.find(b => b['@type'] === 'WebPage');
+  assert.strictEqual(page.name, 'My <Script> Title');
+});
+
+test('renderJsonLd blocks do not contain raw </script> substring', () => {
+  const c = ldContent();
+  c.i18n.ko.meta.description = 'Test </script> in description';
+  const html = renderJsonLd(c, c.languages[1]);
+  const scriptBlockCount = (html.match(/<script type="application\/ld\+json">/g) || []).length;
+  const endScriptCount = (html.match(/<\/script>/g) || []).length;
+  assert.strictEqual(endScriptCount, scriptBlockCount);
+});
