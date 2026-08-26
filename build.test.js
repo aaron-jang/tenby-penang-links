@@ -387,9 +387,49 @@ test('renderCard with ampersand in name escapes once', () => {
   assert.ok(!out.includes('&amp;amp;'), "should not contain double-escaped &amp;amp;");
 });
 
-test('renderCard preserves non-ASCII characters in onclick', () => {
+test('renderCard app-type buttons with apostrophe in name escape both onclicks', () => {
+  const c = sectionContent();
+  c.i18n.ko.links.vircle.name = "L'app";
+  const out = renderSections(c, { code: 'ko' }, '');
+
+  assert.ok(out.includes("trackLinkClick('L\\'app iOS'"), "iOS button onclick should have escaped apostrophe");
+  assert.ok(out.includes("trackLinkClick('L\\'app Android'"), "Android button onclick should have escaped apostrophe");
+  assert.ok(!out.includes("trackLinkClick('L'app"), "should not contain raw unescaped apostrophe in tracking calls");
+});
+
+test('renderCard web link with apostrophe in URL escapes the onclick', () => {
+  const c = sectionContent();
+  c.sections[0].links[0].url = "https://example.com/a'b";
+  const out = renderSections(c, { code: 'ko' }, '');
+
+  const match = out.match(/onclick="([^"]*)"/);
+  assert.ok(match, "onclick attribute should exist");
+  const onclick = match[1];
+
+  assert.ok(onclick.includes("https://example.com/a\\'b"),
+    "onclick should escape apostrophes in URL");
+  assert.ok(!onclick.includes("a'b'), "),
+    "unescaped apostrophe should not break the JS string literal");
+});
+
+test('renderCard app-type link produces properly quoted hrefs for iOS and Android', () => {
+  const c = sectionContent();
+  const out = renderSections(c, { code: 'ko' }, '');
+
+  assert.ok(out.includes('href="https://apps.apple.com/app/id1492422874"'),
+    "iOS button href should be present with proper quoting");
+  assert.ok(out.includes('href="https://play.google.com/store/apps/details?id=dc.circlepay.customer&amp;hl=ko"'),
+    "Android button href should be present with escaped &amp;");
+});
+
+test('renderCard preserves non-ASCII characters inside onclick attribute', () => {
   const c = sectionContent();
   c.i18n.ko.links.isams.name = '학부모 포털';
   const out = renderSections(c, { code: 'ko' }, '');
-  assert.ok(out.includes('학부모 포털'), "Korean text should pass through unmangled");
+
+  const match = out.match(/onclick="([^"]*)"/);
+  assert.ok(match, "onclick attribute should exist");
+  const onclick = match[1];
+
+  assert.ok(onclick.includes('학부모 포털'), "Korean text should pass through intact in onclick attribute");
 });
