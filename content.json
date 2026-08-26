@@ -181,11 +181,11 @@
         "beepbox": { "name": "BeepBox", "desc": "Music creation and composition tool" },
         "teams": { "name": "Microsoft Teams", "desc": "Video calls and collaboration" },
         "classdojo": { "name": "ClassDojo", "desc": "Classroom communication" },
-        "website": { "name": "Website", "desc": "Official Tenby International School Penang website" },
+        "website": { "name": "School Website", "desc": "Official Tenby International School Penang website" },
         "facebook": { "name": "Facebook", "desc": "Follow school updates and news" },
         "linkedin": { "name": "LinkedIn", "desc": "Professional school community" },
-        "instagram": { "name": "Instagram", "desc": "Follow school updates and activities" },
-        "location": { "name": "Location", "desc": "Get directions to the school" }
+        "instagram": { "name": "School Instagram", "desc": "Follow school updates and activities" },
+        "location": { "name": "School Location", "desc": "Get directions to the school" }
       },
       "guide": { "aboutTitle": "a", "aboutBody": ["b"], "portalsTitle": "p", "portals": [], "checklistTitle": "c", "checklist": [] },
       "faqTitle": "Frequently Asked Questions",
