@@ -642,3 +642,15 @@ test('renderPage carries the generated-file banner', () => {
   const c = fullFixture();
   assert.ok(renderPage(c, c.languages[0], TEMPLATE).includes('DO NOT EDIT'));
 });
+
+test('renderPage throws with the offending token name when the template has an unknown token', () => {
+  const c = fullFixture();
+  const badTemplate = TEMPLATE.replace('{{h1}}', '{{nosuchtoken}}');
+  assert.throws(() => renderPage(c, c.languages[0], badTemplate), /nosuchtoken/);
+});
+
+test('renderPage banner matches the required text exactly', () => {
+  const c = fullFixture();
+  const firstLine = renderPage(c, c.languages[0], TEMPLATE).split('\n')[0];
+  assert.strictEqual(firstLine, '<!-- GENERATED FILE — DO NOT EDIT. Source: content.json + template.html. Run: node build.js -->');
+});
