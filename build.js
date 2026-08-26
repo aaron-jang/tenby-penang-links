@@ -28,4 +28,29 @@ function validateContent(content) {
   return true;
 }
 
-module.exports = { loadContent, validateContent };
+function baseFor(lang) {
+  return lang.path === '' ? '' : '../';
+}
+
+function pageUrl(site, lang) {
+  return site.baseUrl + lang.path;
+}
+
+function iosUrl(link) {
+  return `https://apps.apple.com/app/id${link.ios.id}`;
+}
+
+function androidUrl(link, langCode, appStore) {
+  const hl = appStore.playLangParam[langCode];
+  if (!hl) throw new Error(`appStore.playLangParam.${langCode} missing`);
+  return `https://play.google.com/store/apps/details?id=${link.android.pkg}&hl=${hl}`;
+}
+
+function hreflangTags(content) {
+  const lines = content.languages.map(l =>
+    `    <link rel="alternate" hreflang="${l.hreflang}" href="${pageUrl(content.site, l)}">`);
+  lines.push(`    <link rel="alternate" hreflang="x-default" href="${content.site.baseUrl}">`);
+  return lines.join('\n');
+}
+
+module.exports = { loadContent, validateContent, baseFor, pageUrl, iosUrl, androidUrl, hreflangTags };
