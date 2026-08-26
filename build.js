@@ -246,4 +246,46 @@ function renderSections(content, lang, base) {
   ].join('\n')).join('\n\n');
 }
 
-module.exports = { loadContent, validateContent, baseFor, pageUrl, iosUrl, androidUrl, hreflangTags, renderHead, escapeHtml, escapeAttr, renderJsonLd, linkTargetUrl, renderSections, renderCard, jsSingleQuoted, trackAttr };
+function renderLangSwitcher(content, lang, base) {
+  return content.languages.map(l => {
+    const cls = l.code === lang.code ? 'lang-btn active' : 'lang-btn';
+    return `        <a href="${base}${l.path}" class="${cls}" hreflang="${l.hreflang}">${escapeHtml(l.label)}</a>`;
+  }).join('\n');
+}
+
+function renderGuide(content, lang) {
+  const g = content.i18n[lang.code].guide;
+  const out = [`            <section class="parent-guide">`];
+
+  out.push(`                <h2 class="guide-title">${escapeHtml(g.aboutTitle)}</h2>`);
+  for (const p of g.aboutBody) out.push(`                <p class="guide-text">${escapeHtml(p)}</p>`);
+
+  out.push(`                <h2 class="guide-title">${escapeHtml(g.portalsTitle)}</h2>`);
+  out.push(`                <dl class="guide-portals">`);
+  for (const p of g.portals) {
+    out.push(`                    <dt>${escapeHtml(p.name)}</dt>`);
+    out.push(`                    <dd>${escapeHtml(p.desc)}</dd>`);
+  }
+  out.push(`                </dl>`);
+
+  out.push(`                <h2 class="guide-title">${escapeHtml(g.checklistTitle)}</h2>`);
+  out.push(`                <ul class="guide-checklist">`);
+  for (const item of g.checklist) out.push(`                    <li>${escapeHtml(item)}</li>`);
+  out.push(`                </ul>`);
+
+  out.push(`            </section>`);
+  return out.join('\n');
+}
+
+function renderFaq(content, lang) {
+  const t = content.i18n[lang.code];
+  const items = t.faq.map(f => [
+    `            <div class="faq-item">`,
+    `                <button class="faq-question" onclick="toggleFaq(this)">${escapeHtml(f.q)}</button>`,
+    `                <div class="faq-answer">${escapeHtml(f.a)}</div>`,
+    `            </div>`
+  ].join('\n')).join('\n\n');
+  return `            <h2 class="faq-title">${escapeHtml(t.faqTitle)}</h2>\n\n${items}`;
+}
+
+module.exports = { loadContent, validateContent, baseFor, pageUrl, iosUrl, androidUrl, hreflangTags, renderHead, escapeHtml, escapeAttr, renderJsonLd, linkTargetUrl, renderSections, renderCard, jsSingleQuoted, trackAttr, renderLangSwitcher, renderGuide, renderFaq };

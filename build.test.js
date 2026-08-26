@@ -435,3 +435,54 @@ test('renderCard preserves non-ASCII characters inside onclick attribute', () =>
 
   assert.ok(onclick.includes('학부모 포털'), "Korean text should pass through intact in onclick attribute");
 });
+
+const { renderLangSwitcher, renderGuide, renderFaq } = require('./build.js');
+
+const SWITCH_CONTENT = {
+  languages: [
+    { code: 'en', path: '', hreflang: 'en', label: 'EN' },
+    { code: 'ko', path: 'ko/', hreflang: 'ko', label: '한' },
+    { code: 'zh-CN', path: 'zh-cn/', hreflang: 'zh-CN', label: '中简' }
+  ]
+};
+
+test('renderLangSwitcher emits anchors, never switchLanguage calls', () => {
+  const out = renderLangSwitcher(SWITCH_CONTENT, SWITCH_CONTENT.languages[1], '../');
+  assert.ok(!out.includes('switchLanguage'));
+  assert.ok(out.includes('<a href="../ko/"'));
+  assert.ok(out.includes('hreflang="zh-CN"'));
+});
+
+test('renderLangSwitcher marks the current language active', () => {
+  const out = renderLangSwitcher(SWITCH_CONTENT, SWITCH_CONTENT.languages[1], '../');
+  assert.match(out, /class="lang-btn active"[^>]*hreflang="ko"/);
+});
+
+test('renderLangSwitcher links the English page at the base itself', () => {
+  const out = renderLangSwitcher(SWITCH_CONTENT, SWITCH_CONTENT.languages[1], '../');
+  assert.ok(out.includes('<a href="../"'));
+});
+
+test('renderGuide renders about, portals and checklist', () => {
+  const c = { i18n: { ko: { guide: {
+    aboutTitle: '학교 소개', aboutBody: ['첫 문단', '둘째 문단'],
+    portalsTitle: '자주 쓰는 포털', portals: [{ name: 'iSAMS', desc: '성적 확인' }],
+    checklistTitle: '체크리스트', checklist: ['계정 발급받기']
+  }}}};
+  const out = renderGuide(c, { code: 'ko' });
+  assert.ok(out.includes('학교 소개'));
+  assert.ok(out.includes('첫 문단'));
+  assert.ok(out.includes('둘째 문단'));
+  assert.ok(out.includes('iSAMS'));
+  assert.ok(out.includes('계정 발급받기'));
+});
+
+test('renderFaq reuses the existing faq-item markup and toggleFaq handler', () => {
+  const c = { i18n: { ko: { faqTitle: '자주 묻는 질문', faq: [{ q: '질문1', a: '답변1' }] } } };
+  const out = renderFaq(c, { code: 'ko' });
+  assert.ok(out.includes('class="faq-title"'));
+  assert.ok(out.includes('class="faq-item"'));
+  assert.ok(out.includes('onclick="toggleFaq(this)"'));
+  assert.ok(out.includes('질문1'));
+  assert.ok(out.includes('답변1'));
+});
