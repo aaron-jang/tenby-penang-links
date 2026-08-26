@@ -1,14 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://soosoo.life/tenby-penang-links/</loc>
-    <lastmod>2026-02-26T00:00:00+00:00</lastmod>
+    <lastmod>2026-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://soosoo.life/tenby-penang-links/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://soosoo.life/tenby-penang-links/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://soosoo.life/tenby-penang-links/zh-cn/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://soosoo.life/tenby-penang-links/zh-tw/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://soosoo.life/tenby-penang-links/ja/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://soosoo.life/tenby-penang-links/"/>
+  </url>
+  <url>
+    <loc>https://soosoo.life/tenby-penang-links/ko/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://soosoo.life/tenby-penang-links/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://soosoo.life/tenby-penang-links/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://soosoo.life/tenby-penang-links/zh-cn/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://soosoo.life/tenby-penang-links/zh-tw/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://soosoo.life/tenby-penang-links/ja/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://soosoo.life/tenby-penang-links/"/>
+  </url>
+  <url>
+    <loc>https://soosoo.life/tenby-penang-links/zh-cn/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://soosoo.life/tenby-penang-links/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://soosoo.life/tenby-penang-links/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://soosoo.life/tenby-penang-links/zh-cn/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://soosoo.life/tenby-penang-links/zh-tw/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://soosoo.life/tenby-penang-links/ja/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://soosoo.life/tenby-penang-links/"/>
+  </url>
+  <url>
+    <loc>https://soosoo.life/tenby-penang-links/zh-tw/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://soosoo.life/tenby-penang-links/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://soosoo.life/tenby-penang-links/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://soosoo.life/tenby-penang-links/zh-cn/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://soosoo.life/tenby-penang-links/zh-tw/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://soosoo.life/tenby-penang-links/ja/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://soosoo.life/tenby-penang-links/"/>
+  </url>
+  <url>
+    <loc>https://soosoo.life/tenby-penang-links/ja/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://soosoo.life/tenby-penang-links/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://soosoo.life/tenby-penang-links/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://soosoo.life/tenby-penang-links/zh-cn/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://soosoo.life/tenby-penang-links/zh-tw/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://soosoo.life/tenby-penang-links/ja/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://soosoo.life/tenby-penang-links/"/>
   </url>
   <url>
     <loc>https://soosoo.life/tenby-penang-links/qr-generator.html</loc>
-    <lastmod>2026-02-26T00:00:00+00:00</lastmod>
+    <lastmod>2026-08-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
