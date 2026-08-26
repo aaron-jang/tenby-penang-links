@@ -295,3 +295,56 @@ test('renderJsonLd blocks do not contain raw </script> substring', () => {
   const endScriptCount = (html.match(/<\/script>/g) || []).length;
   assert.strictEqual(endScriptCount, scriptBlockCount);
 });
+
+const { renderSections, renderCard } = require('./build.js');
+
+function sectionContent() {
+  return {
+    appStore: { playLangParam: { ko: 'ko' } },
+    sections: [{ id: 'portal', icon: '🏫', links: [
+      { id: 'isams', type: 'web', url: 'https://isams.example/', iconFile: 'isams.webp' },
+      { id: 'vircle', type: 'app', iconFile: 'vircle.webp', iconFit: 'cover',
+        ios: { id: '1492422874' }, android: { pkg: 'dc.circlepay.customer' } }
+    ]}],
+    i18n: { ko: {
+      sections: { portal: '학교 포털 및 자료' },
+      links: { isams: { name: 'iSAMS 학부모 포털', desc: '성적·출결 확인' },
+               vircle: { name: 'Vircle', desc: '교복 및 스토어' } },
+      uiLabels: { ios: '📱 iOS', android: '🤖 Android' }
+    }}
+  };
+}
+
+test('renderSections prefixes icon paths with base', () => {
+  const c = sectionContent();
+  assert.ok(renderSections(c, { code: 'ko' }, '../').includes('src="../icons/isams.webp"'));
+  assert.ok(renderSections(c, { code: 'ko' }, '').includes('src="icons/isams.webp"'));
+});
+
+test('renderSections renders a web link as an anchor card', () => {
+  const out = renderSections(sectionContent(), { code: 'ko' }, '');
+  assert.ok(out.includes('<a href="https://isams.example/" class="app-card web-card" target="_blank"'));
+  assert.ok(out.includes('iSAMS 학부모 포털'));
+});
+
+test('renderSections bakes the store URLs into hrefs', () => {
+  const out = renderSections(sectionContent(), { code: 'ko' }, '');
+  assert.ok(out.includes('href="https://apps.apple.com/app/id1492422874"'));
+  assert.ok(out.includes('&amp;hl=ko"'));
+});
+
+test('renderSections never emits openAppStore or data-i18n', () => {
+  const out = renderSections(sectionContent(), { code: 'ko' }, '');
+  assert.ok(!out.includes('openAppStore'));
+  assert.ok(!out.includes('data-i18n'));
+});
+
+test('renderSections honours iconFit, defaulting to contain', () => {
+  const out = renderSections(sectionContent(), { code: 'ko' }, '');
+  assert.ok(out.includes('object-fit: cover'));
+  assert.ok(out.includes('object-fit: contain'));
+});
+
+test('renderSections uses the localized section title', () => {
+  assert.ok(renderSections(sectionContent(), { code: 'ko' }, '').includes('학교 포털 및 자료'));
+});

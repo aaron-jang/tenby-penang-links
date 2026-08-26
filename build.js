@@ -167,4 +167,71 @@ function renderJsonLd(content, lang) {
     .join('\n');
 }
 
-module.exports = { loadContent, validateContent, baseFor, pageUrl, iosUrl, androidUrl, hreflangTags, renderHead, escapeHtml, escapeAttr, renderJsonLd, linkTargetUrl };
+function renderIcon(link, name, base) {
+  const fit = link.iconFit || 'contain';
+  return [
+    `                            <div class="app-icon">`,
+    `                                <img src="${base}icons/${link.iconFile}" alt="${escapeAttr(name)}" style="width: 100%; height: 100%; border-radius: 15px; object-fit: ${fit};">`,
+    `                            </div>`
+  ].join('\n');
+}
+
+function renderCard(content, lang, link, sectionId, base) {
+  const t = content.i18n[lang.code];
+  const info = t.links[link.id];
+  const ui = t.uiLabels || {};
+  const inner = [
+    `                        <div class="app-left">`,
+    renderIcon(link, info.name, base),
+    `                            <div class="app-info">`,
+    `                                <div class="app-title">${escapeHtml(info.name)}</div>`,
+    `                                <div class="app-description">${escapeHtml(info.desc)}</div>`,
+    `                            </div>`,
+    `                        </div>`
+  ].join('\n');
+
+  if (link.type === 'web') {
+    const track = `trackLinkClick('${escapeAttr(info.name).replace(/'/g, "\\'")}', '${link.url}', '${sectionId}')`;
+    return [
+      `                    <a href="${escapeAttr(link.url)}" class="app-card web-card" target="_blank" onclick="${escapeAttr(track)}">`,
+      inner,
+      `                    </a>`
+    ].join('\n');
+  }
+
+  const buttons = [];
+  if (link.ios) {
+    const u = iosUrl(link);
+    buttons.push(`                            <a href="${u}" class="app-button" target="_blank" onclick="${escapeAttr(`trackLinkClick('${info.name} iOS', '${u}', 'App Store')`)}">${escapeHtml(ui.ios || '📱 iOS')}</a>`);
+  }
+  if (link.android) {
+    const u = androidUrl(link, lang.code, content.appStore);
+    buttons.push(`                            <a href="${escapeAttr(u)}" class="app-button" target="_blank" onclick="${escapeAttr(`trackLinkClick('${info.name} Android', '${u}', 'App Store')`)}">${escapeHtml(ui.android || '🤖 Android')}</a>`);
+  }
+
+  return [
+    `                    <div class="app-card">`,
+    inner,
+    `                        <div class="app-buttons">`,
+    buttons.join('\n'),
+    `                        </div>`,
+    `                    </div>`
+  ].join('\n');
+}
+
+function renderSections(content, lang, base) {
+  const t = content.i18n[lang.code];
+  return content.sections.map(section => [
+    `            <div class="section">`,
+    `                <h2 class="section-title">`,
+    `                    <span class="section-icon">${section.icon}</span>`,
+    `                    <span>${escapeHtml(t.sections[section.id])}</span>`,
+    `                </h2>`,
+    `                <div class="app-links">`,
+    section.links.map(l => renderCard(content, lang, l, section.id, base)).join('\n'),
+    `                </div>`,
+    `            </div>`
+  ].join('\n')).join('\n\n');
+}
+
+module.exports = { loadContent, validateContent, baseFor, pageUrl, iosUrl, androidUrl, hreflangTags, renderHead, escapeHtml, escapeAttr, renderJsonLd, linkTargetUrl, renderSections, renderCard };
