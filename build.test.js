@@ -466,23 +466,33 @@ test('renderLangSwitcher links the English page at the base itself', () => {
 test('renderGuide renders about, portals and checklist', () => {
   const c = { i18n: { ko: { guide: {
     aboutTitle: '학교 소개', aboutBody: ['첫 문단', '둘째 문단'],
-    portalsTitle: '자주 쓰는 포털', portals: [{ name: 'iSAMS', desc: '성적 확인' }],
-    checklistTitle: '체크리스트', checklist: ['계정 발급받기']
+    portalsTitle: '자주 쓰는 포털', portals: [{ name: 'iSAMS', desc: '성적 확인' }, { name: 'PowerSchool', desc: '학사일정' }],
+    checklistTitle: '체크리스트', checklist: ['계정 발급받기', '모바일앱 설치']
   }}}};
   const out = renderGuide(c, { code: 'ko' });
   assert.ok(out.includes('학교 소개'));
   assert.ok(out.includes('첫 문단'));
   assert.ok(out.includes('둘째 문단'));
+  assert.ok(out.includes('자주 쓰는 포털'));
   assert.ok(out.includes('iSAMS'));
+  assert.ok(out.includes('성적 확인'));
+  assert.ok(out.includes('PowerSchool'));
+  assert.ok(out.includes('학사일정'));
+  assert.ok(out.includes('체크리스트'));
   assert.ok(out.includes('계정 발급받기'));
+  assert.ok(out.includes('모바일앱 설치'));
 });
 
 test('renderFaq reuses the existing faq-item markup and toggleFaq handler', () => {
-  const c = { i18n: { ko: { faqTitle: '자주 묻는 질문', faq: [{ q: '질문1', a: '답변1' }] } } };
+  const c = { i18n: { ko: { faqTitle: '자주 묻는 질문', faq: [{ q: '질문1', a: '답변1' }, { q: '질문2', a: '답변2' }] } } };
   const out = renderFaq(c, { code: 'ko' });
   assert.ok(out.includes('class="faq-title"'));
   assert.ok(out.includes('class="faq-item"'));
+  assert.ok(out.includes('class="faq-question"'));
+  assert.ok(out.includes('class="faq-answer"'));
   assert.ok(out.includes('onclick="toggleFaq(this)"'));
   assert.ok(out.includes('질문1'));
   assert.ok(out.includes('답변1'));
+  assert.ok(out.includes('질문2'));
+  assert.ok(out.includes('답변2'));
 });
