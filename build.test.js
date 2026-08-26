@@ -531,3 +531,36 @@ test('renderSitemap includes extra URLs without alternates', () => {
 test('renderSitemap stamps lastmod from the given date', () => {
   assert.ok(renderSitemap(SITEMAP_CONTENT, '2026-08-26').includes('<lastmod>2026-08-26</lastmod>'));
 });
+
+test('renderSitemap keeps xhtml:link elements out of extraUrls blocks', () => {
+  const xml = renderSitemap(SITEMAP_CONTENT, '2026-08-26');
+  const urlBlocks = xml.split('<url>').slice(1);
+  const qrBlock = urlBlocks.find(b => b.includes('qr-generator.html'));
+  assert.ok(qrBlock, 'qr-generator.html block exists');
+  assert.ok(!qrBlock.includes('<xhtml:link'), 'qr-generator.html block contains no xhtml:link elements');
+});
+
+test('renderSitemap pins x-default href to the site root', () => {
+  const xml = renderSitemap(SITEMAP_CONTENT, '2026-08-26');
+  assert.ok(xml.includes('<xhtml:link rel="alternate" hreflang="x-default" href="https://soosoo.life/tenby-penang-links/"/>'));
+});
+
+test('hreflangTags and renderSitemap alternate sets match', () => {
+  const headAlts = hreflangTags(SITEMAP_CONTENT);
+  const sitemapXml = renderSitemap(SITEMAP_CONTENT, '2026-08-26');
+
+  const headPairs = new Set();
+  const headRegex = /hreflang="([^"]+)"\s+href="([^"]+)"/g;
+  let match;
+  while ((match = headRegex.exec(headAlts)) !== null) {
+    headPairs.add(`${match[1]}|${match[2]}`);
+  }
+
+  const sitemapPairs = new Set();
+  const sitemapRegex = /hreflang="([^"]+)"\s+href="([^"]+)"/g;
+  while ((match = sitemapRegex.exec(sitemapXml)) !== null) {
+    sitemapPairs.add(`${match[1]}|${match[2]}`);
+  }
+
+  assert.deepStrictEqual(Array.from(sitemapPairs).sort(), Array.from(headPairs).sort(), 'hreflang alternate sets must match between HTML head and sitemap');
+});
