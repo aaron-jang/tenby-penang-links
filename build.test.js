@@ -2,13 +2,33 @@ const test = require('node:test');
 const assert = require('node:assert');
 const { validateContent } = require('./build.js');
 
+function baseLangI18n(label) {
+  return {
+    sections: { portal: label },
+    links: { isams: { name: 'n', desc: 'd' } },
+    meta: { title: 't', description: 'd', h1: 'h', subtitle: 's' },
+    guide: {
+      aboutTitle: 'a',
+      aboutBody: ['body'],
+      portalsTitle: 'p',
+      portals: [{ name: 'n', desc: 'd' }],
+      checklistTitle: 'c',
+      checklist: ['item']
+    },
+    faqTitle: 'FAQ',
+    faq: [{ q: 'q', a: 'a' }],
+    disclaimer: 'disclaimer text',
+    uiLabels: { ios: 'iOS', android: 'Android', qrgen: 'QR' }
+  };
+}
+
 function baseContent() {
   return {
     languages: [{ code: 'en' }, { code: 'ko' }],
     sections: [{ id: 'portal', links: [{ id: 'isams' }] }],
     i18n: {
-      en: { sections: { portal: 'Portal' }, links: { isams: { name: 'n', desc: 'd' } } },
-      ko: { sections: { portal: '포털' }, links: { isams: { name: 'n', desc: 'd' } } }
+      en: baseLangI18n('Portal'),
+      ko: baseLangI18n('포털')
     }
   };
 }
@@ -33,6 +53,72 @@ test('validateContent throws when a whole language block is missing', () => {
   const c = baseContent();
   delete c.i18n.ko;
   assert.throws(() => validateContent(c), /i18n\.ko missing/);
+});
+
+for (const field of ['title', 'description', 'h1', 'subtitle']) {
+  test(`validateContent throws naming the exact path when meta.${field} is missing`, () => {
+    const c = baseContent();
+    delete c.i18n.ko.meta[field];
+    assert.throws(() => validateContent(c), new RegExp(`i18n\\.ko\\.meta\\.${field} missing`));
+  });
+}
+
+for (const field of ['aboutTitle', 'aboutBody', 'portalsTitle', 'portals', 'checklistTitle', 'checklist']) {
+  test(`validateContent throws naming the exact path when guide.${field} is missing`, () => {
+    const c = baseContent();
+    delete c.i18n.ko.guide[field];
+    assert.throws(() => validateContent(c), new RegExp(`i18n\\.ko\\.guide\\.${field} missing`));
+  });
+}
+
+test('validateContent throws naming the exact path when guide is missing entirely', () => {
+  const c = baseContent();
+  delete c.i18n.ko.guide;
+  assert.throws(() => validateContent(c), /i18n\.ko\.guide\.aboutTitle missing/);
+});
+
+test('validateContent throws naming the exact path when faqTitle is missing', () => {
+  const c = baseContent();
+  delete c.i18n.ko.faqTitle;
+  assert.throws(() => validateContent(c), /i18n\.ko\.faqTitle missing/);
+});
+
+test('validateContent throws naming the exact path when faq is missing entirely', () => {
+  const c = baseContent();
+  delete c.i18n.ko.faq;
+  assert.throws(() => validateContent(c), /i18n\.ko\.faq missing/);
+});
+
+test('validateContent throws naming the exact path when faq is present but empty', () => {
+  const c = baseContent();
+  c.i18n.ko.faq = [];
+  assert.throws(() => validateContent(c), /i18n\.ko\.faq missing/);
+});
+
+test('validateContent throws naming the exact path when disclaimer is missing', () => {
+  const c = baseContent();
+  delete c.i18n.ko.disclaimer;
+  assert.throws(() => validateContent(c), /i18n\.ko\.disclaimer missing/);
+});
+
+test('validateContent throws naming the exact path when disclaimer is empty string', () => {
+  const c = baseContent();
+  c.i18n.ko.disclaimer = '';
+  assert.throws(() => validateContent(c), /i18n\.ko\.disclaimer missing/);
+});
+
+for (const field of ['ios', 'android', 'qrgen']) {
+  test(`validateContent throws naming the exact path when uiLabels.${field} is missing`, () => {
+    const c = baseContent();
+    delete c.i18n.ko.uiLabels[field];
+    assert.throws(() => validateContent(c), new RegExp(`i18n\\.ko\\.uiLabels\\.${field} missing`));
+  });
+}
+
+test('validateContent does not throw when meta.keywords is absent (keywords is optional)', () => {
+  const c = baseContent();
+  delete c.i18n.ko.meta.keywords;
+  assert.strictEqual(validateContent(c), true);
 });
 
 const { baseFor, pageUrl, iosUrl, androidUrl, hreflangTags } = require('./build.js');
@@ -720,6 +806,12 @@ test('renderPage throws with the offending token name when the template has an u
   const c = fullFixture();
   const badTemplate = TEMPLATE.replace('{{h1}}', '{{nosuchtoken}}');
   assert.throws(() => renderPage(c, c.languages[0], badTemplate), /nosuchtoken/);
+});
+
+test('renderPage throws instead of injecting inherited Object.prototype members for {{toString}}', () => {
+  const c = fullFixture();
+  const badTemplate = TEMPLATE.replace('{{h1}}', '{{toString}}');
+  assert.throws(() => renderPage(c, c.languages[0], badTemplate), /toString/);
 });
 
 test('renderPage banner matches the required text exactly', () => {

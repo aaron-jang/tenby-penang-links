@@ -14,6 +14,10 @@ function validateContent(content) {
   const dupes = linkIds.filter((id, i) => linkIds.indexOf(id) !== i);
   if (dupes.length) errors.push(`duplicate link ids: ${[...new Set(dupes)].join(', ')}`);
 
+  const metaFields = ['title', 'description', 'h1', 'subtitle'];
+  const guideFields = ['aboutTitle', 'aboutBody', 'portalsTitle', 'portals', 'checklistTitle', 'checklist'];
+  const uiLabelFields = ['ios', 'android', 'qrgen'];
+
   for (const lang of content.languages) {
     const t = content.i18n[lang.code];
     if (!t) { errors.push(`i18n.${lang.code} missing`); continue; }
@@ -22,6 +26,18 @@ function validateContent(content) {
     }
     for (const id of linkIds) {
       if (!t.links || !t.links[id]) errors.push(`i18n.${lang.code}.links.${id} missing`);
+    }
+    for (const field of metaFields) {
+      if (!t.meta || !t.meta[field]) errors.push(`i18n.${lang.code}.meta.${field} missing`);
+    }
+    for (const field of guideFields) {
+      if (!t.guide || !t.guide[field]) errors.push(`i18n.${lang.code}.guide.${field} missing`);
+    }
+    if (!t.faqTitle) errors.push(`i18n.${lang.code}.faqTitle missing`);
+    if (!Array.isArray(t.faq) || t.faq.length === 0) errors.push(`i18n.${lang.code}.faq missing`);
+    if (!t.disclaimer) errors.push(`i18n.${lang.code}.disclaimer missing`);
+    for (const field of uiLabelFields) {
+      if (!t.uiLabels || !t.uiLabels[field]) errors.push(`i18n.${lang.code}.uiLabels.${field} missing`);
     }
   }
   if (errors.length) throw new Error('content.json validation failed:\n  ' + errors.join('\n  '));
@@ -358,7 +374,7 @@ function renderPage(content, lang, template) {
   };
 
   const html = template.replace(/\{\{(\w+)\}\}/g, (m, key) => {
-    if (!(key in tokens)) throw new Error(`unknown template token: {{${key}}}`);
+    if (!Object.prototype.hasOwnProperty.call(tokens, key)) throw new Error(`unknown template token: {{${key}}}`);
     return tokens[key];
   });
 
