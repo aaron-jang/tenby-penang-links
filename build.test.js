@@ -173,3 +173,79 @@ test('renderHead escapes dangerous characters in title and description', () => {
   assert.ok(!out.includes('<"'));
   assert.ok(!out.includes('content="E & F'));
 });
+
+const { renderJsonLd } = require('./build.js');
+
+function ldContent() {
+  return {
+    site: {
+      baseUrl: 'https://soosoo.life/tenby-penang-links/',
+      siteName: 'Tenby Parent Resources',
+      schoolNameEn: 'Tenby International School Penang',
+      officialUrl: 'https://www.tenby.edu.my/penang/'
+    },
+    languages: [
+      { code: 'en', path: '', htmlLang: 'en' },
+      { code: 'ko', path: 'ko/', htmlLang: 'ko' }
+    ],
+    appStore: { playLangParam: { en: 'en', ko: 'ko' } },
+    sections: [{ id: 'portal', links: [
+      { id: 'isams', type: 'web', url: 'https://isams.example/' },
+      { id: 'vircle', type: 'app', ios: { id: '1492422874' }, android: { pkg: 'dc.circlepay.customer' } }
+    ]}],
+    i18n: {
+      en: { meta: { title: 'T', description: 'D' }, links: { isams: { name: 'iSAMS' }, vircle: { name: 'Vircle' } }, faq: [{ q: 'Q1', a: 'A1' }] },
+      ko: { meta: { title: '제목', description: '설명' }, links: { isams: { name: 'iSAMS' }, vircle: { name: 'Vircle' } }, faq: [{ q: '질문', a: '답변' }] }
+    }
+  };
+}
+
+function parseLd(html) {
+  return [...html.matchAll(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/g)]
+    .map(m => JSON.parse(m[1]));
+}
+
+test('renderJsonLd describes the school with about/sameAs, not as the page subject', () => {
+  const c = ldContent();
+  const blocks = parseLd(renderJsonLd(c, c.languages[1]));
+  const page = blocks.find(b => b['@type'] === 'WebPage');
+  assert.strictEqual(page.about['@type'], 'School');
+  assert.strictEqual(page.about.sameAs, 'https://www.tenby.edu.my/penang/');
+  assert.ok(!blocks.some(b => b['@type'] === 'EducationalOrganization'));
+});
+
+test('renderJsonLd sets inLanguage from htmlLang', () => {
+  const c = ldContent();
+  const page = parseLd(renderJsonLd(c, c.languages[1])).find(b => b['@type'] === 'WebPage');
+  assert.strictEqual(page.inLanguage, 'ko');
+});
+
+test('renderJsonLd emits an ItemList covering every link', () => {
+  const c = ldContent();
+  const list = parseLd(renderJsonLd(c, c.languages[0])).find(b => b['@type'] === 'ItemList');
+  assert.strictEqual(list.itemListElement.length, 2);
+  assert.strictEqual(list.itemListElement[0].position, 1);
+  assert.strictEqual(list.itemListElement[1].url, 'https://apps.apple.com/app/id1492422874');
+});
+
+test('renderJsonLd emits FAQPage from the language faq entries', () => {
+  const c = ldContent();
+  const faq = parseLd(renderJsonLd(c, c.languages[1])).find(b => b['@type'] === 'FAQPage');
+  assert.strictEqual(faq.mainEntity[0].name, '질문');
+  assert.strictEqual(faq.mainEntity[0].acceptedAnswer.text, '답변');
+});
+
+test('renderJsonLd emits BreadcrumbList on language pages but not on the English root', () => {
+  const c = ldContent();
+  const ko = parseLd(renderJsonLd(c, c.languages[1]));
+  const en = parseLd(renderJsonLd(c, c.languages[0]));
+  const koCrumb = ko.find(b => b['@type'] === 'BreadcrumbList');
+  assert.strictEqual(koCrumb.itemListElement.length, 2);
+  assert.ok(!en.some(b => b['@type'] === 'BreadcrumbList'));
+});
+
+test('renderJsonLd omits FAQPage when there are no faq entries', () => {
+  const c = ldContent();
+  c.i18n.en.faq = [];
+  assert.ok(!parseLd(renderJsonLd(c, c.languages[0])).some(b => b['@type'] === 'FAQPage'));
+});

@@ -95,4 +95,73 @@ function renderHead(content, lang) {
   ].join('\n');
 }
 
-module.exports = { loadContent, validateContent, baseFor, pageUrl, iosUrl, androidUrl, hreflangTags, renderHead, escapeHtml, escapeAttr };
+function linkTargetUrl(link) {
+  if (link.type === 'web') return link.url;
+  return iosUrl(link);
+}
+
+function renderJsonLd(content, lang) {
+  const t = content.i18n[lang.code];
+  const site = content.site;
+  const url = pageUrl(site, lang);
+  const blocks = [];
+
+  blocks.push({
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': url,
+    url,
+    name: t.meta.title,
+    description: t.meta.description,
+    inLanguage: lang.htmlLang,
+    isPartOf: { '@type': 'WebSite', url: site.baseUrl, name: site.siteName },
+    about: { '@type': 'School', name: site.schoolNameEn, sameAs: site.officialUrl }
+  });
+
+  const items = [];
+  for (const section of content.sections) {
+    for (const link of section.links) {
+      items.push({
+        '@type': 'ListItem',
+        position: items.length + 1,
+        name: t.links[link.id].name,
+        url: linkTargetUrl(link)
+      });
+    }
+  }
+  blocks.push({
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: t.meta.title,
+    itemListElement: items
+  });
+
+  if (t.faq && t.faq.length) {
+    blocks.push({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: t.faq.map(f => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a }
+      }))
+    });
+  }
+
+  if (lang.path !== '') {
+    blocks.push({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: site.siteName, item: site.baseUrl },
+        { '@type': 'ListItem', position: 2, name: t.meta.h1 || t.meta.title, item: url }
+      ]
+    });
+  }
+
+  return blocks
+    .map(b => `    <script type="application/ld+json">\n${JSON.stringify(b, null, 4)}\n    </script>`)
+    .join('\n');
+}
+
+module.exports = { loadContent, validateContent, baseFor, pageUrl, iosUrl, androidUrl, hreflangTags, renderHead, escapeHtml, escapeAttr, renderJsonLd, linkTargetUrl };
