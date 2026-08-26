@@ -267,6 +267,26 @@ test('renderJsonLd omits address entirely when schoolAddress is absent, never em
   assert.ok(!/undefined/.test(html), 'rendered JSON-LD must never contain the string "undefined"');
 });
 
+const { loadContent: loadShippedContent } = require('./build.js');
+
+test('the shipped content.json actually carries the school sameAs profiles and address', () => {
+  // Pins the real config, not a fixture: the five tests above set schoolSameAs/schoolAddress
+  // themselves, so deleting them from content.json would leave those tests green.
+  const site = loadShippedContent(__dirname).site;
+  assert.ok(Array.isArray(site.schoolSameAs), 'site.schoolSameAs must be an array');
+  for (const url of [
+    'https://www.tenby.edu.my/penang/',
+    'https://www.facebook.com/tenbypenang/',
+    'https://www.instagram.com/tenbypenang/',
+    'https://www.linkedin.com/company/tenbyschoolspenang/'
+  ]) {
+    assert.ok(site.schoolSameAs.includes(url), `site.schoolSameAs must contain ${url}`);
+  }
+  assert.ok(site.schoolAddress, 'site.schoolAddress must be present');
+  assert.strictEqual(site.schoolAddress.addressRegion, 'Penang');
+  assert.strictEqual(site.schoolAddress.addressCountry, 'Malaysia');
+});
+
 test('renderJsonLd sets inLanguage from htmlLang', () => {
   const c = ldContent();
   const page = parseLd(renderJsonLd(c, c.languages[1])).find(b => b['@type'] === 'WebPage');
