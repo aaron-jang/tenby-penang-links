@@ -552,11 +552,18 @@
         }
 
         .parent-guide { max-width: 800px; margin: 40px auto 0; padding: 0 20px; }
-        .guide-title { font-size: 1.3rem; margin: 32px 0 12px; }
-        .guide-text { line-height: 1.8; margin-bottom: 12px; opacity: 0.9; }
-        .guide-portals dt { font-weight: 700; margin-top: 12px; }
-        .guide-portals dd { margin: 4px 0 0 0; line-height: 1.7; opacity: 0.9; }
-        .guide-checklist { padding-left: 20px; line-height: 1.9; opacity: 0.9; }
+        .guide-title { font-size: 1.3rem; margin: 32px 0 12px; color: #1e3a5f; }
+        .guide-text { line-height: 1.8; margin-bottom: 12px; color: #4a5568; }
+        .guide-portals dt { font-weight: 700; margin-top: 12px; color: #1e3a5f; }
+        .guide-portals dd { margin: 4px 0 0 0; line-height: 1.7; color: #4a5568; }
+        .guide-checklist { padding-left: 20px; line-height: 1.9; color: #4a5568; }
+
+        body.dark-mode .guide-title,
+        body.dark-mode .guide-portals dt { color: #F3F4F6; }
+        body.dark-mode .guide-text,
+        body.dark-mode .guide-portals dd,
+        body.dark-mode .guide-checklist { color: #D1D5DB; }
+
         .site-disclaimer { max-width: 800px; margin: 32px auto 24px; padding: 0 20px;
                            font-size: 0.85rem; opacity: 0.65; text-align: center; line-height: 1.6; }
         .site-disclaimer a { color: inherit; text-decoration: underline; }
