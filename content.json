@@ -308,7 +308,13 @@
       "uiLabels": { "ios": "📱 iOS", "android": "🤖 Android", "qrgen": "QR 코드 생성기" }
     },
     "zh-CN": {
-      "meta": { "title": "t", "description": "d", "keywords": "k", "h1": "h", "subtitle": "s" },
+      "meta": {
+        "title": "Tenby 槟城国际学校家长链接汇总 | 马来西亚国际学校家长门户",
+        "description": "槟城国际学校 Tenby International School Penang 家长常用链接汇总：iSAMS 家长门户、SchoolsBuddy、Vircle、ClassDojo 及各类学习应用。",
+        "keywords": "槟城国际学校, Tenby Penang, 马来西亚国际学校, 家长门户, iSAMS 家长门户, SchoolsBuddy, Vircle",
+        "h1": "Tenby 槟城国际学校家长链接汇总",
+        "subtitle": "家长资源与快捷链接"
+      },
       "sections": {
         "portal": "学校门户及资源",
         "learning": "学习资源",
@@ -344,7 +350,29 @@
         "instagram": { "name": "Instagram", "desc": "关注学校动态和活动" },
         "location": { "name": "位置", "desc": "获取学校路线指引" }
       },
-      "guide": { "aboutTitle": "a", "aboutBody": ["b"], "portalsTitle": "p", "portals": [], "checklistTitle": "c", "checklist": [] },
+      "guide": {
+        "aboutTitle": "关于槟城国际学校 Tenby Penang",
+        "aboutBody": [
+          "这里汇总了槟城国际学校 Tenby International School Penang 家长最常用的链接。iSAMS 家长门户、SchoolsBuddy、Vircle、ClassDojo、Learning Village 等在马来西亚国际学校日常会用到的服务，都集中在同一个页面。",
+          "学校的官方信息和校历请以学校官网为准；本页面主要方便家长快速打开每天要用的家长门户和学习应用。"
+        ],
+        "portalsTitle": "家长最常用的在线门户",
+        "portals": [
+          { "name": "iSAMS 家长门户", "desc": "查看孩子成绩、出勤和学校公告的主要门户，用学年初学校发放的账号登录。" },
+          { "name": "SchoolsBuddy", "desc": "用于报名课外活动（ECA）、社团和学校活动，并查看相关时间安排。" },
+          { "name": "Vircle", "desc": "用于学生卡充值、购买校服以及在校园商店付款的应用。" },
+          { "name": "ClassDojo", "desc": "用于和班主任沟通，接收班级通知和班级照片。" }
+        ],
+        "checklistTitle": "新生家长入学清单",
+        "checklist": [
+          "领取 iSAMS 家长门户账号并确认可以正常登录",
+          "用 SchoolsBuddy 账号确认课外活动的报名时间",
+          "安装 Vircle 应用并设置学生卡充值",
+          "在 ClassDojo 上与孩子的班主任建立联系",
+          "按孩子所在年级安装学习应用（Early Years、KS1 建议 1-Minute Maths、Raz Kids、Purple Mash、Epic）",
+          "确认 Microsoft Teams 可以正常登录"
+        ]
+      },
       "faqTitle": "常见问题",
       "faq": [
         { "q": "iSAMS（家长门户）在哪里登录？", "a": "点击本页顶部的\"家长门户 (iSAMS)\"卡片。您需要学校在学年初提供的登录凭据。如果忘记密码，请联系学校办公室。" },
@@ -354,11 +382,17 @@
         { "q": "这是腾比官方页面吗？", "a": "不是。这是家长为槟城腾比社区便利而创建的非官方资源页面。如需官方信息，请访问学校官方网站或直接联系学校。" },
         { "q": "Vircle应用是什么？如何使用？", "a": "Vircle是槟城腾比使用的校园社区应用，可用于为孩子的餐卡充值、购买校服以及在校园商店购物。请从App Store（iOS）或Google Play（Android）下载，并使用学校关联账户注册。" }
       ],
-      "disclaimer": "d",
+      "disclaimer": "本页面是家长制作的非官方链接汇总。学校官方信息请见 https://www.tenby.edu.my/penang/",
       "uiLabels": { "ios": "📱 iOS", "android": "🤖 Android", "qrgen": "QR码生成器" }
     },
     "zh-TW": {
-      "meta": { "title": "t", "description": "d", "keywords": "k", "h1": "h", "subtitle": "s" },
+      "meta": {
+        "title": "Tenby 檳城國際學校家長連結彙整 | 馬來西亞國際學校家長入口",
+        "description": "檳城國際學校 Tenby International School Penang 家長常用連結彙整：iSAMS 家長入口、SchoolsBuddy、Vircle、ClassDojo 及各類學習應用程式。",
+        "keywords": "檳城國際學校, Tenby Penang, 馬來西亞國際學校, 家長入口, iSAMS 家長入口, SchoolsBuddy, Vircle",
+        "h1": "Tenby 檳城國際學校家長連結彙整",
+        "subtitle": "家長資源與快速連結"
+      },
       "sections": {
         "portal": "學校入口網站及資源",
         "learning": "學習資源",
@@ -394,7 +428,29 @@
         "instagram": { "name": "Instagram", "desc": "關注學校動態和活動" },
         "location": { "name": "位置", "desc": "取得學校路線指引" }
       },
-      "guide": { "aboutTitle": "a", "aboutBody": ["b"], "portalsTitle": "p", "portals": [], "checklistTitle": "c", "checklist": [] },
+      "guide": {
+        "aboutTitle": "關於檳城國際學校 Tenby Penang",
+        "aboutBody": [
+          "這裡彙整了檳城國際學校 Tenby International School Penang 家長最常用的連結。iSAMS 家長入口、SchoolsBuddy、Vircle、ClassDojo、Learning Village 等在馬來西亞國際學校日常會用到的服務，都整理在同一個頁面。",
+          "學校的官方資訊與行事曆請以學校官網為準；本頁面主要方便家長快速開啟每天要用的家長入口與學習應用程式。"
+        ],
+        "portalsTitle": "家長最常使用的線上入口",
+        "portals": [
+          { "name": "iSAMS 家長入口", "desc": "查詢孩子成績、出缺席與學校公告的主要入口，請用學年初學校核發的帳號登入。" },
+          { "name": "SchoolsBuddy", "desc": "用來報名課後活動（ECA）、社團與學校活動，也可以查看相關時間安排。" },
+          { "name": "Vircle", "desc": "用來為學生卡儲值、購買制服，以及在校內商店付款的應用程式。" },
+          { "name": "ClassDojo", "desc": "用來與導師聯絡，接收班級公告與班級照片。" }
+        ],
+        "checklistTitle": "新生家長的入學檢查清單",
+        "checklist": [
+          "取得 iSAMS 家長入口帳號，並確認可以順利登入",
+          "用 SchoolsBuddy 帳號確認課後活動的報名時間",
+          "安裝 Vircle 應用程式並設定學生卡儲值",
+          "在 ClassDojo 上與孩子的導師建立聯繫",
+          "依孩子的年級安裝學習應用程式（Early Years、KS1 建議 1-Minute Maths、Raz Kids、Purple Mash、Epic）",
+          "確認 Microsoft Teams 可以順利登入"
+        ]
+      },
       "faqTitle": "常見問題",
       "faq": [
         { "q": "iSAMS（家長入口網站）在哪裡登入？", "a": "點擊本頁頂部的「家長入口網站 (iSAMS)」卡片。您需要學校在學年初提供的登入憑據。如果忘記密碼，請聯繫學校辦公室。" },
@@ -404,11 +460,17 @@
         { "q": "這是騰比官方頁面嗎？", "a": "不是。這是家長為檳城騰比社群便利而建立的非官方資源頁面。如需官方資訊，請造訪學校官方網站或直接聯繫學校。" },
         { "q": "Vircle應用程式是什麼？如何使用？", "a": "Vircle是檳城騰比使用的校園社群應用程式，可用於為孩子的餐卡充值、購買校服以及在校園商店購物。請從App Store（iOS）或Google Play（Android）下載，並使用學校關聯帳戶註冊。" }
       ],
-      "disclaimer": "d",
+      "disclaimer": "本頁面是家長製作的非官方連結彙整。學校官方資訊請見 https://www.tenby.edu.my/penang/",
       "uiLabels": { "ios": "📱 iOS", "android": "🤖 Android", "qrgen": "QR碼產生器" }
     },
     "ja": {
-      "meta": { "title": "t", "description": "d", "keywords": "k", "h1": "h", "subtitle": "s" },
+      "meta": {
+        "title": "テンビー ペナン 保護者リンク集 | マレーシア インターナショナルスクール",
+        "description": "ペナンのインターナショナルスクール、Tenby International School Penang の保護者向けリンク集です。iSAMS 保護者ポータル、SchoolsBuddy、Vircle、ClassDojo、学習アプリをまとめています。",
+        "keywords": "ペナン インターナショナルスクール, テンビー ペナン, Tenby Penang, マレーシア インターナショナルスクール, 保護者ポータル, iSAMS",
+        "h1": "テンビー ペナン 保護者リンク集",
+        "subtitle": "保護者向けリソースとクイックリンク"
+      },
       "sections": {
         "portal": "学校ポータル・リソース",
         "learning": "学習リソース",
@@ -444,7 +506,29 @@
         "instagram": { "name": "Instagram", "desc": "学校の最新情報や活動をフォロー" },
         "location": { "name": "場所", "desc": "学校への道案内を取得" }
       },
-      "guide": { "aboutTitle": "a", "aboutBody": ["b"], "portalsTitle": "p", "portals": [], "checklistTitle": "c", "checklist": [] },
+      "guide": {
+        "aboutTitle": "テンビー ペナン（Tenby International School Penang）について",
+        "aboutBody": [
+          "ペナンのインターナショナルスクール、Tenby International School Penang に通うお子さんの保護者がよく使うリンクをまとめたページです。iSAMS 保護者ポータル、SchoolsBuddy、Vircle、ClassDojo、Learning Village など、マレーシアのインターナショナルスクール生活で日常的に使うサービスを一か所に集めました。",
+          "学校の公式情報や学年暦は学校のウェブサイトでご確認ください。このページは、毎日使うポータルや学習アプリにすばやくアクセスするためにお使いください。"
+        ],
+        "portalsTitle": "保護者がよく使うオンラインポータル",
+        "portals": [
+          { "name": "iSAMS 保護者ポータル", "desc": "成績、出欠、学校からのお知らせを確認する基本のポータルです。学年度の初めに学校から発行されたアカウントでログインします。" },
+          { "name": "SchoolsBuddy", "desc": "放課後アクティビティ（ECA）やクラブ、学校イベントの申し込みと日程確認に使います。" },
+          { "name": "Vircle", "desc": "生徒カードのチャージ、制服の購入、校内ストアでの支払いに使うアプリです。" },
+          { "name": "ClassDojo", "desc": "担任の先生とのやり取りや、クラスのお知らせ・写真の共有に使います。" }
+        ],
+        "checklistTitle": "入学したばかりの保護者向けチェックリスト",
+        "checklist": [
+          "iSAMS 保護者ポータルのアカウントを受け取り、ログインできるか確認する",
+          "SchoolsBuddy のアカウントで放課後アクティビティの申し込み時期を確認する",
+          "Vircle アプリをインストールし、生徒カードのチャージを設定する",
+          "ClassDojo で担任の先生とつながる",
+          "学年に合った学習アプリをインストールする（Early Years・KS1 は 1-Minute Maths、Raz Kids、Purple Mash、Epic）",
+          "Microsoft Teams にログインできるか確認する"
+        ]
+      },
       "faqTitle": "よくある質問",
       "faq": [
         { "q": "iSAMS（保護者ポータル）はどこでログインできますか？", "a": "このページ上部の「保護者ポータル (iSAMS)」カードをクリックしてください。学年度初めに学校から提供されたログイン情報が必要です。パスワードを忘れた場合は、学校事務局にお問い合わせください。" },
@@ -454,7 +538,7 @@
         { "q": "これはテンビーの公式ページですか？", "a": "いいえ。これはペナン・テンビーコミュニティの利便性のために保護者が作成した非公式のリソースページです。公式情報については、学校の公式ウェブサイトを訪問するか、学校に直接お問い合わせください。" },
         { "q": "Vircleアプリとは何ですか？どう使いますか？", "a": "Vircleはペナン・テンビーで使用されている学校コミュニティアプリです。お子様の給食カードのチャージ、制服の購入、校内ストアでの買い物ができます。App Store（iOS）またはGoogle Play（Android）からダウンロードし、学校連携アカウントで登録してください。" }
       ],
-      "disclaimer": "d",
+      "disclaimer": "このページは保護者が作成した非公式のリンク集です。学校の公式情報は https://www.tenby.edu.my/penang/ でご確認ください。",
       "uiLabels": { "ios": "📱 iOS", "android": "🤖 Android", "qrgen": "QRコード生成器" }
     }
   }
