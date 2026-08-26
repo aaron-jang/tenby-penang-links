@@ -151,7 +151,13 @@
   ],
   "i18n": {
     "en": {
-      "meta": { "title": "t", "description": "d", "keywords": "k", "h1": "h", "subtitle": "s" },
+      "meta": {
+        "title": "Tenby International School Penang | Parent Portal & Learning Apps Hub",
+        "description": "Quick access for Tenby International School Penang parents: iSAMS parent portal, SchoolsBuddy, Vircle, ClassDojo, learning apps and school information links.",
+        "keywords": "Tenby International School Penang, Tenby Penang parent portal, iSAMS Tenby Penang, SchoolsBuddy, Vircle, ClassDojo, international school Penang, international school Malaysia",
+        "h1": "Tenby International School Penang",
+        "subtitle": "Parent Resources & Quick Links"
+      },
       "sections": {
         "portal": "School Portal & Resources",
         "learning": "Learning Resources",
@@ -187,7 +193,29 @@
         "instagram": { "name": "School Instagram", "desc": "Follow school updates and activities" },
         "location": { "name": "School Location", "desc": "Get directions to the school" }
       },
-      "guide": { "aboutTitle": "a", "aboutBody": ["b"], "portalsTitle": "p", "portals": [], "checklistTitle": "c", "checklist": [] },
+      "guide": {
+        "aboutTitle": "About Tenby International School Penang",
+        "aboutBody": [
+          "This is a collection of the links Tenby International School Penang parents use most. iSAMS Parent Portal, SchoolsBuddy, Vircle, ClassDojo, Learning Village and the other services that come with everyday life at an international school in Malaysia are gathered here in one place.",
+          "For official school information and the academic calendar, please check the school website. Use this page for quick access to the portals and learning apps you need day to day."
+        ],
+        "portalsTitle": "Online portals parents use most",
+        "portals": [
+          { "name": "iSAMS Parent Portal", "desc": "The main portal for checking grades, attendance and school announcements. Log in with the account the school issues at the start of the academic year." },
+          { "name": "SchoolsBuddy", "desc": "Used to book after-school activities (ECAs), clubs and school events, and to check their schedules." },
+          { "name": "Vircle", "desc": "The app used for student card top-ups, uniform purchases and school store payments." },
+          { "name": "ClassDojo", "desc": "Used for messaging your child's class teacher, class announcements and photo sharing." }
+        ],
+        "checklistTitle": "Checklist for parents new to the school",
+        "checklist": [
+          "Get your iSAMS Parent Portal account and confirm you can log in",
+          "Check the after-school activity booking dates in your SchoolsBuddy account",
+          "Install the Vircle app and set up student card top-ups",
+          "Connect with your child's class teacher on ClassDojo",
+          "Install the learning apps for your child's year group (Early Years and KS1: 1-Minute Maths, Raz Kids, Purple Mash, Epic)",
+          "Confirm your Microsoft Teams login"
+        ]
+      },
       "faqTitle": "Frequently Asked Questions",
       "faq": [
         { "q": "Where can I log in to iSAMS (Parent Portal)?", "a": "Click the \"Parent Portal (iSAMS)\" card at the top of this page. You'll need the login credentials provided by the school at the start of the academic year. If you've forgotten your password, contact the school office." },
@@ -197,11 +225,17 @@
         { "q": "Is this an official Tenby school page?", "a": "No. This is an unofficial resource page created by a parent for the convenience of the Tenby Penang community. For official information, please visit the school's official website or contact the school directly." },
         { "q": "What is the Vircle app and how do I use it?", "a": "Vircle is a school community app used at Tenby Penang for topping up your child's meal card, purchasing uniforms, and buying items from the school store. Download it from the App Store (iOS) or Google Play (Android) and register with your school-linked account." }
       ],
-      "disclaimer": "d",
+      "disclaimer": "This is an unofficial link hub maintained by parents. For official school information, visit https://www.tenby.edu.my/penang/",
       "uiLabels": { "ios": "📱 iOS", "android": "🤖 Android", "qrgen": "QR Code Generator" }
     },
     "ko": {
-      "meta": { "title": "t", "description": "d", "keywords": "k", "h1": "h", "subtitle": "s" },
+      "meta": {
+        "title": "텐비 국제학교 페낭 학부모 링크 모음 | 말레이시아 페낭 국제학교 포털",
+        "description": "텐비 국제학교 페낭(Tenby International School Penang) 학부모를 위한 iSAMS 학부모 포털, SchoolsBuddy, Vircle, ClassDojo, 학습 앱, 학교 정보 링크 모음입니다.",
+        "keywords": "텐비 국제학교, 텐비 국제학교 페낭, 텐비 페낭, 페낭 국제학교, 말레이시아 국제학교, 국제학교 학부모 포털, iSAMS 학부모 포털, SchoolsBuddy, Vircle",
+        "h1": "텐비 국제학교 페낭 학부모 링크 모음",
+        "subtitle": "학부모 자료 및 바로가기"
+      },
       "sections": {
         "portal": "학교 포털 및 리소스",
         "learning": "학습 리소스",
@@ -231,13 +265,35 @@
         "beepbox": { "name": "BeepBox", "desc": "음악 제작 및 작곡 도구" },
         "teams": { "name": "Microsoft Teams", "desc": "화상통화 및 협업" },
         "classdojo": { "name": "ClassDojo", "desc": "교실 소통 플랫폼" },
-        "website": { "name": "웹사이트", "desc": "텐비 인터내셔널 스쿨 페낭 공식 웹사이트" },
+        "website": { "name": "웹사이트", "desc": "텐비 국제학교 페낭 공식 웹사이트" },
         "facebook": { "name": "페이스북", "desc": "학교 소식과 뉴스 팩로우" },
         "linkedin": { "name": "링크드인", "desc": "전문적인 학교 커뮤니티" },
         "instagram": { "name": "인스타그램", "desc": "학교 소식과 활동 팩로우" },
         "location": { "name": "위치", "desc": "학교 길찾기" }
       },
-      "guide": { "aboutTitle": "a", "aboutBody": ["b"], "portalsTitle": "p", "portals": [], "checklistTitle": "c", "checklist": [] },
+      "guide": {
+        "aboutTitle": "텐비 국제학교 페낭 안내",
+        "aboutBody": [
+          "텐비 국제학교 페낭 학부모를 위한 주요 링크 모음입니다. iSAMS Parent Portal, SchoolsBuddy, Vircle, ClassDojo, Learning Village 등 말레이시아 국제학교 생활에서 자주 쓰는 서비스를 한곳에 정리했습니다.",
+          "학교 공식 정보와 학사 일정은 학교 홈페이지를 확인하시고, 이 페이지는 매일 쓰는 포털과 학습 앱에 빠르게 접근하는 용도로 사용하세요."
+        ],
+        "portalsTitle": "학부모가 자주 쓰는 온라인 포털",
+        "portals": [
+          { "name": "iSAMS 학부모 포털", "desc": "성적, 출결, 학교 공지를 확인하는 기본 포털입니다. 학년 초에 학교에서 받은 계정으로 로그인합니다." },
+          { "name": "SchoolsBuddy", "desc": "방과후 활동(ECA), 클럽, 학교 행사 신청과 일정 확인에 사용합니다." },
+          { "name": "Vircle", "desc": "학생 카드 충전, 교복 구매, 스쿨 스토어 결제에 사용하는 앱입니다." },
+          { "name": "ClassDojo", "desc": "담임 교사와의 소통, 학급 공지, 사진 공유에 사용합니다." }
+        ],
+        "checklistTitle": "처음 오신 학부모를 위한 체크리스트",
+        "checklist": [
+          "iSAMS 학부모 포털 계정을 발급받고 로그인 확인",
+          "SchoolsBuddy 계정으로 방과후 활동 신청 일정 확인",
+          "Vircle 앱 설치 후 학생 카드 충전 설정",
+          "ClassDojo에서 담임 교사 연결",
+          "학년에 맞는 학습 앱 설치 (Early Years·KS1은 1-Minute Maths, Raz Kids, Purple Mash, Epic)",
+          "Microsoft Teams 로그인 확인"
+        ]
+      },
       "faqTitle": "자주 묻는 질문",
       "faq": [
         { "q": "iSAMS (학부모 포털) 로그인은 어디서 하나요?", "a": "이 페이지 상단의 \"학부모 포털 (iSAMS)\" 카드를 클릭하세요. 학년 초에 학교에서 제공한 로그인 정보가 필요합니다. 비밀번호를 잊으셨다면 학교 사무실에 문의하세요." },
@@ -245,9 +301,10 @@
         { "q": "학년별 추천 앱은 무엇인가요?", "a": "Early Years & KS1 (4-7세): 1-Minute Maths, Raz Kids, Purple Mash, Epic. KS2 (7-11세): Times Tables Rock Stars, Flash Academy, Purple Mash, Epic, Tinkercad. 전 학년: Microsoft Teams, ClassDojo, Canva." },
         { "q": "방과 후 활동은 어떻게 예약하나요?", "a": "SchoolsBuddy(학교 포털 및 리소스에 있음)를 사용하여 방과 후 활동, 클럽, 학교 행사를 확인하고 예약할 수 있습니다. 학교에서 제공한 자격 증명으로 로그인하세요." },
         { "q": "이 페이지는 텐비 공식 페이지인가요?", "a": "아닙니다. 이 페이지는 텐비 페낭 커뮤니티의 편의를 위해 학부모가 만든 비공식 리소스 페이지입니다. 공식 정보는 학교 공식 웹사이트를 방문하거나 학교에 직접 문의하세요." },
-        { "q": "Vircle(버클) 앱은 무엇이고 어떻게 사용하나요?", "a": "Vircle(버클)은 텐비 페낭에서 사용하는 학교 커뮤니티 앱입니다. 아이의 급식 카드 충전, 교복 구매, 학교 매점 물품 구매 등을 할 수 있습니다. App Store(iOS) 또는 Google Play(Android)에서 다운로드 후 학교 연동 계정으로 가입하세요." }
+        { "q": "Vircle(버클) 앱은 무엇이고 어떻게 사용하나요?", "a": "Vircle(버클)은 텐비 페낭에서 사용하는 학교 커뮤니티 앱입니다. 아이의 급식 카드 충전, 교복 구매, 학교 매점 물품 구매 등을 할 수 있습니다. App Store(iOS) 또는 Google Play(Android)에서 다운로드 후 학교 연동 계정으로 가입하세요." },
+        { "q": "학교 이름 표기가 여러 가지인데 같은 학교인가요?", "a": "네, 같은 학교입니다. 텐비 국제학교 페낭은 '텐비 인터내셔널 스쿨 페낭'으로도 불리며, 영문 정식 명칭은 Tenby International School Penang입니다. 페낭 지역 학부모 사이에서는 '텐비 페낭'으로 줄여 부르기도 합니다." }
       ],
-      "disclaimer": "d",
+      "disclaimer": "이 페이지는 학부모가 만든 비공식 링크 모음입니다. 학교 공식 정보는 https://www.tenby.edu.my/penang/ 에서 확인하세요.",
       "uiLabels": { "ios": "📱 iOS", "android": "🤖 Android", "qrgen": "QR 코드 생성기" }
     },
     "zh-CN": {
