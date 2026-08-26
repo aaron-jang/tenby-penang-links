@@ -564,3 +564,81 @@ test('hreflangTags and renderSitemap alternate sets match', () => {
 
   assert.deepStrictEqual(Array.from(sitemapPairs).sort(), Array.from(headPairs).sort(), 'hreflang alternate sets must match between HTML head and sitemap');
 });
+
+const { renderPage } = require('./build.js');
+
+function fullFixture() {
+  return {
+    site: {
+      baseUrl: 'https://soosoo.life/tenby-penang-links/',
+      gaId: 'G-TEST', officialUrl: 'https://www.tenby.edu.my/penang/',
+      schoolNameEn: 'Tenby International School Penang',
+      siteName: 'Tenby Parent Resources', ogImage: 'og-image.png'
+    },
+    languages: [
+      { code: 'en', path: '', htmlLang: 'en', hreflang: 'en', ogLocale: 'en_US', label: 'EN' },
+      { code: 'ko', path: 'ko/', htmlLang: 'ko', hreflang: 'ko', ogLocale: 'ko_KR', label: '한' },
+      { code: 'zh-CN', path: 'zh-cn/', htmlLang: 'zh-Hans', hreflang: 'zh-CN', ogLocale: 'zh_CN', label: '中简' }
+    ],
+    appStore: { playLangParam: { en: 'en', ko: 'ko', 'zh-CN': 'zh-CN' } },
+    sections: [{ id: 'portal', icon: '🏫', links: [
+      { id: 'isams', type: 'web', url: 'https://isams.example/', iconFile: 'isams.webp' },
+      { id: 'vircle', type: 'app', iconFile: 'vircle.webp',
+        ios: { id: '1492422874' }, android: { pkg: 'dc.circlepay.customer' } }
+    ]}],
+    i18n: Object.fromEntries(['en', 'ko', 'zh-CN'].map(code => [code, {
+      meta: { title: `T-${code}`, description: `D-${code}`, keywords: 'k', h1: `H-${code}`, subtitle: `S-${code}` },
+      sections: { portal: `P-${code}` },
+      links: { isams: { name: 'iSAMS', desc: 'd' }, vircle: { name: 'Vircle', desc: 'd' } },
+      guide: { aboutTitle: 'a', aboutBody: ['b'], portalsTitle: 'p', portals: [{ name: 'n', desc: 'd' }],
+               checklistTitle: 'c', checklist: ['i'] },
+      faqTitle: 'F', faq: [{ q: 'q', a: 'a' }], disclaimer: 'disc',
+      uiLabels: { ios: '📱 iOS', android: '🤖 Android', qrgen: 'QR' }
+    }]))
+  };
+}
+
+const TEMPLATE = [
+  '<!DOCTYPE html>',
+  '<html lang="{{htmlLang}}">',
+  '<head>',
+  '{{head}}',
+  '{{jsonld}}',
+  '<link rel="icon" href="{{base}}favicon.svg">',
+  '</head>',
+  '<body>',
+  '<div class="language-switcher">{{langSwitcher}}</div>',
+  '<h1>{{h1}}</h1><p>{{subtitle}}</p>',
+  '{{sections}}',
+  '<a href="{{base}}qr-generator.html">{{qrgenLabel}}</a>',
+  '{{guide}}',
+  '{{faq}}',
+  '<footer>{{disclaimer}}</footer>',
+  '<script>gtag("config","{{gaId}}");</script>',
+  '</body></html>'
+].join('\n');
+
+test('renderPage leaves no unreplaced tokens', () => {
+  const c = fullFixture();          // Step 2에서 정의
+  for (const lang of c.languages) {
+    assert.ok(!renderPage(c, lang, TEMPLATE).includes('{{'), `unreplaced token in ${lang.code}`);
+  }
+});
+
+test('renderPage sets html lang per language', () => {
+  const c = fullFixture();
+  assert.ok(renderPage(c, c.languages[0], TEMPLATE).startsWith('<!-- GENERATED FILE'));
+  assert.match(renderPage(c, c.languages[1], TEMPLATE), /<html lang="ko">/);
+  assert.match(renderPage(c, c.languages[2], TEMPLATE), /<html lang="zh-Hans">/);
+});
+
+test('renderPage resolves base to ../ inside language directories', () => {
+  const c = fullFixture();
+  assert.ok(renderPage(c, c.languages[1], TEMPLATE).includes('href="../qr-generator.html"'));
+  assert.ok(renderPage(c, c.languages[0], TEMPLATE).includes('href="qr-generator.html"'));
+});
+
+test('renderPage carries the generated-file banner', () => {
+  const c = fullFixture();
+  assert.ok(renderPage(c, c.languages[0], TEMPLATE).includes('DO NOT EDIT'));
+});

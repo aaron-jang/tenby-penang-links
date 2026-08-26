@@ -325,4 +325,60 @@ function renderSitemap(content, today) {
   ].join('\n');
 }
 
-module.exports = { loadContent, validateContent, baseFor, pageUrl, iosUrl, androidUrl, hreflangTags, renderHead, escapeHtml, escapeAttr, renderJsonLd, linkTargetUrl, renderSections, renderCard, jsSingleQuoted, trackAttr, renderLangSwitcher, renderGuide, renderFaq, renderSitemap };
+const BANNER = '<!-- GENERATED FILE — DO NOT EDIT. Source: content.json + template.html. Run: node build.js -->';
+
+function renderPage(content, lang, template) {
+  const t = content.i18n[lang.code];
+  const base = baseFor(lang);
+  const tokens = {
+    htmlLang: lang.htmlLang,
+    head: renderHead(content, lang),
+    jsonld: renderJsonLd(content, lang),
+    base,
+    h1: escapeHtml(t.meta.h1),
+    subtitle: escapeHtml(t.meta.subtitle),
+    langSwitcher: renderLangSwitcher(content, lang, base),
+    sections: renderSections(content, lang, base),
+    qrgenLabel: escapeHtml((t.uiLabels && t.uiLabels.qrgen) || 'QR Code Generator'),
+    guide: renderGuide(content, lang),
+    faq: renderFaq(content, lang),
+    disclaimer: escapeHtml(t.disclaimer),
+    gaId: content.site.gaId
+  };
+
+  const html = template.replace(/\{\{(\w+)\}\}/g, (m, key) => {
+    if (!(key in tokens)) throw new Error(`unknown template token: {{${key}}}`);
+    return tokens[key];
+  });
+
+  return BANNER + '\n' + html;
+}
+
+function build(dir, today) {
+  const content = loadContent(dir);
+  validateContent(content);
+  const template = fs.readFileSync(path.join(dir, 'template.html'), 'utf8');
+  const written = [];
+
+  for (const lang of content.languages) {
+    const outDir = path.join(dir, lang.path);
+    fs.mkdirSync(outDir, { recursive: true });
+    const file = path.join(outDir, 'index.html');
+    fs.writeFileSync(file, renderPage(content, lang, template));
+    written.push(file);
+  }
+
+  const sitemap = path.join(dir, 'sitemap.xml');
+  fs.writeFileSync(sitemap, renderSitemap(content, today));
+  written.push(sitemap);
+  return written;
+}
+
+function main() {
+  const today = new Date().toISOString().slice(0, 10);
+  for (const f of build(__dirname, today)) console.log('written:', path.relative(__dirname, f));
+}
+
+if (require.main === module) main();
+
+module.exports = { loadContent, validateContent, baseFor, pageUrl, iosUrl, androidUrl, hreflangTags, renderHead, escapeHtml, escapeAttr, renderJsonLd, linkTargetUrl, renderSections, renderCard, jsSingleQuoted, trackAttr, renderLangSwitcher, renderGuide, renderFaq, renderSitemap, renderPage, build };
