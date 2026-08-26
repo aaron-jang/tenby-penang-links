@@ -148,3 +148,28 @@ test('renderHead never emits twitter:site', () => {
   const c = headContent();
   assert.ok(!renderHead(c, c.languages[0]).includes('twitter:site'));
 });
+
+const { escapeAttr, escapeHtml } = require('./build.js');
+
+test('escapeHtml escapes & < > but not " with exact replacement order', () => {
+  const input = 'A & B "C" <D>';
+  const expected = 'A &amp; B "C" &lt;D&gt;';
+  assert.strictEqual(escapeHtml(input), expected);
+});
+
+test('escapeAttr escapes & " < > with exact replacement order', () => {
+  const input = 'A & B "C" <D>';
+  const expected = 'A &amp; B &quot;C&quot; &lt;D&gt;';
+  assert.strictEqual(escapeAttr(input), expected);
+});
+
+test('renderHead escapes dangerous characters in title and description', () => {
+  const c = headContent();
+  c.i18n.ko.meta.title = 'A & B "C" <D>';
+  c.i18n.ko.meta.description = 'E & F "G" <H>';
+  const out = renderHead(c, c.languages[1]);
+  assert.ok(out.includes('<title>A &amp; B "C" &lt;D&gt;</title>'));
+  assert.ok(out.includes('content="E &amp; F &quot;G&quot; &lt;H&gt;"'));
+  assert.ok(!out.includes('<"'));
+  assert.ok(!out.includes('content="E & F'));
+});
