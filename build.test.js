@@ -348,3 +348,48 @@ test('renderSections honours iconFit, defaulting to contain', () => {
 test('renderSections uses the localized section title', () => {
   assert.ok(renderSections(sectionContent(), { code: 'ko' }, '').includes('학교 포털 및 자료'));
 });
+
+const { jsSingleQuoted, trackAttr } = require('./build.js');
+
+test('jsSingleQuoted escapes apostrophes', () => {
+  assert.strictEqual(jsSingleQuoted("L'école"), "L\\'école");
+});
+
+test('jsSingleQuoted escapes backslashes', () => {
+  assert.strictEqual(jsSingleQuoted("path\\to\\file"), "path\\\\to\\\\file");
+});
+
+test('renderCard with apostrophe in name generates valid onclick', () => {
+  const c = sectionContent();
+  c.i18n.ko.links.isams.name = "L'école";
+  const out = renderSections(c, { code: 'ko' }, '');
+  assert.ok(out.includes("\\'école"), "onclick should contain escaped apostrophe");
+  assert.ok(!out.includes("('L'"), "raw apostrophe sequence should not appear");
+});
+
+test('renderCard with double quote in name does not double-escape', () => {
+  const c = sectionContent();
+  c.i18n.ko.links.isams.name = 'Portal "Test"';
+  const out = renderSections(c, { code: 'ko' }, '');
+  const onclickMatch = out.match(/onclick="([^"]*)"/) || [];
+  assert.ok(onclickMatch[1], "onclick attribute should exist");
+  const onclick = onclickMatch[1];
+  const quoteCount = (onclick.match(/&quot;/g) || []).length;
+  assert.strictEqual(quoteCount, 2, "&quot; should appear exactly twice in onclick (once per input quote)");
+  assert.ok(!onclick.includes('&amp;quot;'), "onclick should not contain double-escaped &amp;quot;");
+});
+
+test('renderCard with ampersand in name escapes once', () => {
+  const c = sectionContent();
+  c.i18n.ko.links.isams.name = 'Marks & Grades';
+  const out = renderSections(c, { code: 'ko' }, '');
+  assert.ok(out.includes('&amp;'), "onclick should contain &amp;");
+  assert.ok(!out.includes('&amp;amp;'), "should not contain double-escaped &amp;amp;");
+});
+
+test('renderCard preserves non-ASCII characters in onclick', () => {
+  const c = sectionContent();
+  c.i18n.ko.links.isams.name = '학부모 포털';
+  const out = renderSections(c, { code: 'ko' }, '');
+  assert.ok(out.includes('학부모 포털'), "Korean text should pass through unmangled");
+});

@@ -167,6 +167,19 @@ function renderJsonLd(content, lang) {
     .join('\n');
 }
 
+function jsSingleQuoted(s) {
+  return String(s)
+    .replace(/\\/g, '\\\\')
+    .replace(/'/g, "\\'")
+    .replace(/\r/g, '\\r')
+    .replace(/\n/g, '\\n');
+}
+
+function trackAttr(name, url, category) {
+  const args = [name, url, category].map(v => `'${jsSingleQuoted(v)}'`).join(', ');
+  return escapeAttr(`trackLinkClick(${args})`);
+}
+
 function renderIcon(link, name, base) {
   const fit = link.iconFit || 'contain';
   return [
@@ -191,9 +204,8 @@ function renderCard(content, lang, link, sectionId, base) {
   ].join('\n');
 
   if (link.type === 'web') {
-    const track = `trackLinkClick('${escapeAttr(info.name).replace(/'/g, "\\'")}', '${link.url}', '${sectionId}')`;
     return [
-      `                    <a href="${escapeAttr(link.url)}" class="app-card web-card" target="_blank" onclick="${escapeAttr(track)}">`,
+      `                    <a href="${escapeAttr(link.url)}" class="app-card web-card" target="_blank" onclick="${trackAttr(info.name, link.url, sectionId)}">`,
       inner,
       `                    </a>`
     ].join('\n');
@@ -202,11 +214,11 @@ function renderCard(content, lang, link, sectionId, base) {
   const buttons = [];
   if (link.ios) {
     const u = iosUrl(link);
-    buttons.push(`                            <a href="${u}" class="app-button" target="_blank" onclick="${escapeAttr(`trackLinkClick('${info.name} iOS', '${u}', 'App Store')`)}">${escapeHtml(ui.ios || '📱 iOS')}</a>`);
+    buttons.push(`                            <a href="${escapeAttr(u)}" class="app-button" target="_blank" onclick="${trackAttr(info.name + ' iOS', u, 'App Store')}">${escapeHtml(ui.ios || '📱 iOS')}</a>`);
   }
   if (link.android) {
     const u = androidUrl(link, lang.code, content.appStore);
-    buttons.push(`                            <a href="${escapeAttr(u)}" class="app-button" target="_blank" onclick="${escapeAttr(`trackLinkClick('${info.name} Android', '${u}', 'App Store')`)}">${escapeHtml(ui.android || '🤖 Android')}</a>`);
+    buttons.push(`                            <a href="${escapeAttr(u)}" class="app-button" target="_blank" onclick="${trackAttr(info.name + ' Android', u, 'App Store')}">${escapeHtml(ui.android || '🤖 Android')}</a>`);
   }
 
   return [
@@ -234,4 +246,4 @@ function renderSections(content, lang, base) {
   ].join('\n')).join('\n\n');
 }
 
-module.exports = { loadContent, validateContent, baseFor, pageUrl, iosUrl, androidUrl, hreflangTags, renderHead, escapeHtml, escapeAttr, renderJsonLd, linkTargetUrl, renderSections, renderCard };
+module.exports = { loadContent, validateContent, baseFor, pageUrl, iosUrl, androidUrl, hreflangTags, renderHead, escapeHtml, escapeAttr, renderJsonLd, linkTargetUrl, renderSections, renderCard, jsSingleQuoted, trackAttr };
