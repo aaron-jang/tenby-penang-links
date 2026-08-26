@@ -1,0 +1,102 @@
+{
+  "site": {
+    "baseUrl": "https://soosoo.life/tenby-penang-links/",
+    "gaId": "G-2P6F0R5CLH",
+    "officialUrl": "https://www.tenby.edu.my/penang/",
+    "schoolNameEn": "Tenby International School Penang",
+    "siteName": "Tenby International School Penang Parent Resources",
+    "ogImage": "og-image.png"
+  },
+  "languages": [
+    { "code": "en",    "path": "",       "htmlLang": "en",      "hreflang": "en",    "ogLocale": "en_US", "label": "EN" },
+    { "code": "ko",    "path": "ko/",    "htmlLang": "ko",      "hreflang": "ko",    "ogLocale": "ko_KR", "label": "한" },
+    { "code": "zh-CN", "path": "zh-cn/", "htmlLang": "zh-Hans", "hreflang": "zh-CN", "ogLocale": "zh_CN", "label": "中简" },
+    { "code": "zh-TW", "path": "zh-tw/", "htmlLang": "zh-Hant", "hreflang": "zh-TW", "ogLocale": "zh_TW", "label": "中繁" },
+    { "code": "ja",    "path": "ja/",    "htmlLang": "ja",      "hreflang": "ja",    "ogLocale": "ja_JP", "label": "日" }
+  ],
+  "appStore": {
+    "playLangParam": { "en": "en", "ko": "ko", "ja": "ja", "zh-CN": "zh-CN", "zh-TW": "zh-TW" }
+  },
+  "sections": [
+    {
+      "id": "portal",
+      "icon": "🏫",
+      "links": [
+        { "id": "isams", "type": "web",
+          "url": "https://tenbypenang.parents.isamshosting.cloud/",
+          "iconFile": "isams.webp" },
+        { "id": "vircle", "type": "app",
+          "iconFile": "vircle.webp", "iconFit": "cover",
+          "ios": { "id": "1492422874" },
+          "android": { "pkg": "dc.circlepay.customer" } }
+      ]
+    }
+  ],
+  "i18n": {
+    "en": {
+      "meta": { "title": "t", "description": "d", "keywords": "k", "h1": "h", "subtitle": "s" },
+      "sections": { "portal": "School Portal & Resources" },
+      "links": {
+        "isams": { "name": "Parent Portal (iSAMS)", "desc": "Access student grades, attendance, and announcements" },
+        "vircle": { "name": "Vircle", "desc": "Card top-up, uniforms & school store" }
+      },
+      "guide": { "aboutTitle": "a", "aboutBody": ["b"], "portalsTitle": "p", "portals": [], "checklistTitle": "c", "checklist": [] },
+      "faqTitle": "FAQ",
+      "faq": [],
+      "disclaimer": "d",
+      "uiLabels": { "ios": "📱 iOS", "android": "🤖 Android", "qrgen": "QR Code Generator" }
+    },
+    "ko": {
+      "meta": { "title": "t", "description": "d", "keywords": "k", "h1": "h", "subtitle": "s" },
+      "sections": { "portal": "School Portal & Resources" },
+      "links": {
+        "isams": { "name": "Parent Portal (iSAMS)", "desc": "Access student grades, attendance, and announcements" },
+        "vircle": { "name": "Vircle", "desc": "Card top-up, uniforms & school store" }
+      },
+      "guide": { "aboutTitle": "a", "aboutBody": ["b"], "portalsTitle": "p", "portals": [], "checklistTitle": "c", "checklist": [] },
+      "faqTitle": "FAQ",
+      "faq": [],
+      "disclaimer": "d",
+      "uiLabels": { "ios": "📱 iOS", "android": "🤖 Android", "qrgen": "QR Code Generator" }
+    },
+    "zh-CN": {
+      "meta": { "title": "t", "description": "d", "keywords": "k", "h1": "h", "subtitle": "s" },
+      "sections": { "portal": "School Portal & Resources" },
+      "links": {
+        "isams": { "name": "Parent Portal (iSAMS)", "desc": "Access student grades, attendance, and announcements" },
+        "vircle": { "name": "Vircle", "desc": "Card top-up, uniforms & school store" }
+      },
+      "guide": { "aboutTitle": "a", "aboutBody": ["b"], "portalsTitle": "p", "portals": [], "checklistTitle": "c", "checklist": [] },
+      "faqTitle": "FAQ",
+      "faq": [],
+      "disclaimer": "d",
+      "uiLabels": { "ios": "📱 iOS", "android": "🤖 Android", "qrgen": "QR Code Generator" }
+    },
+    "zh-TW": {
+      "meta": { "title": "t", "description": "d", "keywords": "k", "h1": "h", "subtitle": "s" },
+      "sections": { "portal": "School Portal & Resources" },
+      "links": {
+        "isams": { "name": "Parent Portal (iSAMS)", "desc": "Access student grades, attendance, and announcements" },
+        "vircle": { "name": "Vircle", "desc": "Card top-up, uniforms & school store" }
+      },
+      "guide": { "aboutTitle": "a", "aboutBody": ["b"], "portalsTitle": "p", "portals": [], "checklistTitle": "c", "checklist": [] },
+      "faqTitle": "FAQ",
+      "faq": [],
+      "disclaimer": "d",
+      "uiLabels": { "ios": "📱 iOS", "android": "🤖 Android", "qrgen": "QR Code Generator" }
+    },
+    "ja": {
+      "meta": { "title": "t", "description": "d", "keywords": "k", "h1": "h", "subtitle": "s" },
+      "sections": { "portal": "School Portal & Resources" },
+      "links": {
+        "isams": { "name": "Parent Portal (iSAMS)", "desc": "Access student grades, attendance, and announcements" },
+        "vircle": { "name": "Vircle", "desc": "Card top-up, uniforms & school store" }
+      },
+      "guide": { "aboutTitle": "a", "aboutBody": ["b"], "portalsTitle": "p", "portals": [], "checklistTitle": "c", "checklist": [] },
+      "faqTitle": "FAQ",
+      "faq": [],
+      "disclaimer": "d",
+      "uiLabels": { "ios": "📱 iOS", "android": "🤖 Android", "qrgen": "QR Code Generator" }
+    }
+  }
+}
