@@ -225,7 +225,7 @@
         { "q": "Is this an official Tenby school page?", "a": "No. This is an unofficial resource page created by a parent for the convenience of the Tenby Penang community. For official information, please visit the school's official website or contact the school directly." },
         { "q": "What is the Vircle app and how do I use it?", "a": "Vircle is a school community app used at Tenby Penang for topping up your child's meal card, purchasing uniforms, and buying items from the school store. Download it from the App Store (iOS) or Google Play (Android) and register with your school-linked account." }
       ],
-      "disclaimer": "This is an unofficial link hub maintained by parents. For official school information, visit https://www.tenby.edu.my/penang/",
+      "disclaimer": "This is an unofficial link hub maintained by parents. For official school information, visit {url}",
       "uiLabels": { "ios": "📱 iOS", "android": "🤖 Android", "qrgen": "QR Code Generator" }
     },
     "ko": {
@@ -304,7 +304,7 @@
         { "q": "Vircle(버클) 앱은 무엇이고 어떻게 사용하나요?", "a": "Vircle(버클)은 텐비 페낭에서 사용하는 학교 커뮤니티 앱입니다. 아이의 급식 카드 충전, 교복 구매, 학교 매점 물품 구매 등을 할 수 있습니다. App Store(iOS) 또는 Google Play(Android)에서 다운로드 후 학교 연동 계정으로 가입하세요." },
         { "q": "학교 이름 표기가 여러 가지인데 같은 학교인가요?", "a": "네, 같은 학교입니다. 텐비 국제학교 페낭은 '텐비 인터내셔널 스쿨 페낭'으로도 불리며, 영문 정식 명칭은 Tenby International School Penang입니다. 페낭 지역 학부모 사이에서는 '텐비 페낭'으로 줄여 부르기도 합니다." }
       ],
-      "disclaimer": "이 페이지는 학부모가 만든 비공식 링크 모음입니다. 학교 공식 정보는 https://www.tenby.edu.my/penang/ 에서 확인하세요.",
+      "disclaimer": "이 페이지는 학부모가 만든 비공식 링크 모음입니다. 학교 공식 정보는 {url} 에서 확인하세요.",
       "uiLabels": { "ios": "📱 iOS", "android": "🤖 Android", "qrgen": "QR 코드 생성기" }
     },
     "zh-CN": {
@@ -382,7 +382,7 @@
         { "q": "这是腾比官方页面吗？", "a": "不是。这是家长为槟城腾比社区便利而创建的非官方资源页面。如需官方信息，请访问学校官方网站或直接联系学校。" },
         { "q": "Vircle应用是什么？如何使用？", "a": "Vircle是槟城腾比使用的校园社区应用，可用于为孩子的餐卡充值、购买校服以及在校园商店购物。请从App Store（iOS）或Google Play（Android）下载，并使用学校关联账户注册。" }
       ],
-      "disclaimer": "本页面是家长制作的非官方链接汇总。学校官方信息请见 https://www.tenby.edu.my/penang/",
+      "disclaimer": "本页面是家长制作的非官方链接汇总。学校官方信息请见 {url}",
       "uiLabels": { "ios": "📱 iOS", "android": "🤖 Android", "qrgen": "QR码生成器" }
     },
     "zh-TW": {
@@ -460,7 +460,7 @@
         { "q": "這是騰比官方頁面嗎？", "a": "不是。這是家長為檳城騰比社群便利而建立的非官方資源頁面。如需官方資訊，請造訪學校官方網站或直接聯繫學校。" },
         { "q": "Vircle應用程式是什麼？如何使用？", "a": "Vircle是檳城騰比使用的校園社群應用程式，可用於為孩子的餐卡充值、購買校服以及在校園商店購物。請從App Store（iOS）或Google Play（Android）下載，並使用學校關聯帳戶註冊。" }
       ],
-      "disclaimer": "本頁面是家長製作的非官方連結彙整。學校官方資訊請見 https://www.tenby.edu.my/penang/",
+      "disclaimer": "本頁面是家長製作的非官方連結彙整。學校官方資訊請見 {url}",
       "uiLabels": { "ios": "📱 iOS", "android": "🤖 Android", "qrgen": "QR碼產生器" }
     },
     "ja": {
@@ -538,7 +538,7 @@
         { "q": "これはテンビーの公式ページですか？", "a": "いいえ。これはペナン・テンビーコミュニティの利便性のために保護者が作成した非公式のリソースページです。公式情報については、学校の公式ウェブサイトを訪問するか、学校に直接お問い合わせください。" },
         { "q": "Vircleアプリとは何ですか？どう使いますか？", "a": "Vircleはペナン・テンビーで使用されている学校コミュニティアプリです。お子様の給食カードのチャージ、制服の購入、校内ストアでの買い物ができます。App Store（iOS）またはGoogle Play（Android）からダウンロードし、学校連携アカウントで登録してください。" }
       ],
-      "disclaimer": "このページは保護者が作成した非公式のリンク集です。学校の公式情報は https://www.tenby.edu.my/penang/ でご確認ください。",
+      "disclaimer": "このページは保護者が作成した非公式のリンク集です。学校の公式情報は {url} でご確認ください。",
       "uiLabels": { "ios": "📱 iOS", "android": "🤖 Android", "qrgen": "QRコード生成器" }
     }
   }

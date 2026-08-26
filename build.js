@@ -36,6 +36,7 @@ function validateContent(content) {
     if (!t.faqTitle) errors.push(`i18n.${lang.code}.faqTitle missing`);
     if (!Array.isArray(t.faq) || t.faq.length === 0) errors.push(`i18n.${lang.code}.faq missing`);
     if (!t.disclaimer) errors.push(`i18n.${lang.code}.disclaimer missing`);
+    else if (!t.disclaimer.includes('{url}')) errors.push(`i18n.${lang.code}.disclaimer missing the {url} placeholder`);
     for (const field of uiLabelFields) {
       if (!t.uiLabels || !t.uiLabels[field]) errors.push(`i18n.${lang.code}.uiLabels.${field} missing`);
     }
@@ -352,6 +353,12 @@ function renderSitemap(content, today) {
   ].join('\n');
 }
 
+function renderDisclaimer(content, lang) {
+  const url = content.site.officialUrl;
+  const link = `<a href="${escapeAttr(url)}" target="_blank" rel="noopener" onclick="${trackAttr('Official School Site', url, 'Disclaimer')}">${escapeHtml(url)}</a>`;
+  return escapeHtml(content.i18n[lang.code].disclaimer).replace('{url}', link);
+}
+
 const BANNER = '<!-- GENERATED FILE — DO NOT EDIT. Source: content.json + template.html. Run: node build.js -->';
 
 function renderPage(content, lang, template) {
@@ -369,7 +376,7 @@ function renderPage(content, lang, template) {
     qrgenLabel: escapeHtml((t.uiLabels && t.uiLabels.qrgen) || 'QR Code Generator'),
     guide: renderGuide(content, lang),
     faq: renderFaq(content, lang),
-    disclaimer: escapeHtml(t.disclaimer),
+    disclaimer: renderDisclaimer(content, lang),
     gaId: content.site.gaId
   };
 
@@ -408,4 +415,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { loadContent, validateContent, baseFor, pageUrl, iosUrl, androidUrl, hreflangTags, renderHead, escapeHtml, escapeAttr, renderJsonLd, schoolNode, linkTargetUrl, renderSections, renderCard, jsSingleQuoted, trackAttr, renderLangSwitcher, renderGuide, renderFaq, renderSitemap, renderPage, build };
+module.exports = { loadContent, validateContent, baseFor, pageUrl, iosUrl, androidUrl, hreflangTags, renderHead, escapeHtml, escapeAttr, renderJsonLd, schoolNode, linkTargetUrl, renderSections, renderCard, jsSingleQuoted, trackAttr, renderLangSwitcher, renderGuide, renderFaq, renderSitemap, renderPage, renderDisclaimer, build };

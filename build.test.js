@@ -17,7 +17,7 @@ function baseLangI18n(label) {
     },
     faqTitle: 'FAQ',
     faq: [{ q: 'q', a: 'a' }],
-    disclaimer: 'disclaimer text',
+    disclaimer: 'disclaimer text {url}',
     uiLabels: { ios: 'iOS', android: 'Android', qrgen: 'QR' }
   };
 }
@@ -751,7 +751,7 @@ function fullFixture() {
       links: { isams: { name: 'iSAMS', desc: 'd' }, vircle: { name: 'Vircle', desc: 'd' } },
       guide: { aboutTitle: 'a', aboutBody: ['b'], portalsTitle: 'p', portals: [{ name: 'n', desc: 'd' }],
                checklistTitle: 'c', checklist: ['i'] },
-      faqTitle: 'F', faq: [{ q: 'q', a: 'a' }], disclaimer: 'disc',
+      faqTitle: 'F', faq: [{ q: 'q', a: 'a' }], disclaimer: 'disc {url}',
       uiLabels: { ios: '📱 iOS', android: '🤖 Android', qrgen: 'QR' }
     }]))
   };
@@ -818,4 +818,48 @@ test('renderPage banner matches the required text exactly', () => {
   const c = fullFixture();
   const firstLine = renderPage(c, c.languages[0], TEMPLATE).split('\n')[0];
   assert.strictEqual(firstLine, '<!-- GENERATED FILE — DO NOT EDIT. Source: content.json + template.html. Run: node build.js -->');
+});
+
+const { renderDisclaimer, loadContent } = require('./build.js');
+
+function discContent(text) {
+  return {
+    site: { officialUrl: 'https://www.tenby.edu.my/penang/' },
+    i18n: { ko: { disclaimer: text } }
+  };
+}
+
+test('renderDisclaimer turns the {url} placeholder into a real anchor', () => {
+  const out = renderDisclaimer(discContent('공식 정보는 {url} 에서 확인하세요.'), { code: 'ko' });
+  assert.ok(out.includes('<a href="https://www.tenby.edu.my/penang/"'));
+  assert.ok(out.includes('>https://www.tenby.edu.my/penang/</a>'));
+  assert.ok(!out.includes('{url}'));
+});
+
+test('renderDisclaimer escapes the surrounding text but not the anchor', () => {
+  const out = renderDisclaimer(discContent('A & B <c> {url}'), { code: 'ko' });
+  assert.ok(out.includes('A &amp; B &lt;c&gt;'));
+  assert.ok(out.includes('<a href='), 'anchor must not be escaped');
+  assert.ok(!out.includes('&lt;a href='));
+});
+
+test('renderDisclaimer opens the official site in a new tab with rel=noopener', () => {
+  const out = renderDisclaimer(discContent('{url}'), { code: 'ko' });
+  assert.ok(out.includes('target="_blank"'));
+  assert.ok(out.includes('rel="noopener"'));
+});
+
+test('every language disclaimer renders exactly one official-site anchor', () => {
+  const c = loadContent('.');
+  for (const lang of c.languages) {
+    const out = renderDisclaimer(c, lang);
+    assert.strictEqual((out.match(/<a /g) || []).length, 1, `${lang.code} anchor count`);
+    assert.ok(!out.includes('{url}'), `${lang.code} still has the placeholder`);
+  }
+});
+
+test('validateContent rejects a disclaimer with no {url} placeholder', () => {
+  const c = loadContent('.');
+  c.i18n.ko.disclaimer = '플레이스홀더 없는 문구';
+  assert.throws(() => validateContent(c), /i18n\.ko\.disclaimer missing the \{url\} placeholder/);
 });
