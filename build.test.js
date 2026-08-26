@@ -496,3 +496,38 @@ test('renderFaq reuses the existing faq-item markup and toggleFaq handler', () =
   assert.ok(out.includes('질문2'));
   assert.ok(out.includes('답변2'));
 });
+
+const { renderSitemap } = require('./build.js');
+
+const SITEMAP_CONTENT = {
+  site: { baseUrl: 'https://soosoo.life/tenby-penang-links/' },
+  languages: [
+    { code: 'en', path: '', hreflang: 'en' },
+    { code: 'ko', path: 'ko/', hreflang: 'ko' },
+    { code: 'zh-CN', path: 'zh-cn/', hreflang: 'zh-CN' }
+  ],
+  extraUrls: [{ loc: 'qr-generator.html', changefreq: 'monthly', priority: '0.8' }]
+};
+
+test('renderSitemap lists every language URL', () => {
+  const xml = renderSitemap(SITEMAP_CONTENT, '2026-08-26');
+  assert.ok(xml.includes('<loc>https://soosoo.life/tenby-penang-links/</loc>'));
+  assert.ok(xml.includes('<loc>https://soosoo.life/tenby-penang-links/ko/</loc>'));
+  assert.ok(xml.includes('<loc>https://soosoo.life/tenby-penang-links/zh-cn/</loc>'));
+});
+
+test('renderSitemap adds xhtml alternates including x-default', () => {
+  const xml = renderSitemap(SITEMAP_CONTENT, '2026-08-26');
+  assert.ok(xml.includes('xmlns:xhtml="http://www.w3.org/1999/xhtml"'));
+  assert.ok(xml.includes('<xhtml:link rel="alternate" hreflang="ko" href="https://soosoo.life/tenby-penang-links/ko/"/>'));
+  assert.ok(xml.includes('hreflang="x-default"'));
+});
+
+test('renderSitemap includes extra URLs without alternates', () => {
+  const xml = renderSitemap(SITEMAP_CONTENT, '2026-08-26');
+  assert.ok(xml.includes('<loc>https://soosoo.life/tenby-penang-links/qr-generator.html</loc>'));
+});
+
+test('renderSitemap stamps lastmod from the given date', () => {
+  assert.ok(renderSitemap(SITEMAP_CONTENT, '2026-08-26').includes('<lastmod>2026-08-26</lastmod>'));
+});

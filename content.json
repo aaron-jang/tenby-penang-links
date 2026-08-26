@@ -17,6 +17,7 @@
   "appStore": {
     "playLangParam": { "en": "en", "ko": "ko", "ja": "ja", "zh-CN": "zh-CN", "zh-TW": "zh-TW" }
   },
+  "extraUrls": [{ "loc": "qr-generator.html", "changefreq": "monthly", "priority": "0.8" }],
   "sections": [
     {
       "id": "portal",

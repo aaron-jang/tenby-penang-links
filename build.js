@@ -288,4 +288,41 @@ function renderFaq(content, lang) {
   return `            <h2 class="faq-title">${escapeHtml(t.faqTitle)}</h2>\n\n${items}`;
 }
 
-module.exports = { loadContent, validateContent, baseFor, pageUrl, iosUrl, androidUrl, hreflangTags, renderHead, escapeHtml, escapeAttr, renderJsonLd, linkTargetUrl, renderSections, renderCard, jsSingleQuoted, trackAttr, renderLangSwitcher, renderGuide, renderFaq };
+function renderSitemap(content, today) {
+  const alternates = content.languages
+    .map(l => `    <xhtml:link rel="alternate" hreflang="${l.hreflang}" href="${pageUrl(content.site, l)}"/>`)
+    .concat(`    <xhtml:link rel="alternate" hreflang="x-default" href="${content.site.baseUrl}"/>`)
+    .join('\n');
+
+  const entries = content.languages.map(l => [
+    `  <url>`,
+    `    <loc>${pageUrl(content.site, l)}</loc>`,
+    `    <lastmod>${today}</lastmod>`,
+    `    <changefreq>weekly</changefreq>`,
+    `    <priority>${l.path === '' ? '1.0' : '0.9'}</priority>`,
+    alternates,
+    `  </url>`
+  ].join('\n'));
+
+  for (const extra of (content.extraUrls || [])) {
+    entries.push([
+      `  <url>`,
+      `    <loc>${content.site.baseUrl}${extra.loc}</loc>`,
+      `    <lastmod>${today}</lastmod>`,
+      `    <changefreq>${extra.changefreq}</changefreq>`,
+      `    <priority>${extra.priority}</priority>`,
+      `  </url>`
+    ].join('\n'));
+  }
+
+  return [
+    `<?xml version="1.0" encoding="UTF-8"?>`,
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"`,
+    `        xmlns:xhtml="http://www.w3.org/1999/xhtml">`,
+    entries.join('\n'),
+    `</urlset>`,
+    ``
+  ].join('\n');
+}
+
+module.exports = { loadContent, validateContent, baseFor, pageUrl, iosUrl, androidUrl, hreflangTags, renderHead, escapeHtml, escapeAttr, renderJsonLd, linkTargetUrl, renderSections, renderCard, jsSingleQuoted, trackAttr, renderLangSwitcher, renderGuide, renderFaq, renderSitemap };
