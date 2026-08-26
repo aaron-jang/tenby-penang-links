@@ -5,7 +5,14 @@
     "officialUrl": "https://www.tenby.edu.my/penang/",
     "schoolNameEn": "Tenby International School Penang",
     "siteName": "Tenby International School Penang Parent Resources",
-    "ogImage": "og-image.png"
+    "ogImage": "og-image.png",
+    "schoolAddress": { "addressRegion": "Penang", "addressCountry": "Malaysia" },
+    "schoolSameAs": [
+      "https://www.tenby.edu.my/penang/",
+      "https://www.facebook.com/tenbypenang/",
+      "https://www.instagram.com/tenbypenang/",
+      "https://www.linkedin.com/company/tenbyschoolspenang/"
+    ]
   },
   "languages": [
     { "code": "en",    "path": "",       "htmlLang": "en",      "hreflang": "en",    "ogLocale": "en_US", "label": "EN" },

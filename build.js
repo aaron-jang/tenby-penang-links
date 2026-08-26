@@ -100,6 +100,17 @@ function linkTargetUrl(link) {
   return iosUrl(link);
 }
 
+function schoolNode(site) {
+  const node = { '@type': 'School', name: site.schoolNameEn };
+  node.sameAs = (Array.isArray(site.schoolSameAs) && site.schoolSameAs.length)
+    ? site.schoolSameAs
+    : site.officialUrl;
+  if (site.schoolAddress) {
+    node.address = Object.assign({ '@type': 'PostalAddress' }, site.schoolAddress);
+  }
+  return node;
+}
+
 function renderJsonLd(content, lang) {
   const t = content.i18n[lang.code];
   const site = content.site;
@@ -115,7 +126,7 @@ function renderJsonLd(content, lang) {
     description: t.meta.description,
     inLanguage: lang.htmlLang,
     isPartOf: { '@type': 'WebSite', url: site.baseUrl, name: site.siteName },
-    about: { '@type': 'School', name: site.schoolNameEn, sameAs: site.officialUrl }
+    about: schoolNode(site)
   });
 
   const items = [];
@@ -381,4 +392,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { loadContent, validateContent, baseFor, pageUrl, iosUrl, androidUrl, hreflangTags, renderHead, escapeHtml, escapeAttr, renderJsonLd, linkTargetUrl, renderSections, renderCard, jsSingleQuoted, trackAttr, renderLangSwitcher, renderGuide, renderFaq, renderSitemap, renderPage, build };
+module.exports = { loadContent, validateContent, baseFor, pageUrl, iosUrl, androidUrl, hreflangTags, renderHead, escapeHtml, escapeAttr, renderJsonLd, schoolNode, linkTargetUrl, renderSections, renderCard, jsSingleQuoted, trackAttr, renderLangSwitcher, renderGuide, renderFaq, renderSitemap, renderPage, build };

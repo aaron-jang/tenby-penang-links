@@ -214,6 +214,59 @@ test('renderJsonLd describes the school with about/sameAs, not as the page subje
   assert.ok(!blocks.some(b => b['@type'] === 'EducationalOrganization'));
 });
 
+test('renderJsonLd carries every schoolSameAs URL onto the about node as an array', () => {
+  const c = ldContent();
+  c.site.schoolSameAs = [
+    'https://www.tenby.edu.my/penang/',
+    'https://www.facebook.com/tenbypenang/',
+    'https://www.instagram.com/tenbypenang/',
+    'https://www.linkedin.com/company/tenbyschoolspenang/'
+  ];
+  const page = parseLd(renderJsonLd(c, c.languages[1])).find(b => b['@type'] === 'WebPage');
+  assert.ok(Array.isArray(page.about.sameAs), 'sameAs must be an array when schoolSameAs is set');
+  assert.deepStrictEqual(page.about.sameAs, c.site.schoolSameAs);
+});
+
+test('renderJsonLd emits the school address as a PostalAddress with region and country', () => {
+  const c = ldContent();
+  c.site.schoolAddress = { addressRegion: 'Penang', addressCountry: 'Malaysia' };
+  const page = parseLd(renderJsonLd(c, c.languages[0])).find(b => b['@type'] === 'WebPage');
+  assert.strictEqual(page.about.address['@type'], 'PostalAddress');
+  assert.strictEqual(page.about.address.addressRegion, 'Penang');
+  assert.strictEqual(page.about.address.addressCountry, 'Malaysia');
+});
+
+test('renderJsonLd keeps the school a referenced School node, never an EducationalOrganization', () => {
+  const c = ldContent();
+  c.site.schoolSameAs = ['https://www.tenby.edu.my/penang/', 'https://www.facebook.com/tenbypenang/'];
+  c.site.schoolAddress = { addressRegion: 'Penang', addressCountry: 'Malaysia' };
+  const html = renderJsonLd(c, c.languages[1]);
+  const blocks = parseLd(html);
+  const page = blocks.find(b => b['@type'] === 'WebPage');
+  assert.strictEqual(page.about['@type'], 'School');
+  assert.ok(!blocks.some(b => b['@type'] === 'EducationalOrganization'));
+  assert.ok(!/EducationalOrganization/.test(html), 'no block may mention EducationalOrganization');
+});
+
+test('renderJsonLd falls back to the single officialUrl string when schoolSameAs is absent or empty', () => {
+  const c = ldContent();
+  delete c.site.schoolSameAs;
+  const absent = parseLd(renderJsonLd(c, c.languages[0])).find(b => b['@type'] === 'WebPage');
+  assert.strictEqual(absent.about.sameAs, 'https://www.tenby.edu.my/penang/');
+  c.site.schoolSameAs = [];
+  const empty = parseLd(renderJsonLd(c, c.languages[0])).find(b => b['@type'] === 'WebPage');
+  assert.strictEqual(empty.about.sameAs, 'https://www.tenby.edu.my/penang/');
+});
+
+test('renderJsonLd omits address entirely when schoolAddress is absent, never emitting undefined', () => {
+  const c = ldContent();
+  delete c.site.schoolAddress;
+  const html = renderJsonLd(c, c.languages[0]);
+  const page = parseLd(html).find(b => b['@type'] === 'WebPage');
+  assert.ok(!('address' in page.about), 'about must have no address key at all');
+  assert.ok(!/undefined/.test(html), 'rendered JSON-LD must never contain the string "undefined"');
+});
+
 test('renderJsonLd sets inLanguage from htmlLang', () => {
   const c = ldContent();
   const page = parseLd(renderJsonLd(c, c.languages[1])).find(b => b['@type'] === 'WebPage');
