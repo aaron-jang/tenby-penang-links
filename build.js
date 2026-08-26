@@ -53,4 +53,46 @@ function hreflangTags(content) {
   return lines.join('\n');
 }
 
-module.exports = { loadContent, validateContent, baseFor, pageUrl, iosUrl, androidUrl, hreflangTags };
+function escapeAttr(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function renderHead(content, lang) {
+  const t = content.i18n[lang.code];
+  const url = pageUrl(content.site, lang);
+  const ogImage = content.site.baseUrl + content.site.ogImage;
+  const alternates = content.languages
+    .filter(l => l.code !== lang.code)
+    .map(l => `    <meta property="og:locale:alternate" content="${l.ogLocale}">`)
+    .join('\n');
+
+  return [
+    `    <title>${escapeHtml(t.meta.title)}</title>`,
+    `    <meta name="description" content="${escapeAttr(t.meta.description)}">`,
+    `    <meta name="keywords" content="${escapeAttr(t.meta.keywords)}">`,
+    `    <meta name="robots" content="index, follow">`,
+    `    <link rel="canonical" href="${url}">`,
+    ``,
+    hreflangTags(content),
+    ``,
+    `    <meta property="og:title" content="${escapeAttr(t.meta.title)}">`,
+    `    <meta property="og:description" content="${escapeAttr(t.meta.description)}">`,
+    `    <meta property="og:image" content="${ogImage}">`,
+    `    <meta property="og:url" content="${url}">`,
+    `    <meta property="og:type" content="website">`,
+    `    <meta property="og:site_name" content="${escapeAttr(content.site.siteName)}">`,
+    `    <meta property="og:locale" content="${lang.ogLocale}">`,
+    alternates,
+    ``,
+    `    <meta name="twitter:card" content="summary_large_image">`,
+    `    <meta name="twitter:title" content="${escapeAttr(t.meta.title)}">`,
+    `    <meta name="twitter:description" content="${escapeAttr(t.meta.description)}">`,
+    `    <meta name="twitter:image" content="${ogImage}">`
+  ].join('\n');
+}
+
+module.exports = { loadContent, validateContent, baseFor, pageUrl, iosUrl, androidUrl, hreflangTags, renderHead, escapeHtml, escapeAttr };

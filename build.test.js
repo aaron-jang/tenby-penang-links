@@ -85,3 +85,66 @@ test('hreflangTags emits every language plus x-default pointing at the root', ()
   assert.ok(out.includes('hreflang="x-default" href="https://soosoo.life/tenby-penang-links/"'));
   assert.strictEqual(out.split('\n').length, 4);
 });
+
+const { renderHead } = require('./build.js');
+
+function headContent() {
+  return {
+    site: {
+      baseUrl: 'https://soosoo.life/tenby-penang-links/',
+      siteName: 'Tenby Parent Resources',
+      ogImage: 'og-image.png'
+    },
+    languages: [
+      { code: 'en', path: '', htmlLang: 'en', hreflang: 'en', ogLocale: 'en_US' },
+      { code: 'ko', path: 'ko/', htmlLang: 'ko', hreflang: 'ko', ogLocale: 'ko_KR' }
+    ],
+    i18n: {
+      en: { meta: { title: 'EN Title', description: 'EN desc', keywords: 'a, b' } },
+      ko: { meta: { title: '한국어 제목', description: '한국어 설명', keywords: '가, 나' } }
+    }
+  };
+}
+
+test('renderHead uses a self-referencing canonical', () => {
+  const c = headContent();
+  assert.ok(renderHead(c, c.languages[1])
+    .includes('<link rel="canonical" href="https://soosoo.life/tenby-penang-links/ko/">'));
+});
+
+test('renderHead emits the language-specific title and description', () => {
+  const c = headContent();
+  const out = renderHead(c, c.languages[1]);
+  assert.ok(out.includes('<title>한국어 제목</title>'));
+  assert.ok(out.includes('content="한국어 설명"'));
+});
+
+test('renderHead includes the full hreflang set on every page', () => {
+  const c = headContent();
+  for (const lang of c.languages) {
+    const out = renderHead(c, lang);
+    assert.ok(out.includes('hreflang="en"'));
+    assert.ok(out.includes('hreflang="ko"'));
+    assert.ok(out.includes('hreflang="x-default"'));
+  }
+});
+
+test('renderHead sets og:locale and lists the others as alternates', () => {
+  const c = headContent();
+  const out = renderHead(c, c.languages[1]);
+  assert.ok(out.includes('<meta property="og:locale" content="ko_KR">'));
+  assert.ok(out.includes('<meta property="og:locale:alternate" content="en_US">'));
+  assert.ok(!out.includes('<meta property="og:locale:alternate" content="ko_KR">'));
+});
+
+test('renderHead uses absolute URLs for og:image and og:url', () => {
+  const c = headContent();
+  const out = renderHead(c, c.languages[1]);
+  assert.ok(out.includes('content="https://soosoo.life/tenby-penang-links/og-image.png"'));
+  assert.ok(out.includes('<meta property="og:url" content="https://soosoo.life/tenby-penang-links/ko/">'));
+});
+
+test('renderHead never emits twitter:site', () => {
+  const c = headContent();
+  assert.ok(!renderHead(c, c.languages[0]).includes('twitter:site'));
+});
