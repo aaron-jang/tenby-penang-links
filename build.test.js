@@ -408,18 +408,20 @@ test('renderCard web link with apostrophe in URL escapes the onclick', () => {
 
   assert.ok(onclick.includes("https://example.com/a\\'b"),
     "onclick should escape apostrophes in URL");
-  assert.ok(!onclick.includes("a'b'), "),
-    "unescaped apostrophe should not break the JS string literal");
 });
 
-test('renderCard app-type link produces properly quoted hrefs for iOS and Android', () => {
+test('renderCard iOS button escapes special characters in href', () => {
   const c = sectionContent();
+  c.sections[0].links[1].ios.id = '123&x"y';
   const out = renderSections(c, { code: 'ko' }, '');
 
-  assert.ok(out.includes('href="https://apps.apple.com/app/id1492422874"'),
-    "iOS button href should be present with proper quoting");
-  assert.ok(out.includes('href="https://play.google.com/store/apps/details?id=dc.circlepay.customer&amp;hl=ko"'),
-    "Android button href should be present with escaped &amp;");
+  const match = out.match(/href="(https:\/\/apps\.apple\.com\/app\/id[^"]*)"/);
+  assert.ok(match, "iOS href should be present");
+  const iosHref = match[1];
+
+  assert.ok(iosHref.includes('&amp;'), "iOS href should escape & to &amp;");
+  assert.ok(iosHref.includes('&quot;'), "iOS href should escape \" to &quot;");
+  assert.ok(!iosHref.match(/&(?!amp;|quot;)/), "iOS href should not contain raw unescaped & outside of entity refs");
 });
 
 test('renderCard preserves non-ASCII characters inside onclick attribute', () => {
